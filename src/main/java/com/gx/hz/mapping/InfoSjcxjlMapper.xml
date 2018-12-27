@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoSjcxjlDao" >
+    <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoSjcxjl" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="XM" property="xm" jdbcType="VARCHAR" />
+        <result column="XB" property="xb" jdbcType="VARCHAR" />
+        <result column="DALX" property="dalx" jdbcType="VARCHAR" />
+        <result column="YWZBID" property="ywzbid" jdbcType="DECIMAL" />
+        <result column="YWXXID" property="ywxxid" jdbcType="DECIMAL" />
+        <result column="SSDWID" property="ssdwid" jdbcType="VARCHAR" />
+        <result column="SSDWMC" property="ssdwmc" jdbcType="VARCHAR" />
+        <result column="QZH" property="qzh" jdbcType="VARCHAR" />
+        <result column="FLH" property="flh" jdbcType="VARCHAR" />
+        <result column="TM" property="tm" jdbcType="VARCHAR" />
+        <result column="MLH" property="mlh" jdbcType="VARCHAR" />
+        <result column="DACFWZID" property="dacfwzid" jdbcType="DECIMAL" />
+        <result column="ZQZH" property="zqzh" jdbcType="VARCHAR" />
+        <result column="QYZH" property="qyzh" jdbcType="VARCHAR" />
+        <result column="TXMBH" property="txmbh" jdbcType="VARCHAR" />
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_USER" property="updateUser" jdbcType="DECIMAL" />
+        <result column="IS_DEL" property="isDel" jdbcType="DECIMAL" />
+        <result column="SXH" property="sxh" jdbcType="VARCHAR" />
+        <result column="DACFWZ" property="dacfwz" jdbcType="VARCHAR" />
+        <result column="ZJHM" property="zjhm" jdbcType="VARCHAR" />
+        <result column="JZID" property="jzId" jdbcType="DECIMAL" />
+        <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+        <result column="DALXID" property="dalxid" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    ID, XM, XB, DALX, YWZBID, YWXXID, SSDWID, SSDWMC, QZH, FLH, TM, MLH, DACFWZID, ZQZH, 
+    QYZH, TXMBH, UPDATE_TIME, UPDATE_USER, IS_DEL, SXH, DACFWZ, ZJHM,JZID,JZBH,DALXID
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from INFO_SJCXJL
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_SJCXJL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+
+    <sql id="TABLE_SEQUENCE">SEQ_INFO_SJCXJL.nextval</sql>
+    <insert id="insert" parameterType="com.gx.hz.pojo.InfoSjcxjl" >
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select <include refid="TABLE_SEQUENCE"/> from dual
+        </selectKey>
+        insert into INFO_SJCXJL (ID, XM, XB, DALX,
+        YWZBID, YWXXID, SSDWID,
+        SSDWMC, QZH, FLH, TM,
+        MLH, DACFWZID, ZQZH,
+        QYZH, TXMBH, UPDATE_TIME,
+        UPDATE_USER, IS_DEL, SXH,
+        DACFWZ,ZJHM,JZID,JZBH,DALXID)
+        values (#{id,jdbcType=DECIMAL}, #{xm,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{dalx,jdbcType=VARCHAR},
+        #{ywzbid,jdbcType=DECIMAL}, #{ywxxid,jdbcType=DECIMAL}, #{ssdwid,jdbcType=VARCHAR},
+        #{ssdwmc,jdbcType=VARCHAR}, #{qzh,jdbcType=VARCHAR}, #{flh,jdbcType=VARCHAR}, #{tm,jdbcType=VARCHAR},
+        #{mlh,jdbcType=VARCHAR}, #{dacfwzid,jdbcType=DECIMAL}, #{zqzh,jdbcType=VARCHAR},
+        #{qyzh,jdbcType=VARCHAR}, #{txmbh,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateUser,jdbcType=DECIMAL}, #{isDel,jdbcType=DECIMAL}, #{sxh,jdbcType=VARCHAR},
+        #{dacfwz,jdbcType=VARCHAR},#{zjhm,jdbcType=VARCHAR},#{jzId,jdbcType=DECIMAL},#{jzbh,jdbcType=VARCHAR},#{dalxid,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoSjcxjl" >
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select <include refid="TABLE_SEQUENCE"/> from dual
+        </selectKey>
+        insert into INFO_SJCXJL
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="xm != null" >
+                XM,
+            </if>
+            <if test="xb != null" >
+                XB,
+            </if>
+            <if test="dalx != null" >
+                DALX,
+            </if>
+            <if test="ywzbid != null" >
+                YWZBID,
+            </if>
+            <if test="ywxxid != null" >
+                YWXXID,
+            </if>
+            <if test="ssdwid != null" >
+                SSDWID,
+            </if>
+            <if test="ssdwmc != null" >
+                SSDWMC,
+            </if>
+            <if test="qzh != null" >
+                QZH,
+            </if>
+            <if test="flh != null" >
+                FLH,
+            </if>
+            <if test="tm != null" >
+                TM,
+            </if>
+            <if test="mlh != null" >
+                MLH,
+            </if>
+            <if test="dacfwzid != null" >
+                DACFWZID,
+            </if>
+            <if test="zqzh != null" >
+                ZQZH,
+            </if>
+            <if test="qyzh != null" >
+                QYZH,
+            </if>
+            <if test="txmbh != null" >
+                TXMBH,
+            </if>
+            <if test="updateTime != null" >
+                UPDATE_TIME,
+            </if>
+            <if test="updateUser != null" >
+                UPDATE_USER,
+            </if>
+            <if test="isDel != null" >
+                IS_DEL,
+            </if>
+            <if test="sxh != null" >
+                SXH,
+            </if>
+            <if test="dacfwz != null" >
+                DACFWZ,
+            </if>
+            <if test="zjhm != null" >
+                ZJHM,
+            </if>
+            <if test="jzId != null" >
+                JZID,
+            </if>
+            <if test="jzbh != null" >
+                JZBH,
+            </if>
+             <if test="dalxid != null" >
+                DALXID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="xm != null" >
+                #{xm,jdbcType=VARCHAR},
+            </if>
+            <if test="xb != null" >
+                #{xb,jdbcType=VARCHAR},
+            </if>
+            <if test="dalx != null" >
+                #{dalx,jdbcType=VARCHAR},
+            </if>
+            <if test="ywzbid != null" >
+                #{ywzbid,jdbcType=DECIMAL},
+            </if>
+            <if test="ywxxid != null" >
+                #{ywxxid,jdbcType=DECIMAL},
+            </if>
+            <if test="ssdwid != null" >
+                #{ssdwid,jdbcType=VARCHAR},
+            </if>
+            <if test="ssdwmc != null" >
+                #{ssdwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="qzh != null" >
+                #{qzh,jdbcType=VARCHAR},
+            </if>
+            <if test="flh != null" >
+                #{flh,jdbcType=VARCHAR},
+            </if>
+            <if test="tm != null" >
+                #{tm,jdbcType=VARCHAR},
+            </if>
+            <if test="mlh != null" >
+                #{mlh,jdbcType=VARCHAR},
+            </if>
+            <if test="dacfwzid != null" >
+                #{dacfwzid,jdbcType=DECIMAL},
+            </if>
+            <if test="zqzh != null" >
+                #{zqzh,jdbcType=VARCHAR},
+            </if>
+            <if test="qyzh != null" >
+                #{qyzh,jdbcType=VARCHAR},
+            </if>
+            <if test="txmbh != null" >
+                #{txmbh,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=DECIMAL},
+            </if>
+            <if test="isDel != null" >
+                #{isDel,jdbcType=DECIMAL},
+            </if>
+            <if test="sxh != null" >
+                #{sxh,jdbcType=VARCHAR},
+            </if>
+            <if test="dacfwz != null" >
+                #{dacfwz,jdbcType=VARCHAR},
+            </if>
+            <if test="zjhm != null" >
+                #{zjhm,jdbcType=VARCHAR},
+            </if>
+            <if test="jzId != null" >
+                #{jzId,jdbcType=DECIMAL},
+            </if>
+            <if test="jzbh != null" >
+                #{jzbh,jdbcType=VARCHAR},
+            </if>
+            <if test="dalxid != null" >
+                #{dalxid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoSjcxjl" >
+        update INFO_SJCXJL
+        <set >
+            <if test="xm != null" >
+                XM = #{xm,jdbcType=VARCHAR},
+            </if>
+            <if test="xb != null" >
+                XB = #{xb,jdbcType=VARCHAR},
+            </if>
+            <if test="dalx != null" >
+                DALX = #{dalx,jdbcType=VARCHAR},
+            </if>
+            <if test="ywzbid != null" >
+                YWZBID = #{ywzbid,jdbcType=DECIMAL},
+            </if>
+            <if test="ywxxid != null" >
+                YWXXID = #{ywxxid,jdbcType=DECIMAL},
+            </if>
+            <if test="ssdwid != null" >
+                SSDWID = #{ssdwid,jdbcType=VARCHAR},
+            </if>
+            <if test="ssdwmc != null" >
+                SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="qzh != null" >
+                QZH = #{qzh,jdbcType=VARCHAR},
+            </if>
+            <if test="flh != null" >
+                FLH = #{flh,jdbcType=VARCHAR},
+            </if>
+            <if test="tm != null" >
+                TM = #{tm,jdbcType=VARCHAR},
+            </if>
+            <if test="mlh != null" >
+                MLH = #{mlh,jdbcType=VARCHAR},
+            </if>
+            <if test="dacfwzid != null" >
+                DACFWZID = #{dacfwzid,jdbcType=DECIMAL},
+            </if>
+            <if test="zqzh != null" >
+                ZQZH = #{zqzh,jdbcType=VARCHAR},
+            </if>
+            <if test="qyzh != null" >
+                QYZH = #{qyzh,jdbcType=VARCHAR},
+            </if>
+            <if test="txmbh != null" >
+                TXMBH = #{txmbh,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null" >
+                UPDATE_USER = #{updateUser,jdbcType=DECIMAL},
+            </if>
+            <if test="isDel != null" >
+                IS_DEL = #{isDel,jdbcType=DECIMAL},
+            </if>
+            <if test="sxh != null" >
+                SXH = #{sxh,jdbcType=VARCHAR},
+            </if>
+            <if test="dacfwz != null" >
+                DACFWZ = #{dacfwz,jdbcType=VARCHAR},
+            </if>
+            <if test="zjhm != null" >
+                ZJHM = #{zjhm,jdbcType=VARCHAR},
+            </if>
+            <if test="jzId != null" >
+                JZID = #{jzId,jdbcType=DECIMAL},
+            </if>
+            <if test="jzbh != null" >
+                JZBH = #{jzbh,jdbcType=VARCHAR},
+            </if>
+           <if test="dalxid != null" >
+                DALXID = #{dalxid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoSjcxjl" >
+    update INFO_SJCXJL
+    set XM = #{xm,jdbcType=VARCHAR},
+      XB = #{xb,jdbcType=VARCHAR},
+      DALX = #{dalx,jdbcType=VARCHAR},
+      YWZBID = #{ywzbid,jdbcType=DECIMAL},
+      YWXXID = #{ywxxid,jdbcType=DECIMAL},
+      SSDWID = #{ssdwid,jdbcType=VARCHAR},
+      SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+      QZH = #{qzh,jdbcType=VARCHAR},
+      FLH = #{flh,jdbcType=VARCHAR},
+      TM = #{tm,jdbcType=VARCHAR},
+      MLH = #{mlh,jdbcType=VARCHAR},
+      DACFWZID = #{dacfwzid,jdbcType=DECIMAL},
+      ZQZH = #{zqzh,jdbcType=VARCHAR},
+      QYZH = #{qyzh,jdbcType=VARCHAR},
+      TXMBH = #{txmbh,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=DECIMAL},
+      IS_DEL = #{isDel,jdbcType=DECIMAL},
+      SXH = #{sxh,jdbcType=VARCHAR},
+      DACFWZ = #{dacfwz,jdbcType=VARCHAR},
+      ZJHM = #{zjhm,jdbcType=VARCHAR},
+      JZID = #{jzId,jdbcType=DECIMAL},
+      JZBH = #{jzbh,jdbcType=VARCHAR},
+      DALXID = #{dalxid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+    <select id="queryByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM INFO_SJCXJL sjch where is_del=1
+        <if test="xm !=null">
+            AND xm like '%${xm}%'
+        </if>
+        <if test="xb !=null">
+            AND xb like '%${xb}%'
+        </if>
+        <if test="dalx !=null">
+            AND dalx like '%${dalx}%'
+        </if>
+        <if test="ssdwid !=null">
+            AND ssdwid = #{ssdwid}
+        </if>
+        <if test="ssdwmc !=null">
+            AND ssdwmc like '%${ssdwmc}%'
+        </if>
+        <if test="txmbh !=null">
+            AND txmbh like '%${txmbh}%'
+        </if>
+        <if test="qzh !=null">
+            AND qzh like '%${qzh}%'
+        </if>
+       <!--  <if test="lbh !=null">
+            AND lbh like '%${lbh}%'
+        </if> -->
+        <if test="mlh != null">
+            AND mlh like '%${mlh}%'
+        </if>
+        <if test="sxh != null">
+            AND sxh  like '%${sxh}%'
+        </if>
+        <if test="tm != null">
+            AND tm like '%${tm}%'
+        </if>
+        <if test="zjhm != null">
+            AND zjhm like '%${zjhm}%'
+        </if>
+        <if test="jzId != null">
+            AND jzId = #{jzId}
+        </if>
+        <if test="jzbh !=null">
+            AND jzbh like '%${jzbh}%'
+        </if>
+        <if test="dacfwzid !=null">
+            AND dacfwzid = #{dacfwzid}
+        </if>
+        <if test="flh !=null">
+            AND flh like '%${flh}%'
+        </if>
+        <if test="zqzh !=null">
+            AND zqzh like '%${zqzh}%'
+        </if>
+        <if test="qyzh !=null">
+            AND qyzh like '%${qyzh}%'
+        </if>
+        <if test="dalxid !=null">
+            AND DALX = #{dalxid}
+        </if>
+        <if test="datas != null">
+            and
+            <foreach collection="datas" index="index" item="item" open="(" separator="or" close=")">
+                ssdwid in #{item}
+            </foreach>
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectByYWZBID" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from INFO_SJCXJL
+        where YWZBID = #{id,jdbcType=DECIMAL}
+    </select>
+
+
+</mapper>

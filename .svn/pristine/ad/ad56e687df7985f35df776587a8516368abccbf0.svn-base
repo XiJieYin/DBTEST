@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="T_FILE">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.File">
+		<result column="FILEID" property="fileid" jdbcType="VARCHAR" />
+		<result column="GUIDAID" property="guidaid" jdbcType="VARCHAR" />
+		<result column="ROWNO" property="rowno" jdbcType="DECIMAL" />
+		<result column="FILENAME" property="filename" jdbcType="OTHER" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="MD5CODE" property="md5code" jdbcType="VARCHAR" />
+		<result column="CREATIONTIME" property="creationtime" jdbcType="TIMESTAMP" />
+		<result column="CREATEDBYUSERID" property="createdbyuserid"
+			jdbcType="VARCHAR" />
+		<result column="CREATEDBYUSERNAME" property="createdbyusername"
+			jdbcType="OTHER" />
+	</resultMap>
+	<sql id="TABLE_SEQUENCE">SEQ_T_FILE.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.File">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into T_FILE (FILEID, GUIDAID, ROWNO,
+		FILENAME, TYPE, URL,
+		MD5CODE, CREATIONTIME, CREATEDBYUSERID,
+		CREATEDBYUSERNAME)
+		values
+		(#{fileid,jdbcType=VARCHAR}, #{guidaid,jdbcType=VARCHAR},
+		#{rowno,jdbcType=DECIMAL},
+		#{filename,jdbcType=OTHER},
+		#{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+		#{md5code,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP},
+		#{createdbyuserid,jdbcType=VARCHAR},
+		#{createdbyusername,jdbcType=OTHER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.File">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into T_FILE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fileid != null">
+				FILEID,
+			</if>
+			<if test="guidaid != null">
+				GUIDAID,
+			</if>
+			<if test="rowno != null">
+				ROWNO,
+			</if>
+			<if test="filename != null">
+				FILENAME,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="url != null">
+				URL,
+			</if>
+			<if test="md5code != null">
+				MD5CODE,
+			</if>
+			<if test="creationtime != null">
+				CREATIONTIME,
+			</if>
+			<if test="createdbyuserid != null">
+				CREATEDBYUSERID,
+			</if>
+			<if test="createdbyusername != null">
+				CREATEDBYUSERNAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fileid != null">
+				#{fileid,jdbcType=VARCHAR},
+			</if>
+			<if test="guidaid != null">
+				#{guidaid,jdbcType=VARCHAR},
+			</if>
+			<if test="rowno != null">
+				#{rowno,jdbcType=DECIMAL},
+			</if>
+			<if test="filename != null">
+				#{filename,jdbcType=OTHER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="md5code != null">
+				#{md5code,jdbcType=VARCHAR},
+			</if>
+			<if test="creationtime != null">
+				#{creationtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdbyuserid != null">
+				#{createdbyuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="createdbyusername != null">
+				#{createdbyusername,jdbcType=OTHER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

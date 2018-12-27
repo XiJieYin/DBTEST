@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DosFilesStockDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DosFilesStock" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ORGANIZATION" property="organization" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_ID" property="organizationId" jdbcType="DECIMAL" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ADDRESS_ID" property="addressId" jdbcType="DECIMAL" />
+    <result column="JZ_TYPE" property="jzType" jdbcType="VARCHAR" />
+    <result column="JZ_COUNT" property="jzCount" jdbcType="DECIMAL" />
+    <result column="NOW_JZ_COUNT" property="nowJzCount" jdbcType="DECIMAL" />
+    <result column="BORROWED_JZ_COUNT" property="borrowedJzCount" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="GDLX" property="gdlx" jdbcType="VARCHAR" />
+    <result column="JZWC" property="jzwc" jdbcType="DECIMAL"/>
+    <result column="TITLE" property="title" jdbcType="VARCHAR"/>
+    <result column="KSSJ" property="kssj" jdbcType="VARCHAR"/>
+    <result column="JSSJ" property="jssj" jdbcType="VARCHAR"/>
+    <result column="LRXT" property="lrxt" jdbcType="DECIMAL"/>
+    <result column="SMTP" property="smtp" jdbcType="DECIMAL"/>
+    <result column="GDXT" property="gdxt" jdbcType="VARCHAR"/>
+    <result column="GDDNXT" property="gddnxt" jdbcType="VARCHAR"/>
+    <result column="GDXTIP" property="gdxtip" jdbcType="VARCHAR"/>
+    <result column="KSTXM" property="kstxm" jdbcType="VARCHAR"/>
+    <result column="JSTXM" property="jstxm" jdbcType="VARCHAR"/>
+    <result column="SUMNUMBER" property="sumnumber" jdbcType="DECIMAL" />
+    <result column="SUMNUMBERITEMS" property="sumnumberitems" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORGANIZATION, ORGANIZATION_ID, ADDRESS, ADDRESS_ID, JZ_TYPE, JZ_COUNT, NOW_JZ_COUNT, 
+    BORROWED_JZ_COUNT, REMARK, UPDATE_USER, UPDATE_USER_ID, UPDATE_TIME,
+    GDLX,JZWC,TITLE,KSSJ,JSSJ,LRXT,SMTP,GDXT,GDDNXT,GDXTIP,KSTXM,JSTXM,SUMNUMBER,SUMNUMBERITEMS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DOS_FILES_STOCK
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DOS_FILES_STOCK
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_DOS_FILES_STOCK.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DosFilesStock" >
+  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DOS_FILES_STOCK (
+    ID, ORGANIZATION, ORGANIZATION_ID,ADDRESS, ADDRESS_ID,
+     JZ_TYPE,JZ_COUNT, NOW_JZ_COUNT, BORROWED_JZ_COUNT,REMARK, 
+     UPDATE_USER, UPDATE_USER_ID,UPDATE_TIME,GDLX,JZWC,
+     TITLE,KSSJ,JSSJ,LRXT,SMTP,
+     GDXT,GDDNXT,GDXTIP,KSTXM,JSTXM,
+     SUMNUMBER,SUMNUMBERITEMS
+     )
+    values (
+    #{id,jdbcType=DECIMAL}, #{organization,jdbcType=VARCHAR}, #{organizationId,jdbcType=DECIMAL},#{address,jdbcType=VARCHAR}, #{addressId,jdbcType=DECIMAL},
+       #{jzType,jdbcType=VARCHAR}, #{jzCount,jdbcType=DECIMAL}, #{nowJzCount,jdbcType=DECIMAL}, #{borrowedJzCount,jdbcType=DECIMAL},#{remark,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateUserId,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP},#{gdlx,jdbcType=VARCHAR},#{jzwc,jdbcType=DECIMAL},
+      #{title,jdbcType=VARCHAR},#{kssj,jdbcType=VARCHAR},#{jssj,jdbcType=VARCHAR},#{lrxt,jdbcType=DECIMAL},#{smtp,jdbcType=DECIMAL},
+      #{gdxt,jdbcType=VARCHAR},#{gddnxt,jdbcType=VARCHAR},#{gdxtip,jdbcType=VARCHAR},#{kstxm,jdbcType=VARCHAR},#{jstxm,jdbcType=VARCHAR},
+	  #{sumnumber,jdbcType=DECIMAL},#{sumnumberitems,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.DosFilesStock" >
+  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DOS_FILES_STOCK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="organization != null" >
+        ORGANIZATION,
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="addressId != null" >
+        ADDRESS_ID,
+      </if>
+      <if test="jzType != null" >
+        JZ_TYPE,
+      </if>
+      <if test="jzCount != null" >
+        JZ_COUNT,
+      </if>
+      <if test="nowJzCount != null" >
+        NOW_JZ_COUNT,
+      </if>
+      <if test="borrowedJzCount != null" >
+        BORROWED_JZ_COUNT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="gdlx!=null">
+      	GDLX,
+      </if>
+      <if test="jzwc!=null">
+      	JZWC,
+      </if>
+       <if test="title!=null">
+    	TITLE,
+      </if>
+      <if test="kssj!=null">
+      	KSSJ,
+      </if>
+      <if test="jssj!=null">
+      	JSSJ,
+      </if>
+       <if test="lrxt!=null">
+      	LRXT,
+      </if>
+      <if test="smtp!=null">
+      	SMTP,
+      </if>
+       <if test="gdxt!=null">
+      	GDXT,
+      </if>
+	  <if test="gddnxt!=null">
+      	GDDNXT,
+      </if>
+      <if test="gdxtip!=null">
+      	GDXTIP,
+      </if>
+      <if test="kstxm!=null">
+      	KSTXM,
+      </if>
+      <if test="jstxm!=null">
+      	JSTXM,
+      </if>
+      <if test="sumnumber!=null">
+      	SUMNUMBER,
+      </if>
+      <if test="sumnumberitems!=null">
+      	SUMNUMBERITEMS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="organization != null" >
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzType != null" >
+        #{jzType,jdbcType=VARCHAR},
+      </if>
+      <if test="jzCount != null" >
+        #{jzCount,jdbcType=DECIMAL},
+      </if>
+      <if test="nowJzCount != null" >
+        #{nowJzCount,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowedJzCount != null" >
+        #{borrowedJzCount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gdlx!=null">
+   		 #{gdlx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwc!=null">
+      	 #{jzwc,jdbcType=DECIMAL},
+      </if>
+      <if test="title!=null">
+		#{title,jdbcType=VARCHAR},      
+      </if>
+      <if test="kssj!=null">
+      #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj!=null">
+      	#{jssj,jdbcType=VARCHAR},
+      </if>
+       <if test="lrxt!=null">
+      #{lrxt,jdbcType=DECIMAL},
+      </if>
+      <if test="smtp!=null">
+       #{smtp,jdbcType=DECIMAL},
+      </if>
+       <if test="gdxt!=null">
+       #{gdxt,jdbcType=VARCHAR},
+      </if>
+	  <if test="gddnxt!=null">
+      	#{gddnxt,jdbcType=VARCHAR},
+      </if>
+      <if test="gdxtip!=null">
+      	 #{gdxtip,jdbcType=VARCHAR},
+      </if>
+      <if test="kstxm!=null">
+      	#{kstxm,jdbcType=VARCHAR},
+      </if>
+      <if test="jstxm!=null">
+      	 #{jstxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sumnumber!=null">
+      	 #{sumnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="sumnumberitems!=null">
+      	 #{sumnumberitems,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DosFilesStock" >
+    update DOS_FILES_STOCK
+    <set >
+      <if test="organization != null" >
+        ORGANIZATION = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        ORGANIZATION_ID = #{organizationId,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        ADDRESS_ID = #{addressId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzType != null" >
+        JZ_TYPE = #{jzType,jdbcType=VARCHAR},
+      </if>
+      <if test="jzCount != null" >
+        JZ_COUNT = #{jzCount,jdbcType=DECIMAL},
+      </if>
+      <if test="nowJzCount != null" >
+        NOW_JZ_COUNT = #{nowJzCount,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowedJzCount != null" >
+        BORROWED_JZ_COUNT = #{borrowedJzCount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gdlx!=null">
+   		GDLX=#{gdlx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwc!=null">
+      	JZWC=#{jzwc,jdbcType=DECIMAL},
+      </if>
+      <if test="title!=null">
+      	TITLE=#{title,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj!=null">
+      KSSJ=#{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj!=null">
+      	JSSJ=#{jssj,jdbcType=VARCHAR},
+      </if>
+       <if test="lrxt!=null">
+      LRXT=#{lrxt,jdbcType=DECIMAL},
+      </if>
+      <if test="smtp!=null">
+      SMTP= #{smtp,jdbcType=DECIMAL},
+      </if>
+       <if test="gdxt!=null">
+       GDXT=#{gdxt,jdbcType=VARCHAR},
+      </if>
+	  <if test="gddnxt!=null">
+      	GDDNXT=#{gddnxt,jdbcType=VARCHAR},
+      </if>
+      <if test="gdxtip!=null">
+      	GDXTIP= #{gdxtip,jdbcType=VARCHAR},
+      </if>
+      <if test="kstxm!=null">
+      KSTXM=#{kstxm,jdbcType=VARCHAR},
+      </if>
+      <if test="jstxm!=null">
+      	JSTXM= #{jstxm,jdbcType=VARCHAR},
+      </if>
+        <if test="sumnumber!=null">
+      	SUMNUMBER= #{sumnumber,jdbcType=DECIMAL},
+      </if>
+        <if test="sumnumberitems!=null">
+      	SUMNUMBERITEMS= #{sumnumberitems,jdbcType=DECIMAL},
+      </if>
+        <if test="deleteStatus!=null">
+      	DELETESTATUS= #{deleteStatus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DosFilesStock" >
+    update DOS_FILES_STOCK
+    set ORGANIZATION = #{organization,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{organizationId,jdbcType=DECIMAL},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ADDRESS_ID = #{addressId,jdbcType=DECIMAL},
+      JZ_TYPE = #{jzType,jdbcType=VARCHAR},
+      JZ_COUNT = #{jzCount,jdbcType=DECIMAL},
+      NOW_JZ_COUNT = #{nowJzCount,jdbcType=DECIMAL},
+      BORROWED_JZ_COUNT = #{borrowedJzCount,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      GDLX=#{gdlx,jdbcType=VARCHAR},
+      JZWC=#{jzwc,jdbcType=DECIMAL},
+      TITLE=#{title,jdbcType=VARCHAR},
+      KSSJ=#{kssj,jdbcType=VARCHAR},
+      JSSJ=#{jssj,jdbcType=VARCHAR},
+      LRXT=#{lrxt,jdbcType=DECIMAL},
+      SMTP= #{smtp,jdbcType=DECIMAL},
+      GDXT=#{gdxt,jdbcType=VARCHAR},
+      GDDNXT=#{gddnxt,jdbcType=VARCHAR},
+      GDXTIP= #{gdxtip,jdbcType=VARCHAR},
+	  KSTXM=#{kstxm,jdbcType=VARCHAR},
+	  JSTXM= #{jstxm,jdbcType=VARCHAR},
+	  SUMNUMBER= #{sumnumber,jdbcType=VARCHAR},
+	  SUMNUMBERITEMS= #{sumnumberitems,jdbcType=VARCHAR},
+	  DELETESTATUS= #{deleteStatus,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </update>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from DOS_FILES_STOCK 
+    where 1=1
+    <if test="address!=null">
+    and ADDRESS like '%${address}%' 
+    </if>
+    <if test="organization!=null">
+    and ORGANIZATION like '%${organization}%'  
+    </if>
+    <if test="jzType!=null">
+    and JZ_TYPE like '%${jzType}%'  
+    </if>
+    and DELETESTATUS = 0
+    order by UPDATE_TIME
+  </select>
+</mapper>

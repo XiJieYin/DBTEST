@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.CkzlDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Ckzl" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="GFMC" property="gfmc" jdbcType="VARCHAR" />
+    <result column="FBSJ" property="fbsj" jdbcType="TIMESTAMP" />
+    <result column="FBDW" property="fbdw" jdbcType="VARCHAR" />
+    <result column="BB" property="bb" jdbcType="VARCHAR" />
+    <result column="SLCS" property="slcs" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GFMC, FBSJ, FBDW, BB, SLCS, URL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+
+    from CKZL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CKZL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_CKZL.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Ckzl" >
+  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into CKZL (ID, GFMC, FBSJ, 
+      FBDW, BB, SLCS, URL
+      )
+    values (#{id,jdbcType=DECIMAL}, #{gfmc,jdbcType=VARCHAR}, #{fbsj,jdbcType=TIMESTAMP}, 
+      #{fbdw,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{slcs,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Ckzl" >
+    <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into CKZL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="gfmc != null" >
+        GFMC,
+      </if>
+      <if test="fbsj != null" >
+        FBSJ,
+      </if>
+      <if test="fbdw != null" >
+        FBDW,
+      </if>
+      <if test="bb != null" >
+        BB,
+      </if>
+      <if test="slcs != null" >
+        SLCS,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="gfmc != null" >
+        #{gfmc,jdbcType=VARCHAR},
+      </if>
+      <if test="fbsj != null" >
+        #{fbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fbdw != null" >
+        #{fbdw,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null" >
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="slcs != null" >
+        #{slcs,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Ckzl" >
+    update CKZL
+    <set >
+      <if test="gfmc != null" >
+        GFMC = #{gfmc,jdbcType=VARCHAR},
+      </if>
+      <if test="fbsj != null" >
+        FBSJ = #{fbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fbdw != null" >
+        FBDW = #{fbdw,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null" >
+        BB = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="slcs != null" >
+        SLCS = #{slcs,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Ckzl" >
+    update CKZL
+    set GFMC = #{gfmc,jdbcType=VARCHAR},
+      FBSJ = #{fbsj,jdbcType=TIMESTAMP},
+      FBDW = #{fbdw,jdbcType=VARCHAR},
+      BB = #{bb,jdbcType=VARCHAR},
+      SLCS = #{slcs,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from CKZL 
+    where 1=1
+    <if test="gfmc!=null">
+    and GFMC like '%${gfmc}%'
+    </if>
+    order by FBSJ DESC
+  </select>
+</mapper>

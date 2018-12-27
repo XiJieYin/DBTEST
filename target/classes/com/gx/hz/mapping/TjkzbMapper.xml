@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TjkzbDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Tjkzb" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="JZ_ID" property="jzId" jdbcType="DECIMAL" />
+    <result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+    <result column="ZYS" property="zys" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, JZ_ID, RW_ID, ZYS, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TJKZB
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TJKZB
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_TJKZB.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Tjkzb" >
+    <selectKey  keyProperty="id" resultType="long" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into TJKZB (ID, JZ_ID, RW_ID, 
+      ZYS, USER_ID)
+    values (#{id,jdbcType=DECIMAL}, #{jzId,jdbcType=DECIMAL}, #{rwId,jdbcType=DECIMAL}, 
+      #{zys,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Tjkzb" >
+     <selectKey  keyProperty="id" resultType="long" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into TJKZB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="jzId != null" >
+        JZ_ID,
+      </if>
+      <if test="rwId != null" >
+        RW_ID,
+      </if>
+      <if test="zys != null" >
+        ZYS,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="jzId != null" >
+        #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="rwId != null" >
+        #{rwId,jdbcType=DECIMAL},
+      </if>
+      <if test="zys != null" >
+        #{zys,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Tjkzb" >
+    update TJKZB
+    <set >
+      <if test="jzId != null" >
+        JZ_ID = #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="rwId != null" >
+        RW_ID = #{rwId,jdbcType=DECIMAL},
+      </if>
+      <if test="zys != null" >
+        ZYS = #{zys,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Tjkzb" >
+    update TJKZB
+    set JZ_ID = #{jzId,jdbcType=DECIMAL},
+      RW_ID = #{rwId,jdbcType=DECIMAL},
+      ZYS = #{zys,jdbcType=DECIMAL},
+      USER_ID = #{userId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectByjzId" resultMap="BaseResultMap">
+  select * from TJKZB where JZ_ID = #{jzId}
+  </select>
+  
+  <select id="selectByRwIdAndUserId" resultMap="BaseResultMap">
+   select * from TJKZB where RW_ID = #{rwId} AND USER_ID = #{userId}
+  </select>
+</mapper>

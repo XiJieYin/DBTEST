@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoYcfkDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoYcfk" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="JZTM" property="jztm" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="CLTYPE" property="cltype" jdbcType="DECIMAL" />
+     <result column="YCQK" property="ycqk" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TABLE_SEQUENCE">SEQ_INFO_YCFK.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoYcfk" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_YCFK (ID, USER_ID, JZBH, 
+      JZTM, XM, BZ, TYPE,CLTYPE,YCQK
+      )
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{jzbh,jdbcType=VARCHAR}, 
+      #{jztm,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}
+      , #{cltype,jdbcType=DECIMAL},#{ycqk,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoYcfk" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_YCFK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+      <if test="jztm != null" >
+        JZTM,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="cltype != null" >
+        CLTYPE,
+      </if>
+      <if test="ycqk != null" >
+        YCQK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jztm != null" >
+        #{jztm,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="cltype != null" >
+        #{cltype,jdbcType=DECIMAL},
+      </if>
+      <if test="ycqk != null" >
+        #{ycqk,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delectByjzBhToType">
+  update INFO_YCFK set type = 0 where jzbh = #{jzbh}
+  </delete>
+  <delete id="delectByjzBhToClType">
+   update INFO_YCFK set cltype = 0 where jzbh = #{jzbh}
+  </delete>
+  <delete id="deleteByPrimaryKey">
+  update INFO_YCFK set type = 0 , cltype = 0 where id = #{id}
+  </delete>
+  <select id="selectByJzbhAndClType" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where cltype = #{cltype} and jzbh = #{jzbh}
+  </select>
+  
+  <select id="selectByYcsx" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where jzbh = #{jzbh} and (type =1 or CLTYPE = 1)
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where id = #{id}
+  </select>
+  
+    <select id="selectByJzbhAndType" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where type = #{type} and jzbh = #{jzbh}
+  </select>
+    <select id="selectFkByUserId" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where user_id = #{userId} and (type = 1 or cltype = 1)
+  </select>
+    <select id="queryByCondition" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where user_id = #{userId} and (type = 1 or cltype = 1)
+  </select>
+    <select id="queryByQcwtToJzbh" resultMap="BaseResultMap">
+ 	select * from INFO_YCFK where jzbh = #{jzbh} and (type = 1 or cltype = 1)
+  </select>
+  <update id="updateYCZT"  parameterType="Long">
+  		update DOS_JZ set YCZT=0  where id=#{id}
+  </update>
+</mapper>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictMaterialDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictMaterial" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="SHOW_INDEX" property="showIndex" jdbcType="INTEGER" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="INTEGER" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="INTEGER" />
+    <result column="IS_ENTERING" property="isEntering" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="LBH" property="lbh" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="ENTERING_TABLE" property="enteringTable" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="MatAndColResultMap" type="com.gx.hz.pojo.DictMaterial" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="SHOW_INDEX" property="showIndex" jdbcType="INTEGER" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="INTEGER" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="INTEGER" />
+    <result column="IS_ENTERING" property="isEntering" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="LBH" property="lbh" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="ENTERING_TABLE" property="enteringTable" jdbcType="VARCHAR" />
+    <collection property="colList"  ofType="com.gx.hz.pojo.DictColumn">
+    	<id column="COL_ID" property="id" />
+		<result column="EN_NAME" property="enName"  />
+		<result column="CN_NAME" property="cnName"  />
+		<result column="TYPE" property="type"/>
+		<result column="COL_IS_ENABLE" property="isEnable"  />
+	</collection>
+  </resultMap>
+  
+  <resultMap id="CsResultMap" type="com.gx.hz.pojo.DictMaterial" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MATERIAL_NAME" property="materialName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    ID, MATERIAL_NAME, PARENT_ID, SHOW_INDEX, IS_ENABLE, CREATE_TIME, UPDATE_TIME, CREATE_PERSON, 
+    UPDATE_PERSON, IS_ENTERING, REMARK, LBH, CODE, ENTERING_TABLE
+  </sql>
+  
+  <sql id="Mat_Column_List" >
+    M.ID, M.MATERIAL_NAME, 
+    M.PARENT_ID, M.SHOW_INDEX, 
+    M.IS_ENABLE, M.CREATE_TIME, 
+    M.UPDATE_TIME, M.CREATE_PERSON, 
+    M.UPDATE_PERSON, M.IS_ENTERING, 
+    M.REMARK, M.LBH, 
+    M.CODE,M.ENTERING_TABLE
+  </sql>
+  
+  <sql id="Col_Column_List" >
+    C.ID AS COL_ID,
+    C.EN_NAME,
+    C.CN_NAME,
+    C.TYPE,
+    MC.IS_ENABLE AS COL_IS_ENABLE
+  </sql>
+  
+  <sql id="Cs_Column_List" >
+    T.ID,
+    T.MATERIAL_NAME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DICT_MATERIAL
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DICT_MATERIAL
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <sql id='TABLE_SEQUENCE'>SEQ_DICT_MATERIAL.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DictMaterial" keyProperty="id">
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+  </selectKey>
+    insert into DICT_MATERIAL (ID, MATERIAL_NAME, PARENT_ID, 
+      SHOW_INDEX, IS_ENABLE, CREATE_TIME, 
+      UPDATE_TIME, CREATE_PERSON, UPDATE_PERSON, 
+      IS_ENTERING,REMARK, LBH, CODE,ENTERING_TABLE)
+    values (#{id,jdbcType=INTEGER}, #{materialName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{showIndex,jdbcType=INTEGER}, #{isEnable,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=INTEGER}, #{updatePerson,jdbcType=INTEGER}, 
+      #{isEntering,jdbcType=INTEGER},#{remark,jdbcType=VARCHAR},#{lbh,jdbcType=VARCHAR} ,#{code,jdbcType=VARCHAR}, #{enteringTable,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.DictMaterial" >
+    insert into DICT_MATERIAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="materialName != null" >
+        MATERIAL_NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="showIndex != null" >
+        SHOW_INDEX,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="updatePerson != null" >
+        UPDATE_PERSON,
+      </if>
+      <if test="isEntering != null" >
+        IS_ENTERING,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="lbh != null" >
+        LBH,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="enteringTable != null" >
+        ENTERING_Table,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="showIndex != null" >
+        #{showIndex,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=INTEGER},
+      </if>
+      <if test="updatePerson != null" >
+        #{updatePerson,jdbcType=INTEGER},
+      </if>
+      <if test="isEntering != null" >
+        #{isEntering,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+      #{REMARK,jdbcType=VARCHAR},
+      </if>
+       <if test="lbh != null" >
+      #{LBH,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+      #{CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="enteringTable != null" >
+      #{ENTERING_TABLE,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictMaterial" >
+    update DICT_MATERIAL
+    <set >
+      <if test="materialName != null" >
+        MATERIAL_NAME = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="showIndex != null" >
+        SHOW_INDEX = #{showIndex,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=INTEGER},
+      </if>
+      <if test="updatePerson != null" >
+        UPDATE_PERSON = #{updatePerson,jdbcType=INTEGER},
+      </if>
+      <if test="isEntering != null" >
+        IS_ENTERING = #{isEntering,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+       REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="lbh != null" >
+       LBH = #{lbh,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+       CODE = #{code,jdbcType=VARCHAR},
+       </if>
+       <if test="enteringTable != null" >
+      ENTERING_Table = #{enteringTable,jdbcType=VARCHAR},
+       </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DictMaterial" >
+    update DICT_MATERIAL
+    set MATERIAL_NAME = #{materialName,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      SHOW_INDEX = #{showIndex,jdbcType=INTEGER},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=INTEGER},
+      UPDATE_PERSON = #{updatePerson,jdbcType=INTEGER},
+      IS_ENTERING = #{isEntering,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      LBH = #{lbh,jdbcType=VARCHAR},
+      CODE= #{code,jdbcType=VARCHAR},
+      ENTERING_TABLE = #{enteringTable,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    	<include refid="Base_Column_List" />
+    from DICT_MATERIAL
+    order by SHOW_INDEX
+  </select>
+  
+  <select id="queryByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+	select 
+    <include refid="Base_Column_List" />
+    from DICT_MATERIAL
+    where 1 = 1
+    <if test="materialName != null" >
+      AND MATERIAL_NAME like '%${materialName}%'
+    </if>
+    <if test="parentId != null" >
+      start with ID = #{parentId,jdbcType=INTEGER}
+      connect by prior ID = PARENT_ID
+    </if>
+    order by show_Index
+  </select>
+  
+  <!-- 保存材料字段关联关系 -->
+  <sql id='TABLE_SEQUENCE2'>SEQ_DICT_MATERIAL_COLUMN.nextval</sql>
+  <insert id="insertMatAndCol" parameterType="map" keyProperty="id">
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE2" />
+			from dual
+  </selectKey>
+    insert into DICT_MATERIAL_COLUMN (ID, COLUMN_ID, MATERIAL_ID, IS_ENABLE)
+    values (#{id,jdbcType=INTEGER}, 
+    #{columnId}, 
+    #{materialId}, #{isEnable})
+  </insert>
+  
+  <!-- 保存材料字段关联关系 -->
+  <sql id='TABLE_SEQUENCE3'>SEQ_DICT_MATERIAL_TABLE.NEXTVAL</sql>
+  <insert id="insertTableAndCol" parameterType="map" keyProperty="id">
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE2" />
+			from dual
+  </selectKey>
+    insert into DICT_MATERIAL_TABLE (ID, COLUMN_ID, TABLE_ID, IS_ENTERING)
+    values (#{id,jdbcType=INTEGER}, 
+    #{columnId}, 
+    #{tableId}, 
+    #{isEntering})
+  </insert>
+  
+  <!-- 查询材料关联的字段信息 -->
+  <select id="getMatAndColByCode" parameterType="map" resultMap="MatAndColResultMap">
+  	SELECT 
+  	<include refid="Mat_Column_List" />,
+  	<include refid="Col_Column_List" /> 
+  	FROM DICT_MATERIAL M,DICT_COLUMN C,DICT_MATERIAL_COLUMN MC 
+		where M.ID=MC.MATERIAL_ID 
+	AND MC.COLUMN_ID = C.ID 
+	<if test="code != null" >
+	AND M.CODE = #{code}
+	</if>
+	ORDER BY C.ID,COL_IS_ENABLE DESC
+  </select>
+  
+  <!-- 根据材料ID删除材料跟字段关联信息 -->
+   <delete id="delMatAndColByMatId" parameterType="int" >
+	    delete from DICT_MATERIAL_COLUMN
+	    where MATERIAL_ID = #{materialId}
+   </delete>
+   
+   <!-- 根据材料ID删除材料跟字段关联信息 -->
+   <delete id="delTableAndColByMatId" parameterType="int" >
+	    delete from DICT_MATERIAL_TABLE
+	    where MATERIAL_ID = #{materialId}
+   </delete>
+   
+   <!-- CS获取第一层材料列表 -->
+   <select id="getCsFristType" resultMap="CsResultMap">
+   		SELECT 
+  			<include refid="Cs_Column_List" />
+  		FROM DICT_MATERIAL T 
+  		WHERE 
+  			T.IS_ENTERING = 0 
+  			AND T.ID!=1 
+  		ORDER BY ID	
+   </select>
+   
+   <!-- CS获取第二层材料列表 -->
+   <select id="getCsSecondType" resultMap="CsResultMap" parameterType="int">
+   		SELECT 
+   			<include refid="Cs_Column_List" /> 
+   		FROM DICT_MATERIAL T WHERE 
+   		T.PARENT_ID=#{parentId} 
+   		ORDER BY ID
+   </select>
+</mapper>

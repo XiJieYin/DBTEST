@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DosFilesBorRecDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DosFilesBorRec" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ADDRESS_ID" property="addressId" jdbcType="DECIMAL" />
+    <result column="BORROWE_DTIME" property="borroweDtime" jdbcType="TIMESTAMP" />
+    <result column="EXPECTED_RETURN_TIME" property="expectedReturnTime" jdbcType="TIMESTAMP" />
+    <result column="RETURN_TIME" property="returnTime" jdbcType="TIMESTAMP" />
+    <result column="BORROWED_USER" property="borrowedUser" jdbcType="VARCHAR" />
+    <result column="BORROWED_USER_ID" property="borrowedUserId" jdbcType="DECIMAL" />
+    <result column="JZ" property="jz" jdbcType="VARCHAR" />
+    <result column="JZ_ID" property="jzId" jdbcType="DECIMAL" />
+    <result column="JZ_COUNT" property="jzCount" jdbcType="VARCHAR" />
+    <result column="AJ" property="aj" jdbcType="VARCHAR" />
+    <result column="AJ_ID" property="ajId" jdbcType="DECIMAL" />
+    <result column="EFFECT_DESCRIPTION" property="effectDescription" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ADDRESS, ADDRESS_ID, BORROWE_DTIME, EXPECTED_RETURN_TIME, RETURN_TIME, BORROWED_USER, 
+    BORROWED_USER_ID, JZ, JZ_ID, JZ_COUNT, AJ, AJ_ID, EFFECT_DESCRIPTION, REMARK, UPDATE_USER, 
+    UPDATE_USER_ID, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DOS_FILES_BOR_REC
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DOS_FILES_BOR_REC
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_DOS_FILES_BOR_REC.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DosFilesBorRec" >
+  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DOS_FILES_BOR_REC (ID, ADDRESS, ADDRESS_ID, 
+      BORROWE_DTIME, EXPECTED_RETURN_TIME, RETURN_TIME, 
+      BORROWED_USER, BORROWED_USER_ID, JZ, 
+      JZ_ID, JZ_COUNT, AJ, 
+      AJ_ID, EFFECT_DESCRIPTION, REMARK, 
+      UPDATE_USER, UPDATE_USER_ID, UPDATE_TIME
+      )
+    values (#{id,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, #{addressId,jdbcType=DECIMAL}, 
+      #{borroweDtime,jdbcType=TIMESTAMP}, #{expectedReturnTime,jdbcType=TIMESTAMP}, #{returnTime,jdbcType=TIMESTAMP}, 
+      #{borrowedUser,jdbcType=VARCHAR}, #{borrowedUserId,jdbcType=DECIMAL}, #{jz,jdbcType=VARCHAR}, 
+      #{jzId,jdbcType=DECIMAL}, #{jzCount,jdbcType=VARCHAR}, #{aj,jdbcType=VARCHAR}, 
+      #{ajId,jdbcType=DECIMAL}, #{effectDescription,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateUserId,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.DosFilesBorRec" >
+  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DOS_FILES_BOR_REC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="addressId != null" >
+        ADDRESS_ID,
+      </if>
+      <if test="borroweDtime != null" >
+        BORROWE_DTIME,
+      </if>
+      <if test="expectedReturnTime != null" >
+        EXPECTED_RETURN_TIME,
+      </if>
+      <if test="returnTime != null" >
+        RETURN_TIME,
+      </if>
+      <if test="borrowedUser != null" >
+        BORROWED_USER,
+      </if>
+      <if test="borrowedUserId != null" >
+        BORROWED_USER_ID,
+      </if>
+      <if test="jz != null" >
+        JZ,
+      </if>
+      <if test="jzId != null" >
+        JZ_ID,
+      </if>
+      <if test="jzCount != null" >
+        JZ_COUNT,
+      </if>
+      <if test="aj != null" >
+        AJ,
+      </if>
+      <if test="ajId != null" >
+        AJ_ID,
+      </if>
+      <if test="effectDescription != null" >
+        EFFECT_DESCRIPTION,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=DECIMAL},
+      </if>
+      <if test="borroweDtime != null" >
+        #{borroweDtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectedReturnTime != null" >
+        #{expectedReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="borrowedUser != null" >
+        #{borrowedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowedUserId != null" >
+        #{borrowedUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="jz != null" >
+        #{jz,jdbcType=VARCHAR},
+      </if>
+      <if test="jzId != null" >
+        #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzCount != null" >
+        #{jzCount,jdbcType=VARCHAR},
+      </if>
+      <if test="aj != null" >
+        #{aj,jdbcType=VARCHAR},
+      </if>
+      <if test="ajId != null" >
+        #{ajId,jdbcType=DECIMAL},
+      </if>
+      <if test="effectDescription != null" >
+        #{effectDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DosFilesBorRec" >
+    update DOS_FILES_BOR_REC
+    <set >
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        ADDRESS_ID = #{addressId,jdbcType=DECIMAL},
+      </if>
+      <if test="borroweDtime != null" >
+        BORROWE_DTIME = #{borroweDtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectedReturnTime != null" >
+        EXPECTED_RETURN_TIME = #{expectedReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnTime != null" >
+        RETURN_TIME = #{returnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="borrowedUser != null" >
+        BORROWED_USER = #{borrowedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowedUserId != null" >
+        BORROWED_USER_ID = #{borrowedUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="jz != null" >
+        JZ = #{jz,jdbcType=VARCHAR},
+      </if>
+      <if test="jzId != null" >
+        JZ_ID = #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzCount != null" >
+        JZ_COUNT = #{jzCount,jdbcType=VARCHAR},
+      </if>
+      <if test="aj != null" >
+        AJ = #{aj,jdbcType=VARCHAR},
+      </if>
+      <if test="ajId != null" >
+        AJ_ID = #{ajId,jdbcType=DECIMAL},
+      </if>
+      <if test="effectDescription != null" >
+        EFFECT_DESCRIPTION = #{effectDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DosFilesBorRec" >
+    update DOS_FILES_BOR_REC
+    set ADDRESS = #{address,jdbcType=VARCHAR},
+      ADDRESS_ID = #{addressId,jdbcType=DECIMAL},
+      BORROWE_DTIME = #{borroweDtime,jdbcType=TIMESTAMP},
+      EXPECTED_RETURN_TIME = #{expectedReturnTime,jdbcType=TIMESTAMP},
+      RETURN_TIME = #{returnTime,jdbcType=TIMESTAMP},
+      BORROWED_USER = #{borrowedUser,jdbcType=VARCHAR},
+      BORROWED_USER_ID = #{borrowedUserId,jdbcType=DECIMAL},
+      JZ = #{jz,jdbcType=VARCHAR},
+      JZ_ID = #{jzId,jdbcType=DECIMAL},
+      JZ_COUNT = #{jzCount,jdbcType=VARCHAR},
+      AJ = #{aj,jdbcType=VARCHAR},
+      AJ_ID = #{ajId,jdbcType=DECIMAL},
+      EFFECT_DESCRIPTION = #{effectDescription,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from DOS_FILES_BOR_REC 
+    where 1=1
+    <if test="address!=null">
+    and ADDRESS like '%${address}%' 
+    </if>
+    <!-- <if test="fileType!=null">
+    and FILE_TYPE like '%${fileType}%'  
+    </if>
+    <if test="year!=null">
+    and YEAR like '%${year}%'  
+    </if> -->
+    order by UPDATE_TIME DESC
+  </select>
+</mapper>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoRwtjDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoRwtj">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+		<result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+		<result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+		<result column="JZSL" property="jzsl" jdbcType="DECIMAL" />
+		<result column="AJSL" property="ajsl" jdbcType="DECIMAL" />
+		<result column="CLSL" property="clsl" jdbcType="DECIMAL" />
+		<result column="SMYS" property="smys" jdbcType="DECIMAL" />
+		<result column="LRYS" property="lrys" jdbcType="DECIMAL" />
+		<result column="SHYS" property="shys" jdbcType="DECIMAL" />
+		<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+		<result column="JHKSSJ" property="jhkssj" jdbcType="TIMESTAMP" />
+		<result column="JHJSSJ" property="jhjssj" jdbcType="TIMESTAMP" />
+		<result column="RYLX" property="rylx" jdbcType="DECIMAL" />
+		<result column="ZT" property="zt" jdbcType="DECIMAL" />
+		<result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, USER_ID, RW_ID, RWMC, JZSL, AJSL, CLSL, SMYS, LRYS,
+		SHYS, ORG_CODE,
+		ORG_NAME,
+		JHKSSJ, JHJSSJ, RYLX, ZT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_RWTJ
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="queryByRwId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_RWTJ
+		where RW_ID = #{rwId,jdbcType=DECIMAL}
+	</select>
+	<select id="queryByCondition" resultMap="BaseResultMap">
+		select * from INFO_RWTJ
+		where 1=1
+		<if test="userId !=null">
+			and User_ID = #{userId}
+		</if>
+		<if test="rylx !=null">
+			and RYLX = #{rylx}
+		</if>
+		<if test="orgCode !=null">
+			and ORG_CODE = #{orgCode}
+		</if>
+		<if test="zt !=null">
+			and ZT = #{zt}
+		</if>
+		<if test="rwId !=null">
+			and RW_ID = #{rwId}
+		</if>
+		order by RW_ID DESC
+	</select>
+	<select id="selectByUserIdAndRylx" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_RWTJ
+		where USER_ID = #{userId} AND RYLX = #{rylx} AND RW_ID =
+		#{rwId}
+	</select>
+
+	<select id="selectByUserIdAndRylxs" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_RWTJ
+		where USER_ID = #{userId} AND RYLX = #{rylx} AND RW_ID = #{rwId} and cjsj =
+		#{cjsj}
+	</select>
+
+	<select id="selectByUserIdAndRylxss" resultMap="BaseResultMap">
+		<choose>
+			<when test="cjsj !=null or endCjsj !=null ">
+				select
+				<include refid="Base_Column_List" />
+				from INFO_RWTJ
+				where USER_ID = #{userId} AND RYLX = #{rylx} AND RW_ID
+				= #{rwId}
+				<if test="cjsj!=null">
+					and to_date(cjsj,'yyyy-MM-DD') &gt;= to_date(#{cjsj},'yyyy-MM-DD')
+				</if>
+				<if test="endCjsj!=null">
+					and to_date(cjsj,'yyyy-MM-DD') &lt;=
+					to_date(#{endCjsj},'yyyy-MM-DD')
+				</if>
+			</when>
+			<otherwise>
+				select sum(jzsl) jzsl,sum(ajsl) ajsl,sum(clsl) clsl,sum(smys)
+				smys,sum(lrys) lrys,sum(shys) shys
+				from INFO_RWTJ
+				where USER_ID =
+				#{userId} AND RYLX = #{rylx} AND RW_ID = #{rwId}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="selectByRwIdAndRylx" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_RWTJ
+		where RYLX = #{rylx} AND RW_ID = #{rwId}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		INFO_RWTJ
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_INFO_RWTJ.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.InfoRwtj">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into INFO_RWTJ (ID, USER_ID, RW_ID,
+		RWMC, JZSL, AJSL, CLSL,
+		SMYS, LRYS, SHYS, ORG_CODE,
+		ORG_NAME, JHKSSJ, JHJSSJ,
+		RYLX, ZT)
+		values
+		(#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL},
+		#{rwId,jdbcType=DECIMAL},
+		#{rwmc,jdbcType=VARCHAR},
+		#{jzsl,jdbcType=DECIMAL}, #{ajsl,jdbcType=DECIMAL},
+		#{clsl,jdbcType=DECIMAL},
+		#{smys,jdbcType=DECIMAL},
+		#{lrys,jdbcType=DECIMAL}, #{shys,jdbcType=DECIMAL},
+		#{orgCode,jdbcType=VARCHAR},
+		#{orgName,jdbcType=VARCHAR},
+		#{jhkssj,jdbcType=TIMESTAMP}, #{jhjssj,jdbcType=TIMESTAMP},
+		#{rylx,jdbcType=DECIMAL}, #{zt,jdbcType=DECIMAL},
+		#{CJSJ,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoRwtj">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into INFO_RWTJ
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="rwId != null">
+				RW_ID,
+			</if>
+			<if test="rwmc != null">
+				RWMC,
+			</if>
+			<if test="jzsl != null">
+				JZSL,
+			</if>
+			<if test="ajsl != null">
+				AJSL,
+			</if>
+			<if test="clsl != null">
+				CLSL,
+			</if>
+			<if test="smys != null">
+				SMYS,
+			</if>
+			<if test="lrys != null">
+				LRYS,
+			</if>
+			<if test="shys != null">
+				SHYS,
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE,
+			</if>
+			<if test="orgName != null">
+				ORG_NAME,
+			</if>
+			<if test="jhkssj != null">
+				JHKSSJ,
+			</if>
+			<if test="jhjssj != null">
+				JHJSSJ,
+			</if>
+			<if test="rylx != null">
+				RYLX,
+			</if>
+			<if test="zt != null">
+				ZT,
+			</if>
+			<if test="cjsj != null">
+				CJSJ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=DECIMAL},
+			</if>
+			<if test="rwId != null">
+				#{rwId,jdbcType=DECIMAL},
+			</if>
+			<if test="rwmc != null">
+				#{rwmc,jdbcType=VARCHAR},
+			</if>
+			<if test="jzsl != null">
+				#{jzsl,jdbcType=DECIMAL},
+			</if>
+			<if test="ajsl != null">
+				#{ajsl,jdbcType=DECIMAL},
+			</if>
+			<if test="clsl != null">
+				#{clsl,jdbcType=DECIMAL},
+			</if>
+			<if test="smys != null">
+				#{smys,jdbcType=DECIMAL},
+			</if>
+			<if test="lrys != null">
+				#{lrys,jdbcType=DECIMAL},
+			</if>
+			<if test="shys != null">
+				#{shys,jdbcType=DECIMAL},
+			</if>
+			<if test="orgCode != null">
+				#{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="jhkssj != null">
+				#{jhkssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jhjssj != null">
+				#{jhjssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rylx != null">
+				#{rylx,jdbcType=DECIMAL},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=DECIMAL},
+			</if>
+			<if test="cjsj != null">
+				#{cjsj,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective">
+		update INFO_RWTJ
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=DECIMAL},
+			</if>
+			<if test="rwId != null">
+				RW_ID = #{rwId,jdbcType=DECIMAL},
+			</if>
+			<if test="rwmc != null">
+				RWMC = #{rwmc,jdbcType=VARCHAR},
+			</if>
+			<if test="jzsl != null">
+				JZSL = #{jzsl,jdbcType=DECIMAL},
+			</if>
+			<if test="ajsl != null">
+				AJSL = #{ajsl,jdbcType=DECIMAL},
+			</if>
+			<if test="clsl != null">
+				CLSL = #{clsl,jdbcType=DECIMAL},
+			</if>
+			<if test="smys != null">
+				SMYS = #{smys,jdbcType=DECIMAL},
+			</if>
+			<if test="lrys != null">
+				LRYS = #{lrys,jdbcType=DECIMAL},
+			</if>
+			<if test="shys != null">
+				SHYS = #{shys,jdbcType=DECIMAL},
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="jhkssj != null">
+				JHKSSJ = #{jhkssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jhjssj != null">
+				JHJSSJ = #{jhjssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rylx != null">
+				RYLX = #{rylx,jdbcType=DECIMAL},
+			</if>
+			<if test="zt != null">
+				ZT = #{zt,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoRwtj">
+		update INFO_RWTJ
+		set USER_ID = #{userId,jdbcType=DECIMAL},
+		RW_ID =
+		#{rwId,jdbcType=DECIMAL},
+		RWMC = #{rwmc,jdbcType=VARCHAR},
+		JZSL =
+		#{jzsl,jdbcType=DECIMAL},
+		AJSL = #{ajsl,jdbcType=DECIMAL},
+		CLSL =
+		#{clsl,jdbcType=DECIMAL},
+		SMYS = #{smys,jdbcType=DECIMAL},
+		LRYS =
+		#{lrys,jdbcType=DECIMAL},
+		SHYS = #{shys,jdbcType=DECIMAL},
+		ORG_CODE =
+		#{orgCode,jdbcType=VARCHAR},
+		ORG_NAME = #{orgName,jdbcType=VARCHAR},
+		JHKSSJ = #{jhkssj,jdbcType=TIMESTAMP},
+		JHJSSJ =
+		#{jhjssj,jdbcType=TIMESTAMP},
+		RYLX = #{rylx,jdbcType=DECIMAL},
+		ZT =
+		#{zt,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<select id="countLrConsistenceByRWID" resultType="int"
+		parameterType="java.lang.Long">
+		select count(pr."ID") from DOS_JZ jz,DOS_AJ aj,
+		ORI_INFO_PRIMARY pr where
+		aj.RW_ID=#{rwId,jdbcType=DECIMAL} and
+		jz.AJ_ID=aj."ID" and
+		pr.JZBH=jz.JZBH and pr.CONSISTENCY=1
+
+	</select>
+
+</mapper>

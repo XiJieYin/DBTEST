@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OriInfoPrimaryCopyDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.OriInfoPrimaryCopy" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="LRRYMC" property="lrrymc" jdbcType="VARCHAR" />
+    <result column="LRSJ" property="lrsj" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="YWTPBH" property="ywtpbh" jdbcType="VARCHAR" />
+    <result column="YWLX" property="ywlx" jdbcType="VARCHAR" />
+    <result column="NEEDLR" property="needLr" jdbcType="DECIMAL" />
+      <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+      <result column="CONSISTENCY" property="consistency" jdbcType="DECIMAL" />
+    <result column="TMBH" property="tmbh" jdbcType="VARCHAR" />
+    <result column="MATERIAL_ID" property="materialId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, LRRYMC, LRSJ, SATAE, YWTPBH, YWLX ,NEEDLR, JZBH,CONSISTENCY,TMBH,MATERIAL_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORI_INFO_PRIMARY_COPY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ORI_INFO_PRIMARY_COPY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_ORI_INFO_PRIMARY_COPY.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.OriInfoPrimaryCopy" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into ORI_INFO_PRIMARY_COPY (ID, USER_ID, LRRYMC, 
+      LRSJ, SATAE, YWTPBH, 
+      YWLX,NEEDLR,JZBH,CONSISTENCY,TMBH,MATERIAL_ID)
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{lrrymc,jdbcType=VARCHAR}, 
+      #{lrsj,jdbcType=TIMESTAMP}, #{satae,jdbcType=DECIMAL}, #{ywtpbh,jdbcType=VARCHAR}, 
+      #{ywlx,jdbcType=VARCHAR}, #{needLr,jdbcType=DECIMAL},#{jzbh,jdbcType=VARCHAR}, #{consistency,jdbcType=DECIMAL},
+      #{tmbh,jdbcType=DECIMAL},#{materialId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.OriInfoPrimaryCopy" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into ORI_INFO_PRIMARY_COPY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC,
+      </if>
+      <if test="lrsj != null" >
+        LRSJ,
+      </if>
+      <if test="satae != null" >
+        SATAE,
+      </if>
+      <if test="ywtpbh != null" >
+        YWTPBH,
+      </if>
+      <if test="ywlx != null" >
+        YWLX,
+      </if>
+      <if test="needLr != null" >
+        NEEDLR,
+      </if>
+      <if test="jzbh != null" >
+          JZBH,
+      </if>
+      <if test="consistency != null" >
+        CONSISTENCY,
+      </if>
+      <if test="tmbh != null" >
+        TMBH,
+      </if>
+      <if test="materialId != null" >
+        MATERIAL_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="ywtpbh != null" >
+        #{ywtpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlx != null" >
+        #{ywlx,jdbcType=VARCHAR},
+      </if>
+      <if test="needLr != null" >
+        #{needLr,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="consistency != null" >
+        #{consistency,jdbcType=VARCHAR},
+      </if>
+      <if test="tmbh != null" >
+        #{tmbh,jdbcType=VARCHAR},
+      </if>
+		<if test="materialId != null" >
+        #{materialId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.OriInfoPrimaryCopy" >
+    update ORI_INFO_PRIMARY_COPY
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="ywtpbh != null" >
+        YWTPBH = #{ywtpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlx != null" >
+        YWLX = #{ywlx,jdbcType=VARCHAR},
+      </if>
+      <if test="needLr != null" >
+        NEEDLR = #{needLr,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+          JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="consistency != null" >
+          CONSISTENCY = #{consistency,jdbcType=DECIMAL},
+      </if>
+      <if test="tmbh != null" >
+        TMBH = #{tmbh,jdbcType=DECIMAL},
+      </if>
+      <if test="materialId != null">
+		MATERIAL_ID = #{materialId,jdbcType=INTEGER},
+		</if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByTpbh" >
+    update ORI_INFO_PRIMARY_COPY
+      set  SATAE = 4
+    where YWTPBH = #{ywtpbh}
+  </update>
+  
+  <update id="updateByTmbhAndTpbh" >
+    update ORI_INFO_PRIMARY_COPY
+      set  SATAE = 4
+    where YWTPBH = #{ywtpbh} and TMBH = #{tmbh}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.OriInfoPrimaryCopy" >
+    update ORI_INFO_PRIMARY_COPY
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      YWTPBH = #{ywtpbh,jdbcType=VARCHAR},
+      YWLX = #{ywlx,jdbcType=VARCHAR},
+      NEEDLR = #{needLr,jdbcType=DECIMAL},
+      JZBH = #{jzbh,jdbcType=VARCHAR},
+      CONSISTENCY=#{consistency,jdbcType=DECIMAL},
+      TMBH=#{tmbh,jdbcType=DECIMAL},
+	MATERIAL_ID = #{materialId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+    <select id="selectByTPBH" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{tpbh}
+    </select>
+    
+    <select id="selectByTMBHANDTPBH" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{tpbh} AND TMBH = #{tmbh,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByTPBHAndUserId" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{tpbh}  and USER_ID=#{userId}
+    </select>
+    
+    <select id="selectByTpbhAndUserId" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{ywtpbh}  and USER_ID = #{userId}
+    </select>
+    
+    <select id="selectByTmbhAndTpbhAndUserId" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{ywtpbh}  and USER_ID = #{userId} AND TMBH = #{tmbh,jdbcType=VARCHAR}
+    </select>
+    
+	<select id="selectByTPBHAndConsistency" resultMap="BaseResultMap">
+  		select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{tpbh}  and CONSISTENCY=#{consistency}
+	</select>
+	
+	<select id="selectByTMBHAndTPBHAndConsistency" resultMap="BaseResultMap">
+  		select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where YWTPBH = #{tpbh}  and CONSISTENCY=#{consistency} and tmbh = #{tmbh}
+	</select>
+	
+    <select id="selectByJZBHAndUserId" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where JZBH = #{jzbh}  and USER_ID=#{userId}
+    </select>
+    
+    <select id="selectByJZBH" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_PRIMARY_COPY
+        where JZBH = #{jzbh}
+    </select>
+
+    <update id="updateConsistencyByTpbh" parameterType="com.gx.hz.pojo.OriInfoPrimaryCopy">
+        update ORI_INFO_PRIMARY_COPY
+        set
+        CONSISTENCY = #{consistency,jdbcType=DECIMAL}
+        where YWTPBH = #{ywtpbh,jdbcType=VARCHAR}
+    </update>
+
+	<!-- 获取已经录入完成的原文主表信息 -->
+	<select id="selectUnFinshOriInfo" resultType="int"
+		parameterType="map">
+<!-- 		SELECT -->
+<!-- 			T1.SXM -->
+<!-- 		FROM ORI_INFO_PRIMARY_COPY T -->
+<!-- 		LEFT JOIN TM_TMTPXXB T1 ON T.YWTPBH = T1.TPBH -->
+<!-- 		WHERE  -->
+<!-- 			T.JZBH = #{jzbh}  -->
+<!-- 			AND T.SATAE !=0  -->
+<!-- 		ORDER BY T1.SXM -->
+
+		SELECT A.SXM FROM TM_TMTPXXB A WHERE A.SXM NOT IN(
+			SELECT
+						T1.SXM
+					FROM ORI_INFO_PRIMARY_COPY T
+					LEFT JOIN TM_TMTPXXB T1 ON T.YWTPBH = T1.TPBH WHERE T.JZBH = #{jzbh} AND T.SATAE !=0 
+					<if test="consistency != null and consistency != ''" >
+						AND  T.CONSISTENCY = #{consistency}
+					</if>
+					AND T.USER_ID = #{userId})
+		and A.BH= #{jzbh}
+		ORDER BY A.SXM
+	</select>
+</mapper>

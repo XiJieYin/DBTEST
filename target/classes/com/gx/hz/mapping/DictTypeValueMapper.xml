@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictTypeValueDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictTypeValue">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="VALUE" property="value" jdbcType="DECIMAL" />
+		<result column="TYPE_ID" property="typeId" jdbcType="DECIMAL" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="DATE" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, VALUE, TYPE_ID, CREATE_TIME, UPDATE_TIME, CREATE_USER,
+		UPDATE_USER
+	</sql>
+
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TYPE_VALUE
+		WHERE 1=1
+		<if test="name!=null">
+			AND NAME like '%${name}%'
+		</if>
+		<if test="typeId!=null">
+			AND TYPE_ID = #{typeId,jdbcType=DECIMAL}
+		</if>
+		order by id
+	</select>
+
+	<!-- 条件删除 -->
+	<delete id="deleteByCondition" parameterType="com.gx.hz.pojo.DictTypeValue">
+		delete from DICT_TYPE_VALUE
+		where 1=1
+		<if test="typeId != null and typeId !=''">
+			AND TYPE_ID = #{typeId,jdbcType=DECIMAL}
+		</if>
+		<if test="value != null and value !=''">
+			AND VALUE = #{value,jdbcType=DECIMAL}
+		</if>
+		<if test="name != null and name !=''">
+			AND NAME = #{name,jdbcType=VARCHAR}
+		</if>
+	</delete>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TYPE_VALUE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from DICT_TYPE_VALUE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<sql id="TABLE_SEQUENCE">SEQ_DICT_TYPE_VALUE.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.DictTypeValue">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DICT_TYPE_VALUE (ID, NAME, VALUE,
+		TYPE_ID, CREATE_TIME, UPDATE_TIME,
+		CREATE_USER, UPDATE_USER)
+		values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR},
+		#{value,jdbcType=DECIMAL},
+		#{typeId,jdbcType=DECIMAL}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE},
+		#{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into DICT_TYPE_VALUE (ID, NAME, VALUE, TYPE_ID, CREATE_TIME,
+		CREATE_USER,UPDATE_TIME,UPDATE_USER)
+		<!--序列Oracle自增 -->
+		select SEQ_DICT_TYPE_VALUE.NEXTVAL ID ,A.* from(
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			select
+			#{item.name} NAME,
+			#{item.value} VALUE,
+			#{item.typeId} TYPE_ID,
+			#{item.createTime} CREATE_TIME,
+			#{item.createUser} CREATE_USER,
+			#{item.updateTime} UPDATE_TIME,
+			#{item.updateUser} UPDATE_USER
+			from dual
+		</foreach>
+		) A
+	</insert>
+
+
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.DictTypeValue">
+		insert into DICT_TYPE_VALUE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="value != null">
+				VALUE,
+			</if>
+			<if test="typeId != null">
+				TYPE_ID,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="createUser != null">
+				CREATE_USER,
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="value != null">
+				#{value,jdbcType=DECIMAL},
+			</if>
+			<if test="typeId != null">
+				#{typeId,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=DATE},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				#{updateUser,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictTypeValue">
+		update DICT_TYPE_VALUE
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="value != null">
+				VALUE = #{value,jdbcType=DECIMAL},
+			</if>
+			<if test="typeId != null">
+				TYPE_ID = #{typeId,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=DATE},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				CREATE_USER = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DictTypeValue">
+		update DICT_TYPE_VALUE
+		set NAME = #{name,jdbcType=VARCHAR},
+		VALUE = #{value,jdbcType=DECIMAL},
+		TYPE_ID = #{typeId,jdbcType=DECIMAL},
+		CREATE_TIME = #{createTime,jdbcType=DATE},
+		UPDATE_TIME = #{updateTime,jdbcType=DATE},
+		CREATE_USER = #{createUser,jdbcType=VARCHAR},
+		UPDATE_USER = #{updateUser,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

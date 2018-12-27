@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.gx.hz.dao.InfoRWJBXXDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoRWJBXX">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+		<result column="MC" property="mc" jdbcType="VARCHAR" />
+		<result column="JZSL" property="jzsl" jdbcType="DECIMAL" />
+		<result column="JHKSSJ" property="jhkssj" jdbcType="TIMESTAMP" />
+		<result column="JHJSSJ" property="jhjssj" jdbcType="TIMESTAMP" />
+		<result column="ZT" property="zt" jdbcType="DECIMAL" />
+		<result column="WCSL" property="wcsl" jdbcType="DECIMAL" />
+		<result column="CJRMC" property="cjrmc" jdbcType="VARCHAR" />
+		<result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+		<result column="BZ" property="bz" jdbcType="VARCHAR" />
+		<result column="SSDWMC" property="ssdwmc" jdbcType="VARCHAR" />
+		<result column="SSDWDM" property="ssdwdm" jdbcType="VARCHAR" />
+		<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+		<result column="FZRMC" property="fzrmc" jdbcType="VARCHAR" />
+		<result column="CJR_ID" property="cjrId" jdbcType="DECIMAL" />
+		<result column="FZR_ID" property="fzrId" jdbcType="DECIMAL" />
+		<result column="WCSJ" property="wcsj" jdbcType="TIMESTAMP" />
+		<result column="CJRNAME" property="cjrname" jdbcType="VARCHAR" />
+		<result column="FZRNAME" property="fzrname" jdbcType="VARCHAR" />
+		<result column="CLSL" property="clsl" jdbcType="DECIMAL" />
+		<result column="ZYS" property="zys" jdbcType="DECIMAL" />
+		<result column="RYLX" property="rylx" />
+		<result column="RYMC" property="rymc" />
+		<result column="ORGMC" property="orgMc" />
+		<result column="RULE_ID" property="ruleId" jdbcType="DECIMAL" />
+		<result column="ISCHECK" property="isCheck" jdbcType="DECIMAL" />
+		<result column="FZR_ROLE_ID" property="fzrRoleId" jdbcType="DECIMAL" />		
+		<association property="org" javaType="com.gx.hz.pojo.Organization">
+			<id property="zzjgdm" column="zzjgdm" />
+			<result property="zzjgmc" column="zzjgmc" />
+		</association>
+
+	</resultMap>
+	<!--<collection property="dictinfos" select="getDictInfoByRWXX" -->
+	<!--column="id"></collection> -->
+	<resultMap id="BaseResultMap2" type="com.gx.hz.pojo.InfoRWJBXX">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+		<result column="MC" property="mc" jdbcType="VARCHAR" />
+		<result column="JZSL" property="jzsl" jdbcType="DECIMAL" />
+		<result column="JHKSSJ" property="jhkssj" jdbcType="TIMESTAMP" />
+		<result column="JHJSSJ" property="jhjssj" jdbcType="TIMESTAMP" />
+		<result column="ZT" property="zt" jdbcType="DECIMAL" />
+		<result column="WCSL" property="wcsl" jdbcType="DECIMAL" />
+		<result column="CJRMC" property="cjrmc" jdbcType="VARCHAR" />
+		<result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+		<result column="BZ" property="bz" jdbcType="VARCHAR" />
+		<result column="SSDWMC" property="ssdwmc" jdbcType="VARCHAR" />
+		<result column="SSDWDM" property="ssdwdm" jdbcType="VARCHAR" />
+		<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+		<result column="FZRMC" property="fzrmc" jdbcType="VARCHAR" />
+		<result column="CJR_ID" property="cjrId" jdbcType="DECIMAL" />
+		<result column="FZR_ID" property="fzrId" jdbcType="DECIMAL" />
+		<result column="WCSJ" property="wcsj" jdbcType="TIMESTAMP" />
+		<result column="CJRNAME" property="cjrname" jdbcType="VARCHAR" />
+		<result column="FZRNAME" property="fzrname" jdbcType="VARCHAR" />
+		<result column="CLSL" property="clsl" jdbcType="DECIMAL" />
+		<result column="ZYS" property="zys" jdbcType="DECIMAL" />
+		<result column="RYLX" property="rylx" />
+		<result column="RYMC" property="rymc" />
+		<result column="RYID" property="ryId" />
+		<result column="WCCLSL" property="wcclsl" />
+		<result column="WCZJS" property="wczjs" />
+		<result column="WCZYS" property="wczys" />
+		<result column="SMYS" property="smys" />
+		<result column="WCJZ" property="wcjz" />
+		<result column="LRYS" property="lrys" />
+		<result column="SJYS" property="shys" />
+		<result column="WCJZSL" property="wcjzsl" />
+		<result column="ORGNAME" property="orgName" />
+        <result column="RULE_ID" property="ruleId" jdbcType="DECIMAL" />
+        <result column="ISCHECK" property="isCheck" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="DictInfoMap" type="com.gx.hz.pojo.DictInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getDictInfoByRWXX" resultMap="DictInfoMap"
+		parameterType="int">
+		select
+		ar.DICT_ID as id,
+		ro.name as name,
+		ro.CODE as code
+		from DICT_INFO_INFO_RWJBXX ar
+		left OUTER JOIN DICT_INFO ro on ro.id =
+		ar.DICT_ID
+		where ar.RWJBXX_ID = #{id, jdbcType=VARCHAR}
+
+	</select>
+	<sql id="Base_Column_List">
+		ID, RWBH, MC, JZSL, JHKSSJ, JHJSSJ, ZT, WCSL, CJRMC,
+		CJSJ,CLSL,ZYS,
+		BZ, SSDWMC,
+		SSDWDM, ORG_CODE,
+		FZRMC, CJR_ID,
+		FZR_ID,WCSJ,CLSL,ZYS,RULE_ID
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		it.*, org.zzjgmc, su1.user_name fzrname,
+		su2.user_name cjrname
+		FROM
+		DICT_ORG org
+		RIGHT JOIN INFO_RWJBXX it ON
+		it.org_code = org.zzjgdm
+		LEFT JOIN SYS_USER su1 ON su1.id = it.fzr_id
+		LEFT JOIN SYS_USER su2 ON
+		su2.id = it.cjr_id
+
+		WHERE it.ID=#{id}
+
+	</select>
+	<!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" -->
+	<!--parameterType="java.lang.Long"> -->
+	<!--select -->
+	<!--<include refid="Base_Column_List" /> -->
+	<!--from INFO_RWJBXX -->
+	<!--where ID = #{id,jdbcType=DECIMAL} -->
+	<!--</select> -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		INFO_RWJBXX
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_INFO_RWJBXX.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.InfoRWJBXX"
+		keyProperty="id" useGeneratedKeys="true">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into INFO_RWJBXX (ID,
+		RWBH, MC,
+		JZSL, JHKSSJ, JHJSSJ,
+		ZT, WCSL,
+		CJRMC, CJSJ,
+		BZ, SSDWMC,
+		SSDWDM,
+		ORG_CODE, FZRMC,
+		CJR_ID,
+		FZR_ID,CLSL,ZYS,RULE_ID,FZR_ROLE_ID)
+		values
+		(#{id,jdbcType=DECIMAL},
+		#{rwbh,jdbcType=VARCHAR},
+		#{mc,jdbcType=VARCHAR},
+		#{jzsl,jdbcType=DECIMAL},
+		#{jhkssj,jdbcType=TIMESTAMP},
+		#{jhjssj,jdbcType=TIMESTAMP},
+		#{zt,jdbcType=DECIMAL},
+		#{wcsl,jdbcType=DECIMAL},
+		#{cjrmc,jdbcType=VARCHAR},
+		#{cjsj,jdbcType=TIMESTAMP},
+		#{bz,jdbcType=VARCHAR},
+		#{ssdwmc,jdbcType=VARCHAR},
+		#{ssdwdm,jdbcType=VARCHAR},
+		#{orgCode,jdbcType=VARCHAR},
+		#{fzrmc,jdbcType=VARCHAR},
+		#{cjrId,jdbcType=DECIMAL},
+		#{fzrId,jdbcType=DECIMAL}),
+		#{clsl,jdbcType=DECIMAL},
+		#{zys,jdbcType=DECIMAL},
+		#{ruleId,jdbcType=DECIMAL},
+		#{fzrRoleId,jdbcType=DECIMAL}
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoRWJBXX">
+		<selectKey keyProperty="id" resultType="java.lang.Integer"
+			order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into INFO_RWJBXX
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="rwbh != null">
+				RWBH,
+			</if>
+			<if test="mc != null">
+				MC,
+			</if>
+			<if test="jzsl != null">
+				JZSL,
+			</if>
+			<if test="jhkssj != null">
+				JHKSSJ,
+			</if>
+			<if test="jhjssj != null">
+				JHJSSJ,
+			</if>
+			<if test="zt != null">
+				ZT,
+			</if>
+			<if test="wcsl != null">
+				WCSL,
+			</if>
+			<if test="cjrmc != null">
+				CJRMC,
+			</if>
+			<if test="cjsj != null">
+				CJSJ,
+			</if>
+			<if test="bz != null">
+				BZ,
+			</if>
+			<if test="ssdwmc != null">
+				SSDWMC,
+			</if>
+			<if test="ssdwdm != null">
+				DWDM,
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE,
+			</if>
+			<if test="fzrmc != null">
+				FZRMC,
+			</if>
+			<if test="cjrId != null">
+				CJR_ID,
+			</if>
+			<if test="fzrId != null">
+				FZR_ID,
+			</if>
+			<if test="clsl != null">
+				CLSL,
+			</if>
+			<if test="zys != null">
+				ZYS,
+			</if>
+			<if test="ruleId != null">
+				RULE_ID,
+			</if>
+			<if test="isCheck != null">
+                ISCHECK,
+			</if>
+			<if test="fzrRoleId != null">
+                FZR_ROLE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="rwbh != null">
+				#{rwbh,jdbcType=VARCHAR},
+			</if>
+			<if test="mc != null">
+				#{mc,jdbcType=VARCHAR},
+			</if>
+			<if test="jzsl != null">
+				#{jzsl,jdbcType=DECIMAL},
+			</if>
+			<if test="jhkssj != null">
+				#{jhkssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jhjssj != null">
+				#{jhjssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zt != null">
+				#{zt,jdbcType=DECIMAL},
+			</if>
+			<if test="wcsl != null">
+				#{wcsl,jdbcType=DECIMAL},
+			</if>
+			<if test="cjrmc != null">
+				#{cjrmc,jdbcType=VARCHAR},
+			</if>
+			<if test="cjsj != null">
+				#{cjsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bz != null">
+				#{bz,jdbcType=VARCHAR},
+			</if>
+			<if test="ssdwmc != null">
+				#{ssdwmc,jdbcType=VARCHAR},
+			</if>
+			<if test="ssdwdm != null">
+				#{ssdwdm,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				#{orgCode,jdbcType=VARCHAR},
+			</if>
+
+			<if test="fzrmc != null">
+				#{fzrmc,jdbcType=VARCHAR},
+			</if>
+			<if test="cjrId != null">
+				#{cjrId,jdbcType=DECIMAL},
+			</if>
+			<if test="fzrId != null">
+				#{fzrId,jdbcType=DECIMAL},
+			</if>
+			<if test="clsl != null">
+				#{clsl},
+			</if>
+			<if test="zys != null">
+				#{zys},
+			</if>
+            <if test="ruleId != null">
+                #{ruleId,jdbcType=DECIMAL},
+            </if>
+            <if test="isCheck != null">
+                #{isCheck,jdbcType=DECIMAL},
+            </if>
+			<if test="fzrRoleId != null">
+				#{fzrRoleId,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoRWJBXX">
+		update INFO_RWJBXX
+		<set>
+			<if test="rwbh != null">
+				RWBH = #{rwbh,jdbcType=VARCHAR},
+			</if>
+			<if test="mc != null">
+				MC = #{mc,jdbcType=VARCHAR},
+			</if>
+			<if test="jzsl != null">
+				JZSL = #{jzsl,jdbcType=DECIMAL},
+			</if>
+			<if test="jhkssj != null">
+				JHKSSJ = #{jhkssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jhjssj != null">
+				JHJSSJ = #{jhjssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zt != null">
+				ZT = #{zt,jdbcType=DECIMAL},
+			</if>
+			<if test="wcsl != null">
+				WCSL = #{wcsl,jdbcType=DECIMAL},
+			</if>
+			<if test="cjrmc != null">
+				CJRMC = #{cjrmc,jdbcType=VARCHAR},
+			</if>
+			<if test="cjsj != null">
+				CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bz != null">
+				BZ = #{bz,jdbcType=VARCHAR},
+			</if>
+			<if test="ssdwmc != null">
+				SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+			</if>
+			<if test="ssdwdm != null">
+				SSDWDM = #{ssdwdm,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+			</if>
+
+			<if test="fzrmc != null">
+				FZRMC = #{fzrmc,jdbcType=VARCHAR},
+			</if>
+			<if test="cjrId != null">
+				CJR_ID = #{cjrId,jdbcType=DECIMAL},
+			</if>
+			<if test="fzrId != null">
+				FZR_ID = #{fzrId,jdbcType=DECIMAL},
+			</if>
+			<if test="clsl != null">
+				CLSL = #{clsl},
+			</if>
+			<if test="zys != null">
+				ZYS = #{zys},
+			</if>
+            <if test="ruleId != null">
+                RULE_ID = #{ruleId,jdbcType=DECIMAL},
+            </if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoRWJBXX">
+		update INFO_RWJBXX
+		set RWBH = #{rwbh,jdbcType=VARCHAR},
+		MC = #{mc,jdbcType=VARCHAR},
+		JZSL =
+		#{jzsl,jdbcType=DECIMAL},
+		JHKSSJ = #{jhkssj,jdbcType=TIMESTAMP},
+		JHJSSJ
+		= #{jhjssj,jdbcType=TIMESTAMP},
+		ZT = #{zt,jdbcType=DECIMAL},
+		WCSL =
+		#{wcsl,jdbcType=DECIMAL},
+		CJRMC = #{cjrmc,jdbcType=VARCHAR},
+		CJSJ =
+		#{cjsj,jdbcType=TIMESTAMP},
+		BZ = #{bz,jdbcType=VARCHAR},
+		SSDWMC =
+		#{ssdwmc,jdbcType=VARCHAR},
+		SSDWDM = #{ssdwdm,jdbcType=VARCHAR},
+		ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+
+		FZRMC =
+		#{fzrmc,jdbcType=VARCHAR},
+		CJR_ID = #{cjrId,jdbcType=DECIMAL},
+		FZR_ID =
+		#{fzrId,jdbcType=DECIMAL},
+		CLSL = #{clsl,jdbcType=DECIMAL},
+		ZYS =#{zys,jdbcType=DECIMAL},
+		RULE_ID =#{ruleId,jdbcType=DECIMAL}
+		where ID
+		= #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_RWJBXX where zt !=0
+	</select>
+
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		it.*, org.zzjgmc, su1.user_name fzrname, su2.user_name cjrname
+		FROM
+		DICT_ORG org
+		RIGHT JOIN INFO_RWJBXX it ON
+		it.org_code = org.zzjgdm
+		LEFT JOIN SYS_USER su1 ON su1.id = it.fzr_id
+		LEFT JOIN SYS_USER su2 ON
+		su2.id = it.cjr_id
+
+		WHERE 1=1 and it.FZR_ID=#{userId}
+		<if test="orgCode != null">
+			AND it.ORG_CODE = #{orgCode}
+		</if>
+		<if test="rwbh != null">
+			AND it.RWBH like '%${rwbh}%'
+		</if>
+		<if test="rwmc != null">
+			AND it.MC like '%${rwmc}%'
+		</if>
+		<if test="createTimeEnd != null">
+			AND it.CJSJ &lt; #{createTimeEnd}
+		</if>
+		<if test="createTimeBegin != null">
+			AND it.CJSJ &gt; #{createTimeBegin}
+		</if>
+		<if test="finishTimeEnd != null">
+			AND it.JHJSSJ &lt; #{finishTimeEnd}
+		</if>
+		<if test="finishTimeBegin != null">
+			AND it.JHJSSJ &gt; #{finishTimeBegin}
+		</if>
+		<if test="cjrName != null">
+			AND su2.user_name like '%${cjrName}%'
+		</if>
+		<if test="zt!=null">
+			and
+			<foreach collection="zts" index="index" item="item" open="("
+				separator="or" close=")">
+				it.zt = #{item}
+			</foreach>
+		</if>
+		<if test="zt == null">
+			AND it.ZT !=0
+		</if>
+		order by it.id DESC
+	</select>
+
+	<!-- 根据用户名查询用户ID -->
+	<select id="queryUserIdByUserName" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select ID from SYS_USER where USER_NAME =
+		#{userName,jdbcType=VARCHAR}
+	</select>
+	<select id="selectRwmc" resultMap="BaseResultMap">
+		select * from INFO_RWJBXX irw
+		left join
+		INFO_RWRYGLXXB iry on iry.RW_ID = irw.ID
+		where iry.RYLX = 0
+		AND (iry.USER_ID = #{id} or iry.ROLE_ID = #{roleId}) and irw.zt != 0 and irw.zt !=3 order by irw.ID
+		DESC
+	</select>
+	<!-- 获取桌面信息 -->
+	<select id="queryByConditions" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		<choose>
+			<when test="rylx !=5">
+				select * from INFO_RWJBXX irw left join
+				INFO_RWRYGLXXB iry on
+				iry.RW_ID = irw.ID
+				where irw.zt != 0
+				<if test="rylx !=null">
+					AND iry.RYLX = #{rylx}
+					<if test="rylx == 4 || rylx == 3 || rylx == 1 || rylx == 2">
+					AND (irw.zt = 2 or irw.zt =3)
+					</if>
+				</if>
+				<if test="userId != null">
+					AND (iry.USER_ID = #{userId} or iry.ROLE_ID = #{roleId})
+				</if>
+				<if test="zt != null">
+					and irw.zt = #{zt}
+				</if>
+				order by irw.id DESC
+			</when>
+			<otherwise>
+				select * from INFO_RWJBXX rw
+				where zt != 0
+				<if test="userId != null">
+					and (rw.FZR_ID = #{userId} or rw.FZR_ROLE_ID = #{roleId})
+				</if>
+				<if test="zt != null">
+					and rw.zt = #{zt}
+				</if>
+				order by rw.id DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<!-- 获取所有人员类型的任务名称列表信息 -->
+	<select id="queryByAllRylxConditions" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+				select * from INFO_RWJBXX irw 
+				 where irw.zt != 0
+				order by irw.id DESC
+	</select>
+	
+	<!-- 根据rwid获取任务信息 -->
+	<select id="selectByrwId" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select *from INFO_RWJBXX where 1=1
+		<if test="rwId != null">
+			AND  ID = #{rwId}
+		</if>
+	</select>
+
+	<select id="queryByConditionss" resultMap="BaseResultMap">
+	select rw.*,org.zzjgmc orgmc from INFO_RWJBXX rw LEFT JOIN DICT_ORG org on 
+	RW.ORG_CODE = ORG.zzjgdm where rw.zt = 3 
+	<if test="mc !=null">
+	and rw.id = #{mc}
+	</if>
+	order by rw.id DESC
+	</select>
+
+	<select id="queryRwTj" resultMap="BaseResultMap2">
+		select iry.rylx rylx,iry.rymc rymc,iry.USER_ID ryId, rw.*
+		from
+		INFO_RWJBXX rw join INFO_RWRYGLXXB iry
+		on rw.id = iry.RW_ID
+		where rw.zt
+		!= 0
+		<if test="userId != null">
+			and rw.FZR_ID = #{userId}
+		</if>
+		<if test="rwId != null">
+			and rw.id = #{rwId}
+		</if>
+		order by rw.CJSJ DESC
+	</select>
+
+	<select id="getwfp" resultType="int">
+	<choose>
+	<when test="rylx !=5">
+	select count(rw.id) from INFO_RWJBXX rw
+	join INFO_RWRYGLXXB gl on rw.id = gl.rw_id
+	where (gl.USER_ID = #{userId} or gl.ROLE_ID = #{roleId}) and ZT = 1
+	</when>
+	<otherwise>
+	select count(id) from INFO_RWJBXX
+	where (FZR_ID = #{userId} or FZR_ROLE_ID = #{roleId}) and ZT = 1
+	</otherwise>
+	</choose>
+	</select>
+
+	<select id="getjxz" resultType="int">
+		<choose>
+	<when test="rylx !=5">
+	select count(rw.id) from INFO_RWJBXX rw join INFO_RWRYGLXXB gl on rw.id = gl.rw_id
+	where (gl.USER_ID = #{userId} or gl.ROLE_ID = #{roleId}) and ZT = 2
+	</when>
+	<otherwise>
+	select count(id) from INFO_RWJBXX
+		where (FZR_ID = #{userId} or FZR_ROLE_ID = #{roleId}) and ZT = 2
+	</otherwise>
+	</choose>
+	</select>
+
+	<select id="getywc" resultType="int">
+	<choose>
+	<when test="rylx !=5">
+	select count(rw.id) from INFO_RWJBXX
+	rw join INFO_RWRYGLXXB gl on rw.id = gl.rw_id
+	where (gl.USER_ID = #{userId} or gl.ROLE_ID = #{roleId}) and ZT = 3
+	</when>
+	<otherwise>
+	select count(id) from INFO_RWJBXX
+		where (FZR_ID = #{userId} or FZR_ROLE_ID = #{roleId}) and ZT = 3
+	</otherwise>
+	</choose>
+	</select>
+
+	<!-- 获取条目管理员桌面信息 -->
+	<!-- <select id="queryByTmgl" parameterType="java.util.Map" resultMap="BaseResultMap"> 
+		select * from INFO_RWJBXX irw left join INFO_RWRYGLXXB iry on iry.RW_ID = 
+		irw.ID where iry.RYLX = 2 <if test="userId != null"> AND iry.USER_ID = #{userId} 
+		</if> order by CJSJ DESC </select> -->
+	<!-- 获取责任人桌面信息 -->
+	<select id="queryByFzr" parameterType="java.util.Map" resultMap="BaseResultMap">
+	<choose>
+	<when test="rylx!=5">
+		select rw.* from INFO_RWJBXX rw join INFO_RWRYGLXXB gl
+		on rw.id = gl.rw_id
+		 where rw.zt != 0
+		<if test="userId != null">
+			and gl.USER_ID = #{userId}
+		</if>
+		<if test="rylx == 4 || rylx == 3 || rylx == 1 || rylx == 2">
+		AND (rw.zt = 2 or rw.zt =3)
+		</if>
+		order by CJSJ DESC
+	</when>
+	<otherwise>
+		select * from INFO_RWJBXX rw where zt != 0
+		<if test="userId != null">
+			and rw.FZR_ID = #{userId}
+		</if>
+		order by CJSJ DESC
+	</otherwise>
+	</choose>
+	</select>
+	
+	<!-- 获取责任人桌面信息 通过用户角色来查询-->
+	<select id="queryByFzrRole" parameterType="java.util.Map" resultMap="BaseResultMap">
+	<choose>
+	<when test="rylx!=5">
+		select rw.* from INFO_RWJBXX rw join INFO_RWRYGLXXB gl
+		on rw.id = gl.rw_id
+		 where rw.zt != 0
+		<if test="roleId != null">
+			and gl.ROLE_ID = #{roleId}
+		</if>
+		<if test="rylx == 4 || rylx == 3 || rylx == 1 || rylx == 2">
+		AND (rw.zt = 2 or rw.zt =3)
+		</if>
+		order by CJSJ DESC
+	</when>
+	<otherwise>
+		select * from INFO_RWJBXX rw where zt != 0
+		<if test="roleId != null">
+			and rw.FZR_ROLE_ID = #{roleId}
+		</if>
+		order by CJSJ DESC
+	</otherwise>
+	</choose>
+	</select>
+	<!-- 假删除 -->
+	<update id="fakeDel">
+		update INFO_RWJBXX set zt=0 where id =#{id}
+	</update>
+	<select id="getOrgByRwId" resultMap="BaseResultMap2">
+	select RW.*,ORG.ZZJGMC orgName from INFO_RWJBXX rw left join DICT_ORG org on RW.ORG_CODE = ORG.ZZJGDM where rw.ID = #{id}
+	</select>
+	<select id="selectByFzrId" resultMap="BaseResultMap">
+		select * from INFO_RWJBXX where FZR_ID = #{userId} AND zt = 2
+		<if test="rwId != null">
+			AND ID = #{rwId}
+		</if>
+	order by ID DESC
+	</select>
+
+	<select id="selectByUserId" resultMap="BaseResultMap">
+		select * from INFO_RWJBXX where FZR_ID = #{userId}
+	</select>
+	
+	<select id="selectByFzrRoleId" resultMap="BaseResultMap">
+		select * from INFO_RWJBXX where FZR_ROLE_ID = #{fzrRoleId}
+	</select>
+	
+	<select id="findRWByJzbh" resultMap="BaseResultMap">
+		select rw.* from INFO_RWJBXX rw ,DOS_AJ aj,DOS_JZ jz where aj.ID=jz.AJ_ID and jz.JZBH=#{jzbh} and aj.RW_ID=rw.ID
+	</select>
+	
+	<select id="queryRwByUser" resultMap="BaseResultMap">
+		<if test="rylx == 1">
+		select rw.* from INFO_RWJBXX rw where fzr_id = #{userId} and zt !=0 and rw.zt != 3 
+		</if>
+		<if test="rylx != 1">
+		select rw.* from INFO_RWJBXX rw join INFO_RWRYGLXXB gl
+		on rw.id = gl.rw_id
+		 where rw.zt != 0 and rw.zt != 3 and  user_id = #{userId}
+		</if>
+	</select>
+
+	<select id="selectByOtherId" resultMap="BaseResultMap">
+		select rw.*
+		from INFO_RWJBXX rw join INFO_RWRYGLXXB iry
+		on rw.id =
+		iry.RW_ID
+		where iry.USER_ID = #{userId}
+		AND zt = 2
+		<if test="rwId != null">
+			AND
+			rw.ID = #{rwId}
+		</if>
+		order by RW.ID DESC
+	</select>
+	<select id="getWcRw" resultMap="BaseResultMap2">
+	select * FROM INFO_RWJBXX where ZT = 3
+	</select>
+	<select id="selectByMyhome" resultMap="BaseResultMap2">
+		select count(jz.id)
+		wcjzsl ,rw.jzsl jzsl,rw.id,rw.mc,RW.ZT,RW.JHKSSJ,RW.JHJSSJ,sum(tj.clsl)
+		wcclsl,sum(jz.jzjs) wczjs,sum(jz.jzys) wczys,sum(tj.smys) smys,sum(tj.jzsl)
+		wcjz,sum(tj.lrys) lrys ,sum(tj.shys) shys
+		FROM INFO_RWJBXX rw
+		LEFT JOIN DOS_AJ aj on aj.RW_ID = rw.id
+		LEFT JOIN DOS_JZ jz on jz.Aj_ID =aj.id
+		LEFT JOIN INFO_RWTJ tj ON tj.rw_id= rw.id
+		where 1 = 1
+		<if test="zt !=null">
+			AND rw.zt = #{zt}
+		</if>
+		<if test="rwIds != null">
+			AND
+			<foreach item="rwId" index="index" collection="rwIds" open="("
+				separator="or" close=")">
+				rw.id in #{rwId}
+			</foreach>
+		</if>
+		GROUP BY RW.ID,RW.MC,RW.ZT,RW.JHKSSJ,RW.JHJSSJ,RW.JZSL
+		order by RW.ID DESC
+	</select>
+
+
+    <update id="updateCheck">
+        update INFO_RWJBXX set ISCHECK=#{icheck} where id =#{id}
+    </update>
+
+
+</mapper>

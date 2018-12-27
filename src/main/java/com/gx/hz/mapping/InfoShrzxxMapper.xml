@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoShrzxxDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoShrzxx" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SHBH" property="shbh" jdbcType="VARCHAR" />
+    <result column="SHLX" property="shlx" jdbcType="DECIMAL" />
+    <result column="SHYJ" property="shyj" jdbcType="VARCHAR" />
+    <result column="SHNR" property="shnr" jdbcType="VARCHAR" />
+    <result column="SHRID" property="shrid" jdbcType="DECIMAL" />
+    <result column="SHRMC" property="shrmc" jdbcType="VARCHAR" />
+    <result column="SSDWMC" property="ssdwmc" jdbcType="VARCHAR" />
+    <result column="SSDWDM" property="ssdwdm" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="LXBH" property="lxbh" jdbcType="VARCHAR" />
+    <result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SHBH, SHLX, SHYJ, SHNR, SHRID, SHRMC, SSDWMC, SSDWDM, CJSJ, BZ, LXBH,RW_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_SHRZXX
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_SHRZXX
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+   <sql id="TABLE_SEQUENCE">SEQ_INFO_SHRZXX.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoShrzxx" >
+   <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into INFO_SHRZXX (ID, SHBH, SHLX, 
+      SHYJ, SHNR, SHRID, 
+      SHRMC, SSDWMC, SSDWDM, 
+      CJSJ, BZ, LXBH,RW_ID)
+    values (#{id,jdbcType=DECIMAL}, #{shbh,jdbcType=VARCHAR}, #{shlx,jdbcType=DECIMAL}, 
+      #{shyj,jdbcType=VARCHAR}, #{shnr,jdbcType=VARCHAR}, #{shrid,jdbcType=DECIMAL}, 
+      #{shrmc,jdbcType=VARCHAR}, #{ssdwmc,jdbcType=VARCHAR}, #{ssdwdm,jdbcType=VARCHAR}, 
+      #{cjsj,jdbcType=TIMESTAMP}, #{bz,jdbcType=VARCHAR}, #{lxbh,jdbcType=VARCHAR}, #{rwId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoShrzxx" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into INFO_SHRZXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="shbh != null" >
+        SHBH,
+      </if>
+      <if test="shlx != null" >
+        SHLX,
+      </if>
+      <if test="shyj != null" >
+        SHYJ,
+      </if>
+      <if test="shnr != null" >
+        SHNR,
+      </if>
+      <if test="shrid != null" >
+        SHRID,
+      </if>
+      <if test="shrmc != null" >
+        SHRMC,
+      </if>
+      <if test="ssdwmc != null" >
+        SSDWMC,
+      </if>
+      <if test="ssdwdm != null" >
+        SSDWDM,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="lxbh != null" >
+        LXBH,
+      </if>
+       <if test="rwId != null" >
+        RW_ID,
+      </if>
+       <if test="tmbh != null" >
+        TMBH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="shbh != null" >
+        #{shbh,jdbcType=VARCHAR},
+      </if>
+      <if test="shlx != null" >
+        #{shlx,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="shnr != null" >
+        #{shnr,jdbcType=VARCHAR},
+      </if>
+      <if test="shrid != null" >
+        #{shrid,jdbcType=DECIMAL},
+      </if>
+      <if test="shrmc != null" >
+        #{shrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ssdwmc != null" >
+        #{ssdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ssdwdm != null" >
+        #{ssdwdm,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxbh != null" >
+        #{lxbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rwId != null" >
+        #{rwId,jdbcType=DECIMAL},
+      </if>
+      <if test="tmbh != null" >
+        #{tmbh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoShrzxx" >
+    update INFO_SHRZXX
+    <set >
+      <if test="shbh != null" >
+        SHBH = #{shbh,jdbcType=VARCHAR},
+      </if>
+      <if test="shlx != null" >
+        SHLX = #{shlx,jdbcType=DECIMAL},
+      </if>
+      <if test="shyj != null" >
+        SHYJ = #{shyj,jdbcType=VARCHAR},
+      </if>
+      <if test="shnr != null" >
+        SHNR = #{shnr,jdbcType=VARCHAR},
+      </if>
+      <if test="shrid != null" >
+        SHRID = #{shrid,jdbcType=DECIMAL},
+      </if>
+      <if test="shrmc != null" >
+        SHRMC = #{shrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ssdwmc != null" >
+        SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ssdwdm != null" >
+        SSDWDM = #{ssdwdm,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxbh != null" >
+        LXBH = #{lxbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rwId != null" >
+        RW_ID = #{rwId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoShrzxx" >
+    update INFO_SHRZXX
+    set SHBH = #{shbh,jdbcType=VARCHAR},
+      SHLX = #{shlx,jdbcType=DECIMAL},
+      SHYJ = #{shyj,jdbcType=VARCHAR},
+      SHNR = #{shnr,jdbcType=VARCHAR},
+      SHRID = #{shrid,jdbcType=DECIMAL},
+      SHRMC = #{shrmc,jdbcType=VARCHAR},
+      SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+      SSDWDM = #{ssdwdm,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      BZ = #{bz,jdbcType=VARCHAR},
+      LXBH = #{lxbh,jdbcType=VARCHAR},
+      RW_ID = #{rwId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+  select shrz.*
+  from INFO_SHRZXX shrz <!-- join INFO_RWJBXX rw on shrz.RW_ID = rw.id
+   join INFO_RWRYGLXXB rwry on rwry.RW_ID = rw.ID  -->
+		where 1=1
+	<!-- 	<if test="userId != null">
+		AND  rwry.USER_ID = #{userId}
+		</if> -->
+		<if test="ssdwdm !=null">
+		AND shrz.SSDWDM = #{ssdwdm}
+		</if>
+		<if test="cjsj !=null">
+		AND shrz.cjsj &gt;=#{cjsj}
+		</if>
+		<if test="shyj !=null">
+		AND shrz.shyj = #{shyj}
+		</if>
+		<if test="cjsjs !=null">
+		AND shrz.cjsj &lt;= #{cjsjs}
+		</if>
+		<if test="shlx !=null">
+		AND shrz.shlx = #{shlx}
+		</if>
+			<if test="rwIds != null">
+			AND
+			<foreach item="rwId" index="index" collection="rwIds" open="("
+				separator="or" close=")">
+				shrz.RW_ID in #{rwId}
+			</foreach>
+		</if>
+		order by shrz.CJSJ DESC
+		</select>
+</mapper>

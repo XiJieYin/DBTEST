@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OrganizationDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Organization" >
+    <id column="ZZJGDM" property="zzjgdm" jdbcType="VARCHAR" />
+    <result column="ZZJGMC" property="zzjgmc" jdbcType="VARCHAR" />
+    <result column="ZZJGLX" property="zzjglx" jdbcType="VARCHAR" />
+    <result column="SFYX" property="sfyx" jdbcType="VARCHAR" />
+    <result column="SSJGDM" property="ssjgdm" jdbcType="VARCHAR" />
+    <result column="JGLX" property="jglx" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="VIEWMC" property="viewmc" jdbcType="VARCHAR" />
+    <result column="SHOWINDEX" property="showindex" jdbcType="DECIMAL" />
+    <result column="PARENT_ORGCODE" property="fjjgdm" jdbcType="VARCHAR" />
+    <result column="PARENT_ORGNAME" property="fjjgmc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ZZJGDM, ZZJGMC, ZZJGLX, SFYX, SSJGDM, JGLX, REMARK, VIEWMC, SHOWINDEX
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DICT_ORG
+    where ZZJGDM = #{zzjgdm,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DICT_ORG
+    where ZZJGDM = #{zzjgdm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Organization" >
+    insert into DICT_ORG (ZZJGDM, ZZJGMC, ZZJGLX, 
+      SFYX, SSJGDM, JGLX, 
+      REMARK, VIEWMC, SHOWINDEX
+      )
+    values (#{zzjgdm,jdbcType=VARCHAR}, #{zzjgmc,jdbcType=VARCHAR}, #{zzjglx,jdbcType=VARCHAR}, 
+      #{sfyx,jdbcType=VARCHAR}, #{ssjgdm,jdbcType=VARCHAR}, #{jglx,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{viewmc,jdbcType=VARCHAR}, #{showindex,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Organization" >
+    insert into DICT_ORG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zzjgdm != null" >
+        ZZJGDM,
+      </if>
+      <if test="zzjgmc != null" >
+        ZZJGMC,
+      </if>
+      <if test="zzjglx != null" >
+        ZZJGLX,
+      </if>
+      <if test="sfyx != null" >
+        SFYX,
+      </if>
+      <if test="ssjgdm != null" >
+        SSJGDM,
+      </if>
+      <if test="jglx != null" >
+        JGLX,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="viewmc != null" >
+        VIEWMC,
+      </if>
+      <if test="showindex != null" >
+        SHOWINDEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zzjgdm != null" >
+        #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgmc != null" >
+        #{zzjgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjglx != null" >
+        #{zzjglx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyx != null" >
+        #{sfyx,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjgdm != null" >
+        #{ssjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="jglx != null" >
+        #{jglx,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="viewmc != null" >
+        #{viewmc,jdbcType=VARCHAR},
+      </if>
+      <if test="showindex != null" >
+        #{showindex,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Organization" >
+    update DICT_ORG
+    <set >
+      <if test="zzjgdm != null" >
+        ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgmc != null" >
+        ZZJGMC = #{zzjgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjglx != null" >
+        ZZJGLX = #{zzjglx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyx != null" >
+        SFYX = #{sfyx,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjgdm != null" >
+        SSJGDM = #{ssjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="jglx != null" >
+        JGLX = #{jglx,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="viewmc != null" >
+        VIEWMC = #{viewmc,jdbcType=VARCHAR},
+      </if>
+      <if test="showindex != null" >
+        SHOWINDEX = #{showindex,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ZZJGDM = #{oldZzjgdm}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Organization" >
+    update DICT_ORG
+    set ZZJGMC = #{zzjgmc,jdbcType=VARCHAR},
+      ZZJGLX = #{zzjglx,jdbcType=VARCHAR},
+      SFYX = #{sfyx,jdbcType=VARCHAR},
+      SSJGDM = #{ssjgdm,jdbcType=VARCHAR},
+      JGLX = #{jglx,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      VIEWMC = #{viewmc,jdbcType=VARCHAR},
+      SHOWINDEX = #{showindex,jdbcType=DECIMAL}
+    where ZZJGDM = #{zzjgdm,jdbcType=VARCHAR}
+  </update>
+<select id="selectAll" resultMap="BaseResultMap"  parameterType="com.gx.hz.pojo.Organization">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM DICT_ORG where 1 = 1
+    <if test="sfyx != null" >
+      AND sfyx=#{sfyx,jdbcType=VARCHAR}
+    </if>
+    ORDER BY SSJGDM, ZZJGLX, SHOWINDEX
+  </select>
+  <select id="selectAlls" resultMap="BaseResultMap"  parameterType="com.gx.hz.pojo.Organization">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM DICT_ORG
+  </select>
+  <!-- 分页查询 -->
+  <select id="queryByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+	SELECT
+		o1.*, o2.zzjgdm parent_orgCode,
+		o2.zzjgmc parent_orgName,
+		o2.sfyx parent_isValid
+	FROM
+		DICT_ORG o1
+	LEFT JOIN DICT_ORG o2 ON o1.ssjgdm = o2.zzjgdm 
+    where 1 = 1 
+    <if test="name != null" >
+      AND o1.ZZJGMC like '%${name}%'
+    </if>
+    <if test="sid != null" >
+      AND o1.ZZJGDM like '%${sid}%'
+    </if>
+    <if test="parentId != null" >
+      AND o1.SSJGDM=#{parentId}
+    </if>
+    <if test="zzjglx != null" >
+      AND o1.ZZJGLX=#{zzjglx}
+    </if>
+    order by o1.ssjgdm, o1.zzjglx, o1.showindex
+  </select>
+  <!-- 获得单个信息 -->
+ <select id="getParentInfo" resultType="com.gx.hz.pojo.Organization" parameterType="string">
+    select * from DICT_ORG where ZZJGDM=#{s}
+  </select>
+  
+ <!-- 根据用户的组织机构编号查询组织机构名称 -->
+ <!-- <select id="getMcByBh" resultType="com.gx.hz.pojo.Organization" parameterType="string">
+    select org.* from DICT_ORG org  join SYS_USER  us on 
+    us.ORG_CODE = org.ZZJGDM
+     where 1 =1
+    <if test="zzjgdm != null" >
+      AND us.ORG_CODE=#{zzjgdm}
+    </if>
+  </select> -->
+  
+  <!-- 根据编号获取组织机构 -->
+  <select id="getOrgByCode" resultType="com.gx.hz.pojo.Organization" parameterType="string">
+    select org.* from DICT_ORG org  
+     where 1 =1
+    <if test="zzjgdm != null" >
+      AND org.ZZJGDM=#{zzjgdm}
+    </if>
+  </select> 
+  
+ <!-- 查询角色权限绑定的组织机构 -->
+ <select id="getOrgsByUser" resultType="com.gx.hz.pojo.Organization" parameterType="com.gx.hz.pojo.SysUser">
+   select z.* from dict_org z right join (select rdl.org_id from sys_user u, sys_user_role ur, sys_role_data_layers rdl where u.id = ur.user_id and u.id = #{id} and ur.role_id = rdl.role_id) d
+   on z.zzjgdm = d.org_id order by z.showindex
+ </select>
+ <!-- 分局获取下属的派出所 -->
+  <select id="getPcsCodeByFjCode" resultType="com.gx.hz.pojo.Organization" parameterType="com.gx.hz.pojo.Organization">
+    SELECT * FROM dict_org where 1=1 and ZZJGMC LIKE '%派出所'
+   <if test="zzjgdm != null" >
+      AND ssjgdm=#{zzjgdm}
+    </if>
+    order by showindex desc 
+  </select>
+  <!-- 获取所有分局 -->
+   <select id="queryAllFjCode" resultType="com.gx.hz.pojo.Organization" >
+      SELECT * FROM dict_org where ZZJGMC LIKE '%分局'
+   </select>
+    <!-- 获取用户权限内的组织机构 -->
+   <select id="getAsyncOrgTree" resultType="com.gx.hz.pojo.Organization" parameterType="Map" >
+			select t.*, (select case when count(*) > 0 then 1 else 0 end from dict_org where ssjgdm = t.zzjgdm and sfyx=1) isParent 
+			from dict_org t, sys_user u, sys_user_role ur, sys_role r, sys_role_data_layers rdl 
+			where ur.user_id = u.id and ur.role_id = r.id and r.id = rdl.role_id 
+			and rdl.org_id = t.zzjgdm and t.SFYX = '1' and u.id = #{userId} 
+       <if test="zzjgdm == null" >
+         and t.zzjglx &lt;= (select min(t.zzjglx)+1
+		from dict_org t, sys_user u, sys_user_role ur, sys_role r, sys_role_data_layers rdl
+		where ur.user_id = u.id and ur.role_id = r.id and r.id = rdl.role_id
+		 and rdl.org_id = t.zzjgdm and t.SFYX = '1' and u.id = #{userId} ) order by t.showindex
+      </if>
+      <if test="zzjgdm != null" >
+        and t.SSJGDM = #{zzjgdm}  order by t.showindex
+      </if>
+   </select>
+   <!-- 获取用户权限内的组织机构树 -->
+   <select id="findUserOrgTree" resultType="com.gx.hz.pojo.Organization" parameterType="Map" >
+			select t.*, (select case when count(*) > 0 then 1 else 0 end from dict_org where ssjgdm = t.zzjgdm and sfyx=1) isParent 
+			from dict_org t, sys_user u, sys_user_role ur, sys_role r, sys_role_data_layers rdl 
+			where ur.user_id = u.id and ur.role_id = r.id and r.id = rdl.role_id 
+			and rdl.org_id = t.zzjgdm and t.SFYX = '1' and u.id = #{userId} 
+       <if test="zzjgdm == null" >
+         and t.zzjglx &lt;= (select min(t.zzjglx)+1
+		from dict_org t, sys_user u, sys_user_role ur, sys_role r, sys_role_data_layers rdl
+		where ur.user_id = u.id and ur.role_id = r.id and r.id = rdl.role_id
+		 and rdl.org_id = t.zzjgdm and t.SFYX = '1' and u.id = #{userId} )  and t.remark &gt; 0 order by t.showindex
+      </if>
+      <if test="zzjgdm != null" >
+        and t.SSJGDM = #{zzjgdm}  order by t.showindex
+      </if>
+   </select>
+   <!-- 出现修改组织结构代码的情况要相应修改下属机构的父类 -->
+   <update id="updateSsjgdm" parameterType="com.gx.hz.pojo.Organization">
+     update dict_org set ssjgdm =#{zzjgdm}  where ssjgdm =#{oldZzjgdm} 
+   </update>
+   <!-- 根据是否存在父类返回组织数据 -->
+   <select id="getOrgTree" parameterType="map" resultMap="BaseResultMap">
+     select t.* from dict_org t, sys_user u, sys_user_role ur, sys_role r, sys_role_data_layers rdl  where ur.user_id = u.id and ur.role_id = r.id and r.id = rdl.role_id 
+     and rdl.data_layer_id = t.zzjgdm and t.SFYX = '1' and u.id =#{userId} 
+     <if test="zzjgdm == null" >
+        order by t.showindex
+      </if>
+      <if test="zzjgdm != null" >
+        and t.SSJGDM = #{zzjgdm} order by t.showindex
+      </if>
+   </select>
+   	<select id="queryByZzjgmc" resultMap="BaseResultMap">
+	select * from DICT_ORG where zzjgmc = #{zzjgmc,jdbcType=VARCHAR}
+	</select>
+   <!-- 根据状态返回数据 -->
+   <select id="getAllOrgList" parameterType="map" resultMap="BaseResultMap">
+     select t.* FROM dict_org t, sys_user u, sys_user_role ur, sys_role r, sys_role_data_layers rdl where ur.user_id = u.id and ur.role_id = r.id and r.id = rdl.role_id 
+     and rdl.data_layer_id = t.zzjgdm and u.id =#{userId}
+      <if test="sfyx != null" >
+        and t.SFYX = #{sfyx} order by t.showindex
+      </if>
+        order by t.showindex
+   </select>
+   <!-- 查询所有分局 -->
+   <select id="queryByFG" resultMap="BaseResultMap">
+   select * from DICT_ORG where (zzjglx = 12 and SHOWINDEX != 99) or  zzjgdm = '440100000000' ORDER BY ZZJGDM
+   </select>
+   <!-- 查询所分局派出所 -->
+   <select id="selectByFgToDm" resultMap="BaseResultMap">
+select * from DICT_ORG where ( zzjgmc like '%派出所%' and ZZJGDM like '%${dm}%') or ZZJGDM = #{zzjgdm} ORDER BY ZZJGDM
+</select>
+   <!-- 更新状态 -->
+	<update id="updateSfyx" parameterType="com.gx.hz.pojo.Organization">
+  		update dict_org set sfyx=#{sfyx} where zzjgdm=#{zzjgdm}
+	</update>
+
+	<!-- 获取所有分局及其组织机构代码 -->
+	<select id="queryOrgCodeAndNameInFJ" resultType="Map">
+		SELECT
+			zzjgmc,
+			zzjgdm
+		FROM
+			DICT_ORG
+		WHERE
+			ZZJGLX = 12
+		AND ZZJGMC LIKE '%分局%'
+		AND SSJGDM = '440100000000'
+		AND SHOWINDEX != 99
+		ORDER BY
+			ZZJGDM
+	</select>
+
+	
+	<resultMap id="NameAndCodeMap" type="com.gx.hz.pojo.Organization" >
+    	<id column="ZZJGDM" property="zzjgdm" jdbcType="VARCHAR" />
+    	<result column="ZZJGMC" property="zzjgmc" jdbcType="VARCHAR" />
+  	</resultMap>
+</mapper>

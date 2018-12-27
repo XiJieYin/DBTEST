@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TmTmxxbYWDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.TmTmxxbYW" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TMBH" property="tmbh" jdbcType="VARCHAR" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="SXH" property="sxh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="SFZH" property="sfzh" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP" />
+    <result column="DZMS" property="dzms" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="SJ" property="sj" jdbcType="TIMESTAMP" />
+    <result column="ZSYH" property="zsyh" jdbcType="DECIMAL" />
+    <result column="ZZYH" property="zzyh" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="XGRID" property="xgrid" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="TJ" property="tj"/>
+    <result column="SHZT" property="shzt" jdbcType="DECIMAL"/>
+    <result column="SHWT" property="shwt" jdbcType="VARCHAR"/>
+    <result column="IMPORT_ID" property="importId" jdbcType="DECIMAL"/>
+    <result column="GLZT" property="glzt" jdbcType="INTEGER" />
+    <result column="SFZHSW" property="sfzhsw" jdbcType="VARCHAR" />
+    <result column="SFSHZ" property="sfshz" jdbcType="DECIMAL" />
+    <result column="YHZGX" property="yhzgx" jdbcType="VARCHAR" />
+    <result column="XHH" property="xhh" jdbcType="VARCHAR" />
+    <result column="HZMC" property="hzmc" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="com.gx.hz.pojo.TmTmxxbYW" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TMBH" property="tmbh" jdbcType="VARCHAR" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="SXH" property="sxh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="SFZH" property="sfzh" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP" />
+    <result column="DZMS" property="dzms" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="SJ" property="sj" jdbcType="TIMESTAMP" />
+    <result column="ZSYH" property="zsyh" jdbcType="DECIMAL" />
+    <result column="ZZYH" property="zzyh" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="XGRID" property="xgrid" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="TJ" property="tj"/>
+    <result column="SHZT" property="shzt" jdbcType="DECIMAL"/>
+    <association property="dosJz" javaType="com.gx.hz.pojo.DosJz" columnPrefix="jz_">
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+			<result column="AJ_ID" property="ajId" jdbcType="DECIMAL" />
+			<result column="JZLX" property="jzlx" jdbcType="VARCHAR" />
+			<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+			<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+			<result column="BCQX" property="bcqx" jdbcType="DECIMAL" />
+			<result column="JZJS" property="jzjs" jdbcType="DECIMAL" />
+			<result column="JZYS" property="jzys" jdbcType="DECIMAL" />
+			<result column="LJDW" property="ljdw" jdbcType="VARCHAR" />
+			<result column="QZH" property="qzh" jdbcType="VARCHAR" />
+			<result column="LBH" property="lbh" jdbcType="VARCHAR" />
+			<result column="AJH" property="ajh" jdbcType="VARCHAR" />
+			<result column="QZSJ" property="qzsj" jdbcType="VARCHAR" />
+			<result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+			<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+			<result column="record_person" property="recordPerson"
+				jdbcType="VARCHAR" />
+			<result column="JZTM" property="jztm" jdbcType="VARCHAR" />
+			<result column="SATAE" property="satae" jdbcType="DECIMAL" />
+			<result column="KSSJ" property="kssj" jdbcType="TIMESTAMP" />
+			<result column="JSSJ" property="jssj" jdbcType="TIMESTAMP" />
+			<result column="DD_ID" property="ddId" jdbcType="DECIMAL" />
+			<result column="DDMC" property="ddmc" jdbcType="VARCHAR" />
+			<result column="TXMBH" property="txmbh" jdbcType="VARCHAR" />
+			<result column="MLH" property="mlh" jdbcType="VARCHAR" />
+			<result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+            <result column="JZLX_CODE" property="jzlxCode"  jdbcType="DECIMAL"/>
+            <result column="SMZT" property="smzt"  jdbcType="DECIMAL"/>
+            <result column="LRZT" property="lrzt"  jdbcType="DECIMAL"/>
+            <result column="TMZT" property="tmzt"  jdbcType="DECIMAL"/>
+    </association>
+    <association property="dosAj" javaType="com.gx.hz.pojo.DosAJ" columnPrefix="aj_">
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+			<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+			<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+			<result column="BCQX" property="bcqx" jdbcType="DECIMAL" />
+			<result column="AJSL" property="ajsl" jdbcType="DECIMAL" />
+			<result column="QZH" property="qzh" jdbcType="VARCHAR" />
+			<result column="LBH" property="lbh" jdbcType="VARCHAR" />
+			<result column="MLH" property="mlh" jdbcType="VARCHAR" />
+			<result column="AJH" property="ajh" jdbcType="VARCHAR" />
+			<result column="ND" property="nd" jdbcType="VARCHAR" />
+			<result column="AJKSSJ" property="ajkssj" jdbcType="TIMESTAMP" />
+			<result column="AJQZSJ" property="ajqzsj" jdbcType="VARCHAR" />
+			<result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+			<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+			<result column="AJBH" property="ajbh" jdbcType="VARCHAR" />
+			<result column="TXMBH" property="txmbh" jdbcType="VARCHAR" />
+			<result column="AJLX" property="ajlx" jdbcType="VARCHAR" />
+			<result column="TM" property="tm" jdbcType="VARCHAR" />
+			<result column="LJDW" property="ljdw" jdbcType="VARCHAR" />
+			<result column="XGRID" property="xgrid" jdbcType="VARCHAR" />
+			<result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+			<result column="SATAE" property="satae" jdbcType="DECIMAL" />
+			<result column="AJQZH" property="ajqzh" jdbcType="VARCHAR" />
+			<result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+			<result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+			<result column="AJJSH" property="ajjsh" jdbcType="VARCHAR" />
+			<result column="AJJSSJ" property="ajjssj" jdbcType="TIMESTAMP" />
+			<result column="RECORD_PERSON" property="recordPerson"
+				jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+   <resultMap id="BaseResultMap3" type="com.gx.hz.pojo.TmTmxxbYW" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TMBH" property="tmbh" jdbcType="VARCHAR" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="SXH" property="sxh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="SFZH" property="sfzh" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP" />
+    <result column="DZMS" property="dzms" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="SJ" property="sj" jdbcType="TIMESTAMP" />
+    <result column="ZSYH" property="zsyh" jdbcType="DECIMAL" />
+    <result column="ZZYH" property="zzyh" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="XGRID" property="xgrid" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="TJ" property="tj"/>
+    <result column="SHZT" property="shzt" jdbcType="DECIMAL"/>
+    <result column="SHWT" property="shwt" jdbcType="VARCHAR"/>
+    <collection property="oriInfoPrimarys" javaType="java.util.List"
+			ofType="com.gx.hz.pojo.OriInfoPrimary">
+    	<id column="P_ID" property="id" />
+		<result column="P_USER_ID" property="userId"  />
+		<result column="P_LRRYMC" property="lrrymc"  />
+		<result column="P_LRSJ" property="lrsj" />
+		<result column="P_SATAE" property="satae" />
+		<result column="P_YWTPBH" property="ywtpbh" />
+		<result column="P_YWLX" property="ywlx"/>
+		<result column="P_NEEDLR" property="needLr" />
+		<result column="P_SHWT" property="shwt" />
+		<result column="P_JZBH" property="jzbh" />
+		<result column="P_TMBH" property="tmbh" />
+		<result column="P_CONSISTENCY" property="consistency" />
+    </collection>
+  </resultMap>
+  
+  <resultMap id="BaseResultMap4" type="com.gx.hz.pojo.TmTmxxbYW" >
+    <id column="ID" property="id"/>
+    <result column="TMBH" property="tmbh" jdbcType="VARCHAR" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="SXH" property="sxh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="SFZH" property="sfzh" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP" />
+    <result column="DZMS" property="dzms" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="SJ" property="sj" jdbcType="TIMESTAMP" />
+    <result column="ZSYH" property="zsyh" jdbcType="DECIMAL" />
+    <result column="ZZYH" property="zzyh" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="XGRID" property="xgrid" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="TJ" property="tj"/>
+    <result column="SHZT" property="shzt" jdbcType="DECIMAL"/>
+    <result column="SHWT" property="shwt" jdbcType="VARCHAR"/>
+    <collection property="tmtpxxbs"  ofType="com.gx.hz.pojo.TmTmtpxxb">
+    	<id column="TP_ID" property="id" />
+		<result column="TP_IMGPATH" property="imgpath"  />
+		<result column="TP_TPBH" property="tpbh"  />
+		<result column="TP_BH" property="bh"/>
+		<result column="TP_SXM" property="sxm"  />
+		<result column="TP_UPLOAD_TIME" property="uploadTime" />
+		<result column="TP_UPLOAD_USER" property="uploadUser" />
+		<result column="TP_LX" property="lx" />
+		<result column="TP_SATAE" property="satae"/>
+		<result column="TP_IS_LR" property="isLr" />
+		<result column="TP_CLEAN_SATAE" property="cleanSatae" />
+		<result column="TP_FILE_NAME" property="fileName" />
+		<result column="TP_CHILD_NUM" property="childNum" />
+    </collection>
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    ID, TMBH, JZBH, SXH, XM, XB, SFZH, CSRQ, DZMS, DZBM, SJ, ZSYH, ZZYH, BZ, USER_ID, 
+    CREATE_TIME, XGRID, XGRMC, UPDATE_TIME, SATAE,SHZT,SHWT,IMPORT_ID,GLZT
+  </sql>
+    <sql id="YW_List" >
+    yw.ID, yw.TMBH, yw.JZBH, yw.SXH, yw.XM, yw.XB, yw.SFZH, yw.CSRQ, yw.DZMS, yw.DZBM, yw.SJ, yw.ZSYH, yw.ZZYH, yw.BZ, yw.USER_ID, 
+    yw.CREATE_TIME,yw.XGRID, yw.XGRMC, yw.UPDATE_TIME, yw.SATAE,yw.SHZT
+  </sql>
+  <sql id="JZ_List">
+		jz.ID jz_id, jz.AJ_ID jz_AJ_ID, jz.JZLX jz_jzlx, jz.ORG_CODE jz_ORG_CODE,
+		jz.ORG_NAME jz_ORG_NAME, jz.BCQX jz_bcqx,
+		jz.JZJS jz_jzjs, jz.JZYS jz_jzys, jz.LJDW jz_ljdw, jz.QZH jz_qzh, jz.LBH
+		jz_lbh,
+		jz.AJH jz_ajh, jz.QZSJ jz_qzsj,
+		jz.USER_ID jz_userId, jz.CREATE_TIME
+		jz_CREATE_TIME, jz.UPDATE_TIME jz_updateTime,jz.JZTM jz_jztm,jz.SATAE
+		jz_satae,jz.KSSJ jz_kssj,jz.JSSJ jz_jssj,
+		jz.DD_ID jz_DD_Id,jz.DDMC
+		jz_ddmc,jz.TXMBH jz_txmbh,jz.MLH jz_mlh,
+		jz.JZBH jz_jzbh,
+		jz.JZLX_CODE jz_JZLX_CODE,jz.SMZT jz_smzt,jz.LRZT jz_lrzt,jz.TMZT jz_tmzt
+	</sql>
+	<sql id="AJ_List">
+	aj.id aj_id,aj.bcqx aj_bcqx,aj.ajsl aj_ajsl,aj.qzh aj_qzh,aj.lbh aj_lbh,
+	aj.mlh aj_mlh,aj.ajh aj_ajh,aj.nd aj_nd,aj.ajkssj aj_ajkssj,aj.ajqzsj aj_ajqzsj,
+	aj.user_id aj_user_id,aj.create_time aj_create_time,aj.update_time aj_update_time,
+	aj.ajbh aj_ajbh,aj.txmbh aj_txmbh,aj.ajlx aj_ajlx,aj.tm aj_tm,
+	aj.ljdw aj_ljdw,aj.xgrid aj_xgrid,aj.xgrmc aj_xgrmc,aj.satae aj_satae,
+	aj.ajqzh aj_ajqzh,aj.rw_id aj_rw_id,aj.rwmc aj_rwmc,aj.ajjsh aj_ajjsh,
+	aj.ajjssj aj_ajjssj
+	</sql>
+	
+	
+  <!-- 用条目编号查询条目 -->
+  <select id="queryByTmbh" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from TM_TMXXB_YW
+    where TMBH = #{tmbh,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TM_TMXXB_YW
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  update TM_TMXXB_YW set satae = 0  where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByTmbh">
+  update TM_TMXXB_YW set satae = 0  where tmbh = #{tmbh}
+  </delete>
+  <delete id="delectByjzbh"  >
+  update TM_TMXXB_YW set satae = 0  where jzbh = #{jzbh}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_TM_TMXXB_YW.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.TmTmxxbYW" >
+      <selectKey keyProperty="id"  resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into TM_TMXXB_YW (ID, TMBH, JZBH, 
+      SXH, XM, XB, SFZH, 
+      CSRQ, DZMS, DZBM, 
+      SJ, ZSYH, ZZYH, BZ, 
+      USER_ID, CREATE_TIME, XGRID, 
+      XGRMC, UPDATE_TIME, SATAE,SHZT,IMPORT_Id,GLZT,SFZHSW,SFSHZ,YHZGX,XHH,HZMC
+      )
+    values (#{id,jdbcType=DECIMAL}, #{tmbh,jdbcType=VARCHAR}, #{jzbh,jdbcType=VARCHAR}, 
+      #{sxh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{sfzh,jdbcType=VARCHAR}, 
+      #{csrq,jdbcType=TIMESTAMP}, #{dzms,jdbcType=VARCHAR}, #{dzbm,jdbcType=VARCHAR}, 
+      #{sj,jdbcType=TIMESTAMP}, #{zsyh,jdbcType=DECIMAL}, #{zzyh,jdbcType=DECIMAL}, #{bz,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=DECIMAL}, #{createTime,jdbcType=OTHER}, #{xgrid,jdbcType=VARCHAR}, 
+      #{xgrmc,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 1,1, 
+      #{importId,jdbcType=DECIMAL},#{glzt,jdbcType=INTEGER},#{sfzhsw,jdbcType=VARCHAR},#{sfshz,jdbcType=INTEGER},#{yhzgx,jdbcType=VARCHAR},
+      #{xhh,jdbcType=VARCHAR},#{hzmc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.TmTmxxbYW" >
+      <selectKey keyProperty="id"  resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into TM_TMXXB_YW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tmbh != null" >
+        TMBH,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+      <if test="sxh != null" >
+        SXH,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="xb != null" >
+        XB,
+      </if>
+      <if test="sfzh != null" >
+        SFZH,
+      </if>
+      <if test="csrq != null" >
+        CSRQ,
+      </if>
+      <if test="dzms != null" >
+        DZMS,
+      </if>
+      <if test="dzbm != null" >
+        DZBM,
+      </if>
+      <if test="sj != null" >
+        SJ,
+      </if>
+      <if test="zsyh != null" >
+        ZSYH,
+      </if>
+      <if test="zzyh != null" >
+        ZZYH,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="xgrid != null" >
+        XGRID,
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="satae != null" >
+        SATAE,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="shwt != null" >
+        SHWT,
+      </if>
+      <if test="importId != null" >
+        IMPORT_ID,
+      </if>
+      <if test="glzt != null" >
+        GLZT,
+      </if>
+      <if test="sfzhsw !=null">
+ 		SFZHSW,		     
+      </if>
+      <if test="sfshz !=null">
+ 		SFSHZ,		     
+      </if>
+      <if test="yhzgx !=null">
+ 		YHZGX,		     
+      </if>
+      <if test="xhh !=null">
+ 		XHH,		     
+      </if>
+      <if test="hzmc !=null">
+ 		HZMC,		     
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="tmbh != null" >
+        #{tmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sxh != null" >
+        #{sxh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null" >
+        #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        #{csrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dzms != null" >
+        #{dzms,jdbcType=VARCHAR},
+      </if>
+      <if test="dzbm != null" >
+        #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zsyh != null" >
+        #{zsyh,jdbcType=DECIMAL},
+      </if>
+      <if test="zzyh != null" >
+        #{zzyh,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=OTHER},
+      </if>
+      <if test="xgrid != null" >
+        #{xgrid,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        1,
+      </if>
+      <if test="shzt != null" >
+        1,
+      </if>
+        <if test="shwt != null" >
+        #{shwt,jdbcType=VARCHAR},
+      </if>
+        <if test="importId != null" >
+        #{importId,jdbcType=VARCHAR},
+      </if>
+      <if test="glzt != null" >
+         #{glzt,jdbcType=INTEGER},
+      </if>
+      <if test="sfzhsw != null">
+      	#{sfzhsw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfshz !=null">
+ 		#{sfshz,jdbcType=INTEGER},	     
+      </if>
+      <if test="yhzgx !=null">
+      	#{yhzgx,jdbcType=VARCHAR},
+      </if>
+      <if test="xhh !=null">
+      	#{xhh,jdbcType=VARCHAR},
+      </if>
+      <if test="hzmc !=null">
+      	#{hzmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.TmTmxxbYW" >
+    update TM_TMXXB_YW
+    <set >
+      <if test="tmbh != null" >
+        TMBH = #{tmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jzbh != null" >
+        JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sxh != null" >
+        SXH = #{sxh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null" >
+        SFZH = #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        CSRQ = #{csrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dzms != null" >
+        DZMS = #{dzms,jdbcType=VARCHAR},
+      </if>
+      <if test="dzbm != null" >
+        DZBM = #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        SJ = #{sj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zsyh != null" >
+        ZSYH = #{zsyh,jdbcType=DECIMAL},
+      </if>
+      <if test="zzyh != null" >
+        ZZYH = #{zzyh,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=OTHER},
+      </if>
+      <if test="xgrid != null" >
+        XGRID = #{xgrid,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=DECIMAL},
+      </if>
+      <if test="shwt != null" >
+        SHWT = #{shwt,jdbcType=DECIMAL},
+      </if>
+      <if test="glzt != null" >
+        GLZT = #{glzt,jdbcType=INTEGER},
+      </if>
+      <if test="sfzhsw!= null">
+      	SFZHSW=#{sfzhsw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfshz !=null">
+ 		SFSHZ=#{sfshz,jdbcType=INTEGER},	     
+      </if>
+      <if test="yhzgx !=null">
+      	YHZGX=#{yhzgx,jdbcType=VARCHAR},
+      </if>
+      <if test="xhh !=null">
+      	XHH=#{xhh,jdbcType=VARCHAR},
+      </if>
+      <if test="hzmc !=null">
+      	HZMC=#{hzmc,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.TmTmxxbYW" >
+    update TM_TMXXB_YW
+    set TMBH = #{tmbh,jdbcType=VARCHAR},
+      JZBH = #{jzbh,jdbcType=VARCHAR},
+      SXH = #{sxh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      XB = #{xb,jdbcType=VARCHAR},
+      SFZH = #{sfzh,jdbcType=VARCHAR},
+      CSRQ = #{csrq,jdbcType=TIMESTAMP},
+      DZMS = #{dzms,jdbcType=VARCHAR},
+      DZBM = #{dzbm,jdbcType=VARCHAR},
+      SJ = #{sj,jdbcType=TIMESTAMP},
+      ZSYH = #{zsyh,jdbcType=DECIMAL},
+      ZZYH = #{zzyh,jdbcType=DECIMAL},
+      BZ = #{bz,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=OTHER},
+      XGRID = #{xgrid,jdbcType=VARCHAR},
+      XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      SHZT = #{shzt,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByJzbh" resultMap="BaseResultMap">
+  select * from TM_TMXXB_YW where JZBH = #{jzbh,jdbcType=VARCHAR} and satae !=0 ORDER BY sxh
+  </select>
+  
+  <select id="selectByjzbhToInt" resultType="int">
+  select count(id) from TM_TMXXB_YW where JZBH = #{jzbh,jdbcType=VARCHAR} and satae !=0 ORDER BY sxh
+  </select>
+    <select id="queryByCondition" resultMap="BaseResultMap"
+            parameterType="java.util.Map">
+
+        select * from  TM_TMXXB_YW yw
+        where 1=1
+        and  yw.JZBH = #{jzbh,jdbcType=VARCHAR}  and yw.satae=1
+		<if test="glzt !=null">
+	    	and GLZT = #{glzt} 
+	    </if>
+	    <if test="sfshz != null">
+	    	and sfshz = #{sfshz}
+	    </if>
+        order by  cast(yw.sxh as int) asc
+    </select>
+    
+      <!--  获取表列数 -->
+    <select id="getTmXuhao" resultType="Integer">
+    	select count(*) from TM_TMXXB_YW where satae=1
+   	  	<if test="jzbh !=null">
+	    	and JZBH = #{jzbh} 
+	    </if>
+    </select>
+    
+    <select id="getTmXuhaoAndYS" resultMap="BaseResultMap">
+    select * from 
+	(select * from TM_TMXXB_YW where jzbh = #{jzbh} and satae=1 order by  cast(sxh as int) desc )
+	where rownum=1 
+    </select>
+    
+    <!-- 获取顺序号最大的条目的信息 -->
+    <select id="getMaxSxhByJzbh" resultMap="BaseResultMap">
+    	SELECT * from(
+			select * from TM_TMXXB_YW where satae=1  and JZBH = #{jzbh} 
+			ORDER BY sxh DESC 
+			)
+		where ROWNUM &lt;= 1 
+    </select>
+    
+
+    <update id="fakeDel" >
+        update TM_TMXXB_YW  set satae=0 where id =#{id}
+    </update>
+    <update id="updateType" >
+        update TM_TMXXB_YW  set shzt = 1 where id =#{id}
+    </update>
+    
+    <select id="selectByJzbhToCount" resultMap="BaseResultMap" >
+    select  USER_ID,count(id) TJ from TM_TMXXB_YW 
+    where 1=1 and satae !=0
+    <if test="jzbh !=null">
+    AND JZBH = #{jzbh} 
+    </if>
+    group by USER_ID
+    </select>
+
+
+	<select id="selectBySfzh" resultMap="BaseResultMap">
+	select * from TM_TMXXB_YW where sfzh = #{sfzh}
+	</select>
+	
+    <select id="getTMByTpbh" resultMap="BaseResultMap">
+        SELECT tj.* from  TM_TMXXB_YW tj, TM_TMYTPGLXXB gl
+        where  gl.TPBH=#{tpbh}  and  tj.TMBH=gl.TMBH and  tj.satae !=0
+    </select>
+    
+    <select id="getTMByTmbh" resultMap="BaseResultMap">
+        SELECT * FROM TM_TMXXB_YW WHERE TMBH = #{tmbh}
+    </select>
+	
+	<select id="selectByDacx" resultMap="BaseResultMap2">
+	select 
+	<include refid="YW_List"/>,
+	<include refid="JZ_List"/>,
+	<include refid="AJ_List"/>
+	 from TM_TMXXB_YW yw join DOS_JZ jz on YW.JZBH = JZ.JZBH join DOS_AJ aj on aj.ajbh = jz.ajbh
+	where jz.SATAE = 3 and AJ.satae!=0  and yw.satae !=0
+	<if test="xm !=null">
+            AND YW.xm like '%${xm}%'
+        </if>
+        <if test="xb !=null">
+            AND yw.xb like '%${xb}%'
+        </if>
+        <if test="dzms !=null">
+            AND yw.dzms like '%${dzms}%'
+        </if>
+        <if test="ssdwid !=null">
+            AND jz.ORG_CODE = #{ssdwid}
+        </if>
+        <if test="ssdwmc !=null">
+            AND jz.ORG_NAME like '%${ssdwmc}%'
+        </if>
+        <if test="txmbh !=null">
+            AND jz.txmbh like '%${txmbh}%'
+        </if>
+        <if test="qzh !=null">
+            AND jz.qzh like '%${qzh}%'
+        </if>
+        <if test="mlh != null">
+            AND jz.mlh like '%${mlh}%'
+        </if>
+         <if test="dz != null">
+            AND yw.dzms like '%${dz}%'
+        </if>
+        <if test="tm != null">
+            AND jz.jztm like '%${tm}%'
+        </if>
+        <if test="jzbh !=null">
+            AND jz.jzbh like '%${jzbh}%'
+        </if>
+        <if test="dacfwzid !=null">
+            AND jz.DD_ID = #{dacfwzid}
+        </if> 
+        <if test="flh !=null">
+            AND jz.lbh like '%${flh}%'
+        </if>
+         <if test="dalxid !=null">
+            AND jz.jzlx = #{dalxid}
+        </if>
+         <if test="sfz !=null">
+            AND yw.sfzh like '%${sfz}%'
+        </if>
+        <if test="createTime!=null">
+        	AND yw.CREATE_TIME &gt;=#{createTime}
+        </if>
+        <if test="updateTime!=null">
+        	AND yw.CREATE_TIME &lt;=#{updateTime}
+        </if>
+        <if test="datas != null">
+            and
+            <foreach collection="datas" index="index" item="item" open="(" separator="or" close=")">
+                jz.ORG_CODE = #{item}
+            </foreach>
+        </if>
+	ORDER BY YW.id DESC
+	</select>
+	<select id="getGjbg" resultMap="BaseResultMap">
+	select sfzh,xm,xb from TM_TMXXB_YW yw  join DOS_JZ jz on yw.jzbh = jz.jzbh where jz.SATAE = 3
+	<!-- <if test="sfzh">
+	and sfzh = #{sfzh}
+	</if> -->
+	<if test="xm != null">
+		and	XM = #{xm,jdbcType=VARCHAR}
+	</if>
+	<if test="dz != null">
+		and	DZMS like '%${dz}%'
+	</if>
+	<if test="sfzh != null">
+		and SFZH = #{sfzh,jdbcType=VARCHAR}
+	</if>
+	 <if test="datas != null">
+         and
+         <foreach collection="datas" index="index" item="item" open="("  separator="or"  close=")">
+             jz.ORG_CODE in #{item}
+         </foreach>
+     </if>
+	 GROUP BY sfzh,xm,xb
+	</select>
+	
+	<select id="getShtmList" resultMap="BaseResultMap">
+	   select * from  TM_TMXXB_YW yw
+        where 1=1
+        and  yw.JZBH = #{jzbh,jdbcType=VARCHAR}  and yw.satae!=0
+		and yw.shzt=2
+        order by  cast(yw.sxh as int) asc
+	</select>
+	
+	<!-- 通过条目编号更新条目 -->
+	<update id="updateByTmbh" parameterType="com.gx.hz.pojo.TmTmxxbYW">
+	update TM_TMXXB_YW
+	<set>
+		<if test="jzbh != null">
+			JZBH = #{jzbh,jdbcType=VARCHAR},
+		</if>
+		<if test="sxh != null">
+			SXH = #{sxh,jdbcType=VARCHAR},
+		</if>
+		<if test="xm != null">
+			XM = #{xm,jdbcType=VARCHAR},
+		</if>
+		<if test="xb != null">
+			XB = #{xb,jdbcType=VARCHAR},
+		</if>
+		<if test="sfzh != null">
+			SFZH = #{sfzh,jdbcType=VARCHAR},
+		</if>
+		<if test="csrq != null">
+			CSRQ = #{csrq,jdbcType=TIMESTAMP},
+		</if>
+		<if test="dzms != null">
+			DZMS = #{dzms,jdbcType=VARCHAR},
+		</if>
+		<if test="dzbm != null">
+			DZBM = #{dzbm,jdbcType=VARCHAR},
+		</if>
+		<if test="sj != null">
+			SJ = #{sj,jdbcType=TIMESTAMP},
+		</if>
+		<if test="zsyh != null">
+			ZSYH = #{zsyh,jdbcType=DECIMAL},
+		</if>
+		<if test="zzyh != null">
+			ZZYH = #{zzyh,jdbcType=DECIMAL},
+		</if>
+		<if test="bz != null">
+			BZ = #{bz,jdbcType=VARCHAR},
+		</if>
+		<if test="userId != null">
+			USER_ID = #{userId,jdbcType=DECIMAL},
+		</if>
+		<if test="createTime != null">
+			CREATE_TIME = #{createTime,jdbcType=OTHER},
+		</if>
+		<if test="xgrid != null">
+			XGRID = #{xgrid,jdbcType=VARCHAR},
+		</if>
+		<if test="xgrmc != null">
+			XGRMC = #{xgrmc,jdbcType=VARCHAR},
+		</if>
+		<if test="updateTime != null">
+			UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="satae != null">
+			SATAE = #{satae,jdbcType=DECIMAL},
+		</if>
+		<if test="shzt != null">
+			SHZT = #{shzt,jdbcType=DECIMAL},
+		</if>
+		<if test="shwt != null">
+			SHWT = #{shwt,jdbcType=DECIMAL},
+		</if>
+		<if test="glzt != null" >
+	        GLZT = #{glzt,jdbcType=INTEGER},
+	    </if>
+	</set>
+	where TMBH = #{tmbh,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 获取条目信息跟原文录入信息 -->
+	<select id="getTmAndPrimary" resultMap="BaseResultMap3" parameterType="java.util.Map">
+	  SELECT 
+	  	T1.ID, T1.TMBH, 
+	  	T1.JZBH, T1.SXH, 
+	  	T1.XM, T1.XB, 
+	  	T1.SFZH, T1.CSRQ, 
+	  	T1.DZMS, T1.DZBM, 
+	  	T1.SJ, T1.ZSYH, 
+	  	T1.ZZYH, T1.BZ, 
+	  	T1.USER_ID, T1.CREATE_TIME, 
+	  	T1.XGRID, T1.XGRMC, 
+	  	T1.UPDATE_TIME, T1.SATAE,
+	  	T1.SHZT,T1.SHWT,
+	  	T2.ID P_ID ,
+		T2.USER_ID P_USER_ID,
+		T2.LRRYMC P_LRRYMC,
+		T2.LRSJ P_LRSJ,
+		T2.SATAE P_SATAE,
+		T2.YWTPBH P_YWTPBH,
+		T2.YWLX P_YWLX,
+		T2.NEEDLR P_NEEDLR,
+		T2.SHWT P_SHWT,
+		T2.JZBH P_JZBH,
+		T2.TMBH P_TMBH,
+		T2.CONSISTENCY P_CONSISTENCY
+	  FROM TM_TMXXB_YW T1 LEFT JOIN ORI_INFO_PRIMARY T2 on T1.TMBH=T2.TMBH
+	  WHERE 1 = 1
+	  <if test="xm != null">
+			AND T1.XM = #{xm}
+	  </if>
+	  <if test="sfzh != null">
+			AND T1.SFZH = #{sfzh}
+	  </if>
+	  ORDER BY T1.SJ
+	</select>
+	
+	<sql id="pageHeader">
+		select * from ( select tmp_page.*, rownum row_id from (
+	</sql>
+	
+	<sql id="pageRoot">
+		) tmp_page where rownum &lt;= #{pageSize} ) where row_id > &gt;=#{pageNum})
+	</sql>
+	
+	<!-- 根据卷宗编号获取已关联的条目跟图片信息 -->
+	<select id="getYWGlTmImgAndDetailByCondition" resultMap="BaseResultMap4" parameterType="java.util.Map">
+		select A.ID, A.TMBH, 
+		  	A.JZBH, A.SXH, 
+		  	A.XM, A.XB, 
+		  	A.SFZH, A.CSRQ, 
+		  	A.DZMS, A.DZBM, 
+		  	A.SJ, A.ZSYH, 
+		  	A.ZZYH, A.BZ, 
+		  	A.USER_ID, A.CREATE_TIME, 
+		  	A.XGRID, A.XGRMC, 
+		  	A.UPDATE_TIME, A.SATAE,
+		  	A.SHZT,A.SHWT,
+		  	b.ID AS TP_ID, B.TPBH AS TP_TPBH, 	b.IMGPATH AS TP_IMGPATH, 
+		  	b.BH AS TM_BH, b.SXM AS TP_SXM , b.UPLOAD_TIME AS TP_UPLOAD_TIME, b.UPLOAD_USER AS TP_UPLOAD_USER, 
+		  	b.LX AS TP_LX, b.SATAE AS TP_SATAE,b.IS_LR AS TP_IS_LR,b.CLEAN_SATAE AS TP_CLEAN_SATAE,b.FILE_NAME AS TP_FILE_NAME,b.CHILD_NUM AS TP_CHILD_NUM
+	  	FROM
+		(
+		select T.ID, T.TMBH, 
+		  	T.JZBH, T.SXH, 
+		  	T.XM, T.XB, 
+		  	T.SFZH, T.CSRQ, 
+		  	T.DZMS, T.DZBM, 
+		  	T.SJ, T.ZSYH, 
+		  	T.ZZYH, T.BZ, 
+		  	T.USER_ID, T.CREATE_TIME, 
+		  	T.XGRID, T.XGRMC, 
+		  	T.UPDATE_TIME, T.SATAE,
+		  	T.SHZT,T.SHWT,t1.TPBH AS T1_TPBH from 
+		  	(
+		  		select * from ( select tmp_page.*, rownum row_id from (
+		  			SELECT * FROM TM_TMXXB_YW WHERE JZBH = #{jzbh}
+		  		) tmp_page where rownum &lt;= #{pageSize} ) where row_id &gt; #{pageNum}
+		  	)t, TM_TMYTPGLXXB t1 WHERE t.tmbh=t1.tmbh   and t.SATAE=1 )a 
+	  	LEFT JOIN TM_TMTPXXB b on a.T1_TPBH=b.TPBH 
+	</select>
+	
+	<!-- 查询已关联的图片的总数 -->
+	<select id="getYWGlTmImgAndDetailCount" resultType="int" parameterType="java.util.Map">
+		SELECT
+			COUNT (ID)
+		FROM
+		(
+			SELECT
+				A . ID
+			FROM
+				(
+					SELECT
+						T .*, t1.TPBH AS T1_TPBH
+					FROM
+						TM_TMXXB_YW T
+					RIGHT JOIN TM_TMYTPGLXXB t1 ON T .tmbh = t1.tmbh
+					AND T .SATAE = 1
+				) A
+			JOIN TM_TMTPXXB B ON A .T1_TPBH = B.TPBH
+			WHERE
+				B.BH = #{jzbh}
+			GROUP BY
+				A ."ID"
+		)
+	</select>
+	
+	<select id="getLastTM" resultMap="BaseResultMap">
+		select * from (select * from TM_TMXXB_YW where satae = 1 order by id desc) where ROWNUM = 1
+	</select>
+</mapper>

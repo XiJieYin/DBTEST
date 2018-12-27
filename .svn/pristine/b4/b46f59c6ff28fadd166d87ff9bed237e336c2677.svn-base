@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoLrxxtxDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoLrxxtx" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="JZTM" property="jztm" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, JZBH, JZTM, TYPE, BZ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_LRXXTX
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByJzbhAndUserId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_LRXXTX
+    where JZBH = #{jzbh} and USER_ID = #{userId}
+  </select>
+    <select id="selectByUserIdAndType" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_LRXXTX
+    where USER_ID = #{userId} and type = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_LRXXTX
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_INFO_YCFK.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoLrxxtx" >
+   <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_LRXXTX (ID, USER_ID, JZBH, 
+      JZTM, TYPE, BZ)
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{jzbh,jdbcType=VARCHAR}, 
+      #{jztm,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, #{bz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoLrxxtx" >
+   <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_LRXXTX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+      <if test="jztm != null" >
+        JZTM,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jztm != null" >
+        #{jztm,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+  select lr.* FROM INFO_RWJBXX rw join INFO_RWRYGLXXB gl on RW.id = GL.RW_ID join DOS_AJ aj on rw.id=aj.rw_id join DOS_JZ jz on jz.ajbh = aj.ajbh 
+join INFO_LRXXTX lr on  jz.jzbh = lr.jzbh where gl.rylx = 3 and gl.user_id = #{userId} and lr.type = 1
+  </select>
+   <select id="queryByConditionByType" resultType="int">
+  select count(lr.id) FROM INFO_RWJBXX rw join INFO_RWRYGLXXB gl on RW.id = GL.RW_ID join DOS_AJ aj on rw.id=aj.rw_id join DOS_JZ jz on jz.ajbh = aj.ajbh 
+join INFO_LRXXTX lr on  jz.jzbh = lr.jzbh where gl.rylx = 3 and gl.user_id = #{userId} and lr.type = 1
+  </select>
+   <select id="selectByJzbh" resultMap="BaseResultMap">
+  select * FROM INFO_LRXXTX where jzbh = #{jzbh}
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoLrxxtx" >
+    update INFO_LRXXTX
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jztm != null" >
+        JZTM = #{jztm,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoLrxxtx" >
+    update INFO_LRXXTX
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      JZBH = #{jzbh,jdbcType=VARCHAR},
+      JZTM = #{jztm,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      BZ = #{bz,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

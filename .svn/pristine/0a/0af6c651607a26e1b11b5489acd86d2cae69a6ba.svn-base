@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DosAJDao" >
+
+    <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DosAJ" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+        <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+        <result column="BCQX" property="bcqx" jdbcType="VARCHAR" />
+        <result column="AJSL" property="ajsl" jdbcType="DECIMAL" />
+        <result column="QZH" property="qzh" jdbcType="VARCHAR" />
+        <result column="LBH" property="lbh" jdbcType="VARCHAR" />
+        <result column="MLH" property="mlh" jdbcType="VARCHAR" />
+        <result column="AJH" property="ajh" jdbcType="VARCHAR" />
+        <result column="ND" property="nd" jdbcType="VARCHAR" />
+        <result column="AJKSSJ" property="ajkssj" jdbcType="TIMESTAMP" />
+        <result column="AJJSSJ" property="ajjssj" jdbcType="TIMESTAMP" />
+        <result column="AJQZSJ" property="ajqzsj" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="AJBH" property="ajbh" jdbcType="VARCHAR" />
+        <result column="TXMBH" property="txmbh" jdbcType="VARCHAR" />
+        <result column="AJLX" property="ajlx" jdbcType="VARCHAR" />
+        <result column="TM" property="tm" jdbcType="VARCHAR" />
+        <result column="LJDW" property="ljdw" jdbcType="VARCHAR" />
+        <result column="XGRID" property="xgrid" jdbcType="VARCHAR" />
+        <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+        <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+        <result column="AJQZH" property="ajqzh" jdbcType="VARCHAR" />
+        <result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+        <result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+        <result column="AJJSH" property="ajjsh" jdbcType="VARCHAR" />
+        <result column="SHZT" property="shzt" jdbcType="DECIMAL" />
+        <result column="JZYS" property="jzys" jdbcType="DECIMAL" />
+        <result column="JZSL" property="jzsl" jdbcType="DECIMAL" />
+        <result column="RECORD_PERSON" property="recordPerson" jdbcType="VARCHAR" />
+        <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    ID, ORG_CODE, ORG_NAME, BCQX, AJSL, QZH, LBH, MLH, AJH, ND, AJKSSJ, AJQZSJ, USER_ID,
+    CREATE_TIME, UPDATE_TIME, AJBH, TXMBH, AJLX, TM, LJDW, XGRID, XGRMC, SATAE, AJQZH,
+    RW_ID, RWMC, AJJSH,AJJSSJ,SHZT,BZ
+    </sql>
+    
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DOS_AJ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+
+  <delete id="deleteByPrimaryKey" >
+  update DOS_AJ SET SATAE = 0 WHERE ID = #{id}
+  </delete>
+  
+  <delete id="deleteByAjbh" >
+  update DOS_AJ SET SATAE = 0 WHERE AJBH = #{ajbh}
+  </delete>
+
+   <sql id='TABLE_SEQUENCE'>SEQ_DOS_AJ.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DosAJ"  keyProperty="id">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+      insert into DOS_AJ (ID, ORG_CODE, ORG_NAME,
+      BCQX, AJSL, QZH, LBH,
+      MLH, AJH, ND, AJKSSJ,
+      AJQZSJ, USER_ID, CREATE_TIME,
+      UPDATE_TIME, AJBH, TXMBH,
+      AJLX, TM, LJDW, XGRID,
+      XGRMC, SATAE, AJQZH,
+      RW_ID, RWMC, AJJSH,
+      AJJSSJ,SHZT,RECORD_PERSON,BZ)
+      values (#{id,jdbcType=DECIMAL}, #{orgCode,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR},
+      #{bcqx,jdbcType=VARCHAR}, #{ajsl,jdbcType=DECIMAL}, #{qzh,jdbcType=VARCHAR}, #{lbh,jdbcType=VARCHAR},
+      #{mlh,jdbcType=VARCHAR}, #{ajh,jdbcType=VARCHAR}, #{nd,jdbcType=VARCHAR}, #{ajkssj,jdbcType=TIMESTAMP},
+      #{ajqzsj,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{ajbh,jdbcType=VARCHAR}, #{txmbh,jdbcType=VARCHAR},
+      #{ajlx,jdbcType=VARCHAR}, #{tm,jdbcType=VARCHAR}, #{ljdw,jdbcType=VARCHAR}, #{xgrid,jdbcType=VARCHAR},
+      #{xgrmc,jdbcType=VARCHAR}, #{satae,jdbcType=DECIMAL}, #{ajqzh,jdbcType=VARCHAR},
+      #{rwId,jdbcType=DECIMAL}, #{rwmc,jdbcType=VARCHAR}, #{ajjsh,jdbcType=VARCHAR},
+      #{ajjssj,jdbcType=TIMESTAMP},1,#{recordPerson,jdbcType=VARCHAR},#{BZ,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.DosAJ" keyProperty="id">
+   <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+      insert into DOS_AJ
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+          <if test="id != null" >
+              ID,
+          </if>
+          <if test="orgCode != null" >
+              ORG_CODE,
+          </if>
+          <if test="orgName != null" >
+              ORG_NAME,
+          </if>
+          <if test="bcqx != null" >
+              BCQX,
+          </if>
+          <if test="ajsl != null" >
+              AJSL,
+          </if>
+          <if test="qzh != null" >
+              QZH,
+          </if>
+          <if test="lbh != null" >
+              LBH,
+          </if>
+          <if test="mlh != null" >
+              MLH,
+          </if>
+          <if test="ajh != null" >
+              AJH,
+          </if>
+          <if test="nd != null" >
+              ND,
+          </if>
+          <if test="ajkssj != null" >
+              AJKSSJ,
+          </if>
+          <if test="ajqzsj != null" >
+              AJQZSJ,
+          </if>
+          <if test="userId != null" >
+              USER_ID,
+          </if>
+          <if test="createTime != null" >
+              CREATE_TIME,
+          </if>
+          <if test="updateTime != null" >
+              UPDATE_TIME,
+          </if>
+          <if test="ajbh != null" >
+              AJBH,
+          </if>
+          <if test="txmbh != null" >
+              TXMBH,
+          </if>
+          <if test="ajlx != null" >
+              AJLX,
+          </if>
+          <if test="tm != null" >
+              TM,
+          </if>
+          <if test="ljdw != null" >
+              LJDW,
+          </if>
+          <if test="xgrid != null" >
+              XGRID,
+          </if>
+          <if test="xgrmc != null" >
+              XGRMC,
+          </if>
+          <if test="satae != null" >
+              SATAE,
+          </if>
+          <if test="ajqzh != null" >
+              AJQZH,
+          </if>
+          <if test="rwId != null" >
+              RW_ID,
+          </if>
+          <if test="rwmc != null" >
+              RWMC,
+          </if>
+          <if test="ajjsh != null" >
+              AJJSH,
+          </if>
+          <if test="ajjssj != null" >
+              AJJSSJ,
+          </if>
+              SHZT,
+              <if test="recordPerson">
+              RECORD_PERSON,
+              </if>
+             <if test="bz != null">
+              BZ,
+              </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="id != null" >
+              #{id,jdbcType=DECIMAL},
+          </if>
+          <if test="orgCode != null" >
+              #{orgCode,jdbcType=VARCHAR},
+          </if>
+          <if test="orgName != null" >
+              #{orgName,jdbcType=VARCHAR},
+          </if>
+          <if test="bcqx != null" >
+              #{bcqx,jdbcType=VARCHAR},
+          </if>
+          <if test="ajsl != null" >
+              #{ajsl,jdbcType=DECIMAL},
+          </if>
+          <if test="qzh != null" >
+              #{qzh,jdbcType=VARCHAR},
+          </if>
+          <if test="lbh != null" >
+              #{lbh,jdbcType=VARCHAR},
+          </if>
+          <if test="mlh != null" >
+              #{mlh,jdbcType=VARCHAR},
+          </if>
+          <if test="ajh != null" >
+              #{ajh,jdbcType=VARCHAR},
+          </if>
+          <if test="nd != null" >
+              #{nd,jdbcType=VARCHAR},
+          </if>
+          <if test="ajkssj != null" >
+              #{ajkssj,jdbcType=TIMESTAMP},
+          </if>
+          <if test="ajqzsj != null" >
+              #{ajqzsj,jdbcType=VARCHAR},
+          </if>
+          <if test="userId != null" >
+              #{userId,jdbcType=DECIMAL},
+          </if>
+          <if test="createTime != null" >
+              #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null" >
+              #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="ajbh != null" >
+              #{ajbh,jdbcType=VARCHAR},
+          </if>
+          <if test="txmbh != null" >
+              #{txmbh,jdbcType=VARCHAR},
+          </if>
+          <if test="ajlx != null" >
+              #{ajlx,jdbcType=VARCHAR},
+          </if>
+          <if test="tm != null" >
+              #{tm,jdbcType=VARCHAR},
+          </if>
+          <if test="ljdw != null" >
+              #{ljdw,jdbcType=VARCHAR},
+          </if>
+          <if test="xgrid != null" >
+              #{xgrid,jdbcType=VARCHAR},
+          </if>
+          <if test="xgrmc != null" >
+              #{xgrmc,jdbcType=VARCHAR},
+          </if>
+          <if test="satae != null" >
+              #{satae,jdbcType=DECIMAL},
+          </if>
+          <if test="ajqzh != null" >
+              #{ajqzh,jdbcType=VARCHAR},
+          </if>
+          <if test="rwId != null" >
+              #{rwId,jdbcType=DECIMAL},
+          </if>
+          <if test="rwmc != null" >
+              #{rwmc,jdbcType=VARCHAR},
+          </if>
+          <if test="ajjsh != null" >
+              #{ajjsh,jdbcType=VARCHAR},
+          </if>
+          <if test="ajjssj != null" >
+              #{ajjssj,jdbcType=TIMESTAMP},
+          </if>
+              1,
+           <if test="recordPerson">
+            #{recordPerson,jdbcType=VARCHAR},
+            </if>
+           <if test="bz !=null">
+            #{bz,jdbcType=VARCHAR}
+            </if>
+      </trim>
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DosAJ" >
+        update DOS_AJ
+        <set >
+            <if test="orgCode != null" >
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="bcqx != null" >
+                BCQX = #{bcqx,jdbcType=VARCHAR},
+            </if>
+            <if test="ajsl != null" >
+                AJSL = #{ajsl,jdbcType=DECIMAL},
+            </if>
+            <if test="qzh != null" >
+                QZH = #{qzh,jdbcType=VARCHAR},
+            </if>
+            <if test="lbh != null" >
+                LBH = #{lbh,jdbcType=VARCHAR},
+            </if>
+            <if test="mlh != null" >
+                MLH = #{mlh,jdbcType=VARCHAR},
+            </if>
+            <if test="ajh != null" >
+                AJH = #{ajh,jdbcType=VARCHAR},
+            </if>
+            <if test="nd != null" >
+                ND = #{nd,jdbcType=VARCHAR},
+            </if>
+            <if test="ajkssj != null" >
+                AJKSSJ = #{ajkssj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ajqzsj != null" >
+                AJQZSJ = #{ajqzsj,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                USER_ID = #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ajbh != null" >
+                AJBH = #{ajbh,jdbcType=VARCHAR},
+            </if>
+            <if test="txmbh != null" >
+                TXMBH = #{txmbh,jdbcType=VARCHAR},
+            </if>
+            <if test="ajlx != null" >
+                AJLX = #{ajlx,jdbcType=VARCHAR},
+            </if>
+            <if test="tm != null" >
+                TM = #{tm,jdbcType=VARCHAR},
+            </if>
+            <if test="ljdw != null" >
+                LJDW = #{ljdw,jdbcType=VARCHAR},
+            </if>
+            <if test="xgrid != null" >
+                XGRID = #{xgrid,jdbcType=VARCHAR},
+            </if>
+            <if test="xgrmc != null" >
+                XGRMC = #{xgrmc,jdbcType=VARCHAR},
+            </if>
+            <if test="satae != null" >
+                SATAE = #{satae,jdbcType=DECIMAL},
+            </if>
+            <if test="ajqzh != null" >
+                AJQZH = #{ajqzh,jdbcType=VARCHAR},
+            </if>
+            <if test="rwId != null" >
+                RW_ID = #{rwId,jdbcType=DECIMAL},
+            </if>
+            <if test="rwmc != null" >
+                RWMC = #{rwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ajjsh != null" >
+                AJJSH = #{ajjsh,jdbcType=VARCHAR},
+            </if>
+            <if test="ajjssj != null" >
+                AJJSSJ = #{ajjssj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shzt != null" >
+                SHZT = #{shzt,jdbcType=DECIMAL},
+            </if>
+            <if test="bz != null" >
+                BZ = #{bz,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DosAJ" >
+   update DOS_AJ
+    set ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      BCQX = #{bcqx,jdbcType=VARCHAR},
+      AJSL = #{ajsl,jdbcType=DECIMAL},
+      QZH = #{qzh,jdbcType=VARCHAR},
+      LBH = #{lbh,jdbcType=VARCHAR},
+      MLH = #{mlh,jdbcType=VARCHAR},
+      AJH = #{ajh,jdbcType=VARCHAR},
+      ND = #{nd,jdbcType=VARCHAR},
+      AJKSSJ = #{ajkssj,jdbcType=TIMESTAMP},
+      AJQZSJ = #{ajqzsj,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      AJBH = #{ajbh,jdbcType=VARCHAR},
+      TXMBH = #{txmbh,jdbcType=VARCHAR},
+      AJLX = #{ajlx,jdbcType=VARCHAR},
+      TM = #{tm,jdbcType=VARCHAR},
+      LJDW = #{ljdw,jdbcType=VARCHAR},
+      XGRID = #{xgrid,jdbcType=VARCHAR},
+      XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      AJQZH = #{ajqzh,jdbcType=VARCHAR},
+      RW_ID = #{rwId,jdbcType=DECIMAL},
+      RWMC = #{rwmc,jdbcType=VARCHAR},
+      AJJSH = #{ajjsh,jdbcType=VARCHAR},
+      AJJSSJ = #{ajjssj,jdbcType=TIMESTAMP},
+      SHZT = #{shzt,jdbcType=DECIMAL},
+      BZ = #{bz,jdbcType=VARCHAR},
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <!-- 分页查询 -->
+  <select id="queryByCondition" resultMap="BaseResultMap" parameterType="java.util.Map">
+			select aj.* FROM  DOS_AJ aj
+		 JOIN INFO_RWJBXX ir on ir.id= aj.RW_id 
+		 JOIN INFO_RWRYGLXXB iry on iry.RW_id = ir.id
+		 JOIN SYS_USER su on su.id = iry.USER_ID
+		WHERE aj.SATAE in (1,2,3) 
+		<if test="userId !=null">
+		AND (iry.user_id = #{userId} or iry.role_id = #{roleId})
+		</if>
+    <if test="orgCode != null" >
+      AND aj.ORG_CODE = #{orgCode}
+    </if>
+    <if test="satae != null" >
+      AND aj.SATAE = #{satae}
+    </if>
+    <if test="shzt != null" >
+      AND aj.SHZT = #{shzt}
+    </if>
+    <if test="ajh != null" >
+      AND aj.AJH like '%${ajh}%'
+    </if>
+    <if test="ajnd != null" >
+      AND aj.ND = #{ajnd}
+    </if>
+    <if test="bcqx != null" >
+      AND aj.BCQX = #{bcqx}
+    </if>
+    <if test="lbh != null" >
+      AND aj.LBH like '%${lbh}%'
+    </if>
+    <if test="mlh != null" >
+      AND aj.MLH like '%${mlh}%'
+    </if>
+    <if test="qzh != null" >
+      AND aj.QZH like '%${qzh}%'
+    </if>
+    <if test="ajkssj!=null">
+    	AND aj.CREATE_TIME &gt;= #{ajkssj}
+    </if>
+    <if test="ajjssj!=null">
+    	AND aj.CREATE_TIME &lt;= #{ajjssj}
+    </if>
+      <if test="rwId != null">
+          AND aj.RW_ID = #{rwId}
+      </if>
+    order by aj.CREATE_TIME desc
+  </select>
+  
+  <!-- 分页查询所有案卷-->
+  <select id="selectAllAjByPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+			select aj.* FROM  DOS_AJ aj
+		WHERE aj.SATAE in (1,2,3) 
+    <if test="orgCode != null" >
+      AND aj.ORG_CODE = #{orgCode}
+    </if>
+    <if test="satae != null" >
+      AND aj.SATAE = #{satae}
+    </if>
+    <if test="shzt != null" >
+      AND aj.SHZT = #{shzt}
+    </if>
+    <if test="ajh != null" >
+      AND aj.AJH like '%${ajh}%'
+    </if>
+    <if test="ajnd != null" >
+      AND aj.ND = #{ajnd}
+    </if>
+    <if test="bcqx != null" >
+      AND aj.BCQX = #{bcqx}
+    </if>
+    <if test="lbh != null" >
+      AND aj.LBH like '%${lbh}%'
+    </if>
+    <if test="mlh != null" >
+      AND aj.MLH like '%${mlh}%'
+    </if>
+    <if test="qzh != null" >
+      AND aj.QZH like '%${qzh}%'
+    </if>
+    <if test="ajkssj!=null">
+    	AND aj.CREATE_TIME &gt;= #{ajkssj}
+    </if>
+    <if test="ajjssj!=null">
+    	AND aj.CREATE_TIME &lt;= #{ajjssj}
+    </if>
+      <if test="rwId != null">
+          AND aj.RW_ID = #{rwId}
+      </if>
+    order by aj.CREATE_TIME desc
+  </select>
+  
+  <!-- 根据案卷号查找案卷id -->
+  <select id="selectAjIdByAjh" parameterType="int" resultMap="BaseResultMap">
+    select id from DOS_AJ where ajh=#{int} AND SATAE = 1
+  </select>
+  <!-- 检查案卷号是否存在 -->
+  <select id="checkAjh" parameterType="string" resultMap="BaseResultMap">
+    select * from DOS_AJ where ajh=#{ajh} AND SATAE = 1
+  </select>
+   <!-- 根据任务查询所有案卷 -->
+  <select id="selectByRwId" resultMap="BaseResultMap">
+    select * from DOS_AJ where RW_ID=#{rwId} and satae !=0
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  select * from DOS_AJ where satae!=0 ORDER BY ORG_CODE
+  </select>
+  <select id="selectAjByJz" resultMap="BaseResultMap">
+  select aj.id ,AJ.nd,AJ.ORG_CODE,AJ.ORG_NAME,COUNT(jz.id) jzsl from DOS_AJ aj LEFT JOIN DOS_JZ jz on AJ.id = JZ.AJ_ID 
+  where aj.satae!=0 and jz.satae !=0
+  GROUP BY AJ.id,AJ.ORG_NAME,AJ.ORG_CODE,AJ.nd ORDER BY ORG_CODE
+  </select>
+  
+  <select id="selectByNd" resultMap="BaseResultMap">
+	select aj.id ,AJ.ORG_CODE,AJ.ORG_NAME,aj.ajsl,sum(JZ.JZYS) jzys,count(jz.id) jzsl from DOS_AJ aj LEFT JOIN DOS_JZ jz on AJ.id = JZ.AJ_ID 
+	where 1=1 and aj.satae!=0 and jz.satae !=0
+  <if test="year !=null">
+  and AJ.nd = #{year} 
+  </if>
+<!--   <if test="orgName !=null">
+  and AJ.ORG_NAME = #{orgName} 
+  </if> -->
+  <if test="orgCode !=null">
+  and AJ.ORG_CODE like '%${orgCode}%'
+  </if>
+  GROUP BY AJ.id,AJ.ORG_NAME,AJ.ORG_CODE,aj.ajsl
+  </select>
+  <!-- 查询案卷统计件数 -->
+  <select id="countByOrg" resultType="java.util.Map">
+  	SELECT
+		ajtj.counts,
+		org.ZZJGMC AS orgName
+	FROM
+		(
+			SELECT
+				COUNT(*) AS counts,
+				ORG_CODE AS orgCode
+			FROM
+				DOS_AJ WHERE SATAE = 1
+			GROUP BY
+				ORG_CODE
+		) ajtj
+	RIGHT JOIN DICT_ORG org ON ajtj.ORGCODE = org.ZZJGDM
+	WHERE
+		org.ZZJGLX = 12
+	AND org.SFYX = '1'
+	AND org.ZZJGMC LIKE '%分局%'
+	AND org.SSJGDM = '440100000000'
+	AND org.SHOWINDEX != 99
+	ORDER BY
+		org.ssjgdm,
+		org.zzjglx,
+		org.showindex
+  </select>
+  <select id="selectByUserId"  resultMap="BaseResultMap">
+  select aj.* from DOS_AJ aj join INFO_RWJBXX rw on aj.rw_id=rw.id
+  where aj.SATAE = 1
+  <if test="userId != null">
+  AND where aj.USER_ID = userId
+  </if>
+  </select>
+  
+  <!-- 根据案卷编号查找案卷信息 -->
+  <select id="selectByAjbh" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" /> 
+   from DOS_AJ 
+   		where ajbh = #{ajbh}
+  </select>
+  
+  <!-- 通过案卷编号更新案卷信息 -->
+   <update id="updateByAjbh" parameterType="com.gx.hz.pojo.DosAJ" >
+        update DOS_AJ
+        <set >
+            <if test="orgCode != null" >
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="bcqx != null" >
+                BCQX = #{bcqx,jdbcType=VARCHAR},
+            </if>
+            <if test="ajsl != null" >
+                AJSL = #{ajsl,jdbcType=DECIMAL},
+            </if>
+            <if test="qzh != null" >
+                QZH = #{qzh,jdbcType=VARCHAR},
+            </if>
+            <if test="lbh != null" >
+                LBH = #{lbh,jdbcType=VARCHAR},
+            </if>
+            <if test="mlh != null" >
+                MLH = #{mlh,jdbcType=VARCHAR},
+            </if>
+            <if test="ajh != null" >
+                AJH = #{ajh,jdbcType=VARCHAR},
+            </if>
+            <if test="nd != null" >
+                ND = #{nd,jdbcType=VARCHAR},
+            </if>
+            <if test="ajkssj != null" >
+                AJKSSJ = #{ajkssj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ajqzsj != null" >
+                AJQZSJ = #{ajqzsj,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                USER_ID = #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="txmbh != null" >
+                TXMBH = #{txmbh,jdbcType=VARCHAR},
+            </if>
+            <if test="ajlx != null" >
+                AJLX = #{ajlx,jdbcType=VARCHAR},
+            </if>
+            <if test="tm != null" >
+                TM = #{tm,jdbcType=VARCHAR},
+            </if>
+            <if test="ljdw != null" >
+                LJDW = #{ljdw,jdbcType=VARCHAR},
+            </if>
+            <if test="xgrid != null" >
+                XGRID = #{xgrid,jdbcType=VARCHAR},
+            </if>
+            <if test="xgrmc != null" >
+                XGRMC = #{xgrmc,jdbcType=VARCHAR},
+            </if>
+            <if test="satae != null" >
+                SATAE = #{satae,jdbcType=DECIMAL},
+            </if>
+            <if test="ajqzh != null" >
+                AJQZH = #{ajqzh,jdbcType=VARCHAR},
+            </if>
+            <if test="rwId != null" >
+                RW_ID = #{rwId,jdbcType=DECIMAL},
+            </if>
+            <if test="rwmc != null" >
+                RWMC = #{rwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ajjsh != null" >
+                AJJSH = #{ajjsh,jdbcType=VARCHAR},
+            </if>
+            <if test="ajjssj != null" >
+                AJJSSJ = #{ajjssj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shzt != null" >
+                SHZT = #{shzt,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where AJBH = #{ajbh,jdbcType=VARCHAR}
+    </update>
+	
+	<!-- 从卷宗表的数据分析得到卷宗的完成数量 -->
+	<select id="getJZXZSLFromDOS_JZ" resultType="java.util.Map">
+		select all_jz,complete_jz from (select AJBH,count(AJBH) all_jz from "DOS_JZ" WHERE AJBH = #{ajbh} and SATAE > 0 GROUP BY AJBH) table_all left join (select AJBH,count(AJBH) complete_jz from "DOS_JZ" WHERE AJBH = #{ajbh} and SATAE = 3 GROUP BY AJBH) table_complete on table_all.AJBH = table_complete.AJBH
+	</select>
+</mapper>

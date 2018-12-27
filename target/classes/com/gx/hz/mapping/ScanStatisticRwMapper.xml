@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.ScanStatisticRwDao" >
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.ScanStatisticRw" >
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+	    <result column="ID" property="id" jdbcType="DECIMAL" />
+	    <result column="RW_NAME" property="rwName" jdbcType="VARCHAR" />
+	    <result column="JZ_COUNT" property="jzCount" jdbcType="INTEGER" />
+	    <result column="CL_COUNT" property="clCount" jdbcType="INTEGER" />
+	    <result column="SS_SUBSTATION" property="ssSubStation" jdbcType="INTEGER" />
+	    <result column="SS_POLICE_STATION" property="ssPoliceStation" jdbcType="VARCHAR" />
+	    <result column="SCAN_RW_STATUS" property="scanRwStatus" jdbcType="INTEGER" />
+	    <result column="DA_TYPE" property="daType" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,RW_NAME,JZ_COUNT,CL_COUNT,SS_SUBSTATION,SS_POLICE_STATION,SCAN_RW_STATUS,DA_TYPE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select 
+		<include refid="Base_Column_List"/>
+		from INFO_SCAN_STATISTIC_RW
+		where ID=#{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from INFO_SCAN_STATISTIC_RW
+	</select>
+	<select id="queryByCondition" resultMap="BaseResultMap"
+		 parameterType="java.util.Map">
+		select 
+		<include refid="Base_Column_List"/>
+		from INFO_SCAN_STATISTIC_RW
+		where 1=1
+		<if test="rwName!=null">
+			and RW_NAME like '%${rwName}%'
+		</if>
+		<if test="ssSubStation!=null">
+			and SS_SUBSTATION=#{ssSubStation}
+		</if>
+		<if test="daType!=null">
+			and DA_TYPE=#{daType}
+		</if>
+		<if test="scanRwStatus!=null">
+			and SCAN_RW_STATUS=#{scanRwStatus}
+		</if>
+	</select>
+	
+	
+</mapper>

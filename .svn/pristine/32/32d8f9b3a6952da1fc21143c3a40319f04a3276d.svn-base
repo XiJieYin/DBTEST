@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="T_HJDJ_XMBG" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.HjdjXmbg" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="YWLSH" property="ywlsh" jdbcType="VARCHAR" />
+    <result column="GMSFHM" property="gmsfhm" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XBMC" property="xbmc" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP" />
+    <result column="SPSLH" property="spslh" jdbcType="VARCHAR" />
+    <result column="YWLXMC" property="ywlxmc" jdbcType="VARCHAR" />
+    <result column="YWLX" property="ywlx" jdbcType="VARCHAR" />
+    <result column="YWLBMC" property="ywlbmc" jdbcType="VARCHAR" />
+    <result column="YWLB" property="ywlb" jdbcType="VARCHAR" />
+    <result column="BDYYMC" property="bdyymc" jdbcType="VARCHAR" />
+    <result column="BDYY" property="bdyy" jdbcType="VARCHAR" />
+    <result column="TGCLMC" property="tgclmc" jdbcType="VARCHAR" />
+    <result column="TGCL" property="tgcl" jdbcType="VARCHAR" />
+    <result column="SSXQMC" property="ssxqmc" jdbcType="VARCHAR" />
+    <result column="SSXQ" property="ssxq" jdbcType="VARCHAR" />
+    <result column="PCSMC" property="pcsmc" jdbcType="VARCHAR" />
+    <result column="PCS" property="pcs" jdbcType="VARCHAR" />
+    <result column="SQRXM" property="sqrxm" jdbcType="VARCHAR" />
+    <result column="SQRGMSFHM" property="sqrgmsfhm" jdbcType="VARCHAR" />
+    <result column="SQSJ" property="sqsj" jdbcType="TIMESTAMP" />
+    <result column="BGXMMC" property="bgxmmc" jdbcType="VARCHAR" />
+    <result column="BGXM" property="bgxm" jdbcType="VARCHAR" />
+    <result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+    <result column="GXDW" property="gxdw" jdbcType="VARCHAR" />
+    <result column="GXDWMC" property="gxdwmc" jdbcType="VARCHAR" />
+    <result column="SCBZ" property="scbz" jdbcType="VARCHAR" />
+    <result column="CSSJ" property="cssj" jdbcType="TIMESTAMP" />
+    <result column="RID" property="rid" jdbcType="VARCHAR" />
+    <result column="XJGAJG" property="xjgajg" jdbcType="VARCHAR" />
+    <result column="XJGAJGMC" property="xjgajgmc" jdbcType="VARCHAR" />
+    <result column="ZT" property="zt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TABLE_SEQUENCE">SEQ_T_HJDJ_XMBG.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.HjdjXmbg" >
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into T_HJDJ_XMBG (ID, YWLSH, GMSFHM, 
+      XM, XBMC, XB, CSRQ, 
+      SPSLH, YWLXMC, YWLX, 
+      YWLBMC, YWLB, BDYYMC, 
+      BDYY, TGCLMC, TGCL, 
+      SSXQMC, SSXQ, PCSMC, 
+      PCS, SQRXM, SQRGMSFHM, 
+      SQSJ, BGXMMC, BGXM, 
+      GXSJ, GXDW, GXDWMC, 
+      SCBZ, CSSJ, RID, 
+      XJGAJG, XJGAJGMC, ZT
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ywlsh,jdbcType=VARCHAR}, #{gmsfhm,jdbcType=VARCHAR}, 
+      #{xm,jdbcType=VARCHAR}, #{xbmc,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{csrq,jdbcType=TIMESTAMP}, 
+      #{spslh,jdbcType=VARCHAR}, #{ywlxmc,jdbcType=VARCHAR}, #{ywlx,jdbcType=VARCHAR}, 
+      #{ywlbmc,jdbcType=VARCHAR}, #{ywlb,jdbcType=VARCHAR}, #{bdyymc,jdbcType=VARCHAR}, 
+      #{bdyy,jdbcType=VARCHAR}, #{tgclmc,jdbcType=VARCHAR}, #{tgcl,jdbcType=VARCHAR}, 
+      #{ssxqmc,jdbcType=VARCHAR}, #{ssxq,jdbcType=VARCHAR}, #{pcsmc,jdbcType=VARCHAR}, 
+      #{pcs,jdbcType=VARCHAR}, #{sqrxm,jdbcType=VARCHAR}, #{sqrgmsfhm,jdbcType=VARCHAR}, 
+      #{sqsj,jdbcType=TIMESTAMP}, #{bgxmmc,jdbcType=VARCHAR}, #{bgxm,jdbcType=VARCHAR}, 
+      #{gxsj,jdbcType=TIMESTAMP}, #{gxdw,jdbcType=VARCHAR}, #{gxdwmc,jdbcType=VARCHAR}, 
+      #{scbz,jdbcType=VARCHAR}, #{cssj,jdbcType=TIMESTAMP}, #{rid,jdbcType=VARCHAR}, 
+      #{xjgajg,jdbcType=VARCHAR}, #{xjgajgmc,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.HjdjXmbg" >
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into T_HJDJ_XMBG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ywlsh != null" >
+        YWLSH,
+      </if>
+      <if test="gmsfhm != null" >
+        GMSFHM,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="xbmc != null" >
+        XBMC,
+      </if>
+      <if test="xb != null" >
+        XB,
+      </if>
+      <if test="csrq != null" >
+        CSRQ,
+      </if>
+      <if test="spslh != null" >
+        SPSLH,
+      </if>
+      <if test="ywlxmc != null" >
+        YWLXMC,
+      </if>
+      <if test="ywlx != null" >
+        YWLX,
+      </if>
+      <if test="ywlbmc != null" >
+        YWLBMC,
+      </if>
+      <if test="ywlb != null" >
+        YWLB,
+      </if>
+      <if test="bdyymc != null" >
+        BDYYMC,
+      </if>
+      <if test="bdyy != null" >
+        BDYY,
+      </if>
+      <if test="tgclmc != null" >
+        TGCLMC,
+      </if>
+      <if test="tgcl != null" >
+        TGCL,
+      </if>
+      <if test="ssxqmc != null" >
+        SSXQMC,
+      </if>
+      <if test="ssxq != null" >
+        SSXQ,
+      </if>
+      <if test="pcsmc != null" >
+        PCSMC,
+      </if>
+      <if test="pcs != null" >
+        PCS,
+      </if>
+      <if test="sqrxm != null" >
+        SQRXM,
+      </if>
+      <if test="sqrgmsfhm != null" >
+        SQRGMSFHM,
+      </if>
+      <if test="sqsj != null" >
+        SQSJ,
+      </if>
+      <if test="bgxmmc != null" >
+        BGXMMC,
+      </if>
+      <if test="bgxm != null" >
+        BGXM,
+      </if>
+      <if test="gxsj != null" >
+        GXSJ,
+      </if>
+      <if test="gxdw != null" >
+        GXDW,
+      </if>
+      <if test="gxdwmc != null" >
+        GXDWMC,
+      </if>
+      <if test="scbz != null" >
+        SCBZ,
+      </if>
+      <if test="cssj != null" >
+        CSSJ,
+      </if>
+      <if test="rid != null" >
+        RID,
+      </if>
+      <if test="xjgajg != null" >
+        XJGAJG,
+      </if>
+      <if test="xjgajgmc != null" >
+        XJGAJGMC,
+      </if>
+      <if test="zt != null" >
+        ZT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlsh != null" >
+        #{ywlsh,jdbcType=VARCHAR},
+      </if>
+      <if test="gmsfhm != null" >
+        #{gmsfhm,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xbmc != null" >
+        #{xbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        #{csrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spslh != null" >
+        #{spslh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlxmc != null" >
+        #{ywlxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlx != null" >
+        #{ywlx,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlbmc != null" >
+        #{ywlbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlb != null" >
+        #{ywlb,jdbcType=VARCHAR},
+      </if>
+      <if test="bdyymc != null" >
+        #{bdyymc,jdbcType=VARCHAR},
+      </if>
+      <if test="bdyy != null" >
+        #{bdyy,jdbcType=VARCHAR},
+      </if>
+      <if test="tgclmc != null" >
+        #{tgclmc,jdbcType=VARCHAR},
+      </if>
+      <if test="tgcl != null" >
+        #{tgcl,jdbcType=VARCHAR},
+      </if>
+      <if test="ssxqmc != null" >
+        #{ssxqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ssxq != null" >
+        #{ssxq,jdbcType=VARCHAR},
+      </if>
+      <if test="pcsmc != null" >
+        #{pcsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="pcs != null" >
+        #{pcs,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrxm != null" >
+        #{sqrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrgmsfhm != null" >
+        #{sqrgmsfhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqsj != null" >
+        #{sqsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bgxmmc != null" >
+        #{bgxmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="bgxm != null" >
+        #{bgxm,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gxdw != null" >
+        #{gxdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxdwmc != null" >
+        #{gxdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="scbz != null" >
+        #{scbz,jdbcType=VARCHAR},
+      </if>
+      <if test="cssj != null" >
+        #{cssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="xjgajg != null" >
+        #{xjgajg,jdbcType=VARCHAR},
+      </if>
+      <if test="xjgajgmc != null" >
+        #{xjgajgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

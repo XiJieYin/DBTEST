@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictInfoDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictInfo" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="TMLX" property="tmlx" jdbcType="DECIMAL" />
+    <result column="SHOW_INDEX" property="showIndex" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CODE, TYPE, NAME, IS_ENABLE, REMARK, CREATE_TIME, UPDATE_TIME,TMLX,SHOW_INDEX
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from DICT_INFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DICT_INFO
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from DICT_INFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_DICT_INFO.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DictInfo" keyProperty="id">
+  <selectKey  keyProperty="id" resultType="long" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DICT_INFO (ID, CODE, TYPE, 
+      NAME, IS_ENABLE, REMARK, 
+      CREATE_TIME, UPDATE_TIME,TMLX,SHOW_INDEX)
+    values (#{id,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, 1, #{remark,jdbcType=VARCHAR}, 
+      sysdate, #{updateTime,jdbcType=TIMESTAMP},#{tmlx,jdbcType=DECIMAL},#{showIndex,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.DictInfo" >
+    insert into DICT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="tmlx != null" >
+          TMLX,
+      </if>
+      <if test="showIndex != null" >
+          SHOW_INDEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tmlx != null" >
+        #{tmlx,jdbcType=DECIMAL},
+      </if>
+      <if test="showIndex != null" >
+        #{showIndex,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictInfo" >
+    update DICT_INFO
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = sysdate ,
+      </if>
+      <if test="tmlx != null" >
+        TMLX = #{tmlx,jdbcType=DECIMAL},
+      </if>
+      <if test="showIndex != null" >
+          SHOW_INDEX = #{showIndex,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DictInfo" >
+    update DICT_INFO
+    set CODE = #{code,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      UPDATE_TIME = sysdate ,
+      TMLX = #{tmlx,jdbcType=VARCHAR},
+      SHOW_INDEX = #{showIndex,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateForDelById" parameterType="int" >
+    update DICT_INFO
+    set
+      IS_ENABLE = 0,
+      UPDATE_TIME = sysdate
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select
+  		<include refid="Base_Column_List"/>
+  	from DICT_INFO
+  	where IS_ENABLE = 1
+  	<if test="dictName!=null">
+  		 AND NAME like '%${dictName}%'
+  	</if>
+  	order by id
+  </select>
+  
+  <select id="selectByType" resultMap="BaseResultMap">
+  	select *
+  	from DICT_INFO
+  	where 1 = 1 
+  	<if test="type !=null">
+  	AND TYPE = #{type,jdbcType=VARCHAR}
+  	</if>
+  	<if test="name !=null">
+  	AND NAME like '%${name}%'
+  	</if>
+
+      order by SHOW_INDEX ASC
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+  	select *
+  	from DICT_INFO
+  	where 1 = 1 
+  	<if test="jzlx !=null">
+  	AND NAME = #{jzlx,jdbcType=VARCHAR}
+  	</if>
+  </select>
+  <select id="selectByCode" resultMap="BaseResultMap">
+  	select *
+  	from DICT_INFO
+  	where CODE = #{code,jdbcType=VARCHAR}
+
+  </select>
+  
+  <select id="getDicNameByRWId" resultMap="BaseResultMap">
+    SELECT dic.*
+  FROM DICT_INFO dic join DICT_INFO_INFO_RWJBXX diir ON dic.ID =DIIR.DICT_ID 
+  join INFO_RWJBXX ir ON ir.ID = diir.RWJBXX_ID WHERE 
+  1=1
+  <if test="rwId !=null">
+  AND ir.ID = #{rwId}
+  </if>
+  </select>
+
+    <!--<select id="getDictInfoByRWXX" resultMap="BaseResultMap"-->
+            <!--parameterType="int">-->
+        <!--select-->
+        <!--ar.DICT_ID as id,-->
+        <!--ro.name as name,-->
+        <!--ro.CODE as code-->
+        <!--from DICT_INFO_INFO_RWJBXX ar-->
+        <!--left OUTER JOIN DICT_INFO ro on ro.id =-->
+        <!--ar.DICT_ID-->
+        <!--where ar.RWJBXX_ID = #{id, jdbcType=VARCHAR}-->
+
+    <!--</select>-->
+</mapper>

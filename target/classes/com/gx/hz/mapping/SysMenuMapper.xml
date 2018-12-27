@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.SysMenuDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysMenu" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+    <result column="SHOW_INDEX" property="showIndex" jdbcType="DECIMAL" />
+    <result column="ICON_CLS" property="iconCls" jdbcType="VARCHAR" />
+    <result column="MENU_TYPE" property="menuType" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="BUTTON_CODE" property="buttonCode" jdbcType="VARCHAR" />
+    <result column="IS_BUTTON" property="isButton" jdbcType="DECIMAL" />
+    <result column="BG_PIC" property="bgPic" jdbcType="VARCHAR" />
+    <result column="ROLE_KIND" property="roleKind" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MENU_NAME, MENU_URL, PARENT_ID, SHOW_INDEX, ICON_CLS, MENU_TYPE, REMARK, BUTTON_CODE, 
+    IS_BUTTON, BG_PIC, ROLE_KIND
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from SYS_MENU
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id='TABLE_SEQUENCE'>SEQ_SYS_MENU.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.SysMenu" keyProperty="id">
+  <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into SYS_MENU (ID, MENU_NAME, MENU_URL, 
+      PARENT_ID, SHOW_INDEX, ICON_CLS, 
+      MENU_TYPE, REMARK, BUTTON_CODE, 
+      IS_BUTTON, BG_PIC, ROLE_KIND
+      )
+    values (#{id,jdbcType=DECIMAL}, #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=DECIMAL}, #{showIndex,jdbcType=DECIMAL}, #{iconCls,jdbcType=VARCHAR}, 
+      #{menuType,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{buttonCode,jdbcType=VARCHAR}, 
+      #{isButton,jdbcType=DECIMAL}, #{bgPic,jdbcType=VARCHAR}, #{roleKind,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysMenu" >
+    insert into SYS_MENU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="showIndex != null" >
+        SHOW_INDEX,
+      </if>
+      <if test="iconCls != null" >
+        ICON_CLS,
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="buttonCode != null" >
+        BUTTON_CODE,
+      </if>
+      <if test="isButton != null" >
+        IS_BUTTON,
+      </if>
+      <if test="bgPic != null" >
+        BG_PIC,
+      </if>
+      <if test="roleKind != null" >
+        ROLE_KIND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="showIndex != null" >
+        #{showIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="iconCls != null" >
+        #{iconCls,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonCode != null" >
+        #{buttonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isButton != null" >
+        #{isButton,jdbcType=DECIMAL},
+      </if>
+      <if test="bgPic != null" >
+        #{bgPic,jdbcType=VARCHAR},
+      </if>
+      <if test="roleKind != null" >
+        #{roleKind,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysMenu" >
+    update SYS_MENU
+    <set >
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="showIndex != null" >
+        SHOW_INDEX = #{showIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="iconCls != null" >
+        ICON_CLS = #{iconCls,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE = #{menuType,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonCode != null" >
+        BUTTON_CODE = #{buttonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isButton != null" >
+        IS_BUTTON = #{isButton,jdbcType=DECIMAL},
+      </if>
+      <if test="bgPic != null" >
+        BG_PIC = #{bgPic,jdbcType=VARCHAR},
+      </if>
+      <if test="roleKind != null" >
+        ROLE_KIND = #{roleKind,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysMenu" >
+    update SYS_MENU
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      SHOW_INDEX = #{showIndex,jdbcType=DECIMAL},
+      ICON_CLS = #{iconCls,jdbcType=VARCHAR},
+      MENU_TYPE = #{menuType,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      BUTTON_CODE = #{buttonCode,jdbcType=VARCHAR},
+      IS_BUTTON = #{isButton,jdbcType=DECIMAL},
+      BG_PIC = #{bgPic,jdbcType=VARCHAR},
+      ROLE_KIND = #{roleKind,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    	<include refid="Base_Column_List" />
+    from SYS_MENU
+    order by SHOW_INDEX
+  </select>
+  
+   <select id="queryByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+	select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    where 1 = 1
+    <if test="menuName != null" >
+      AND MENU_NAME like '%${menuName}%'
+    </if>
+    <if test="parentId != null" >
+      start with ID = #{parentId,jdbcType=DECIMAL}
+      connect by prior ID = PARENT_ID
+    </if>
+    order by show_Index
+  </select>
+</mapper>

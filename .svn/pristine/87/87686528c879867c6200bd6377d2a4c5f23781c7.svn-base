@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.SysRoleDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysRole" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_PARENT" property="roleParent" jdbcType="INTEGER" />
+    <result column="IS_WORKING" property="isWorking" jdbcType="INTEGER" />
+    <result column="SHOW_INDEX" property="showIndex" jdbcType="INTEGER" />
+    <association property="roleParentName" javaType="string" select="selectParentByPrimaryKey" column="ROLE_PARENT"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROLE_CODE, ROLE_NAME, ROLE_PARENT, IS_WORKING, SHOW_INDEX,zzjgdm,zzjgmc
+  </sql>
+  <select id="selectParentByPrimaryKey" resultType="string" parameterType="int" >
+    select 
+    ROLE_NAME
+    from SYS_ROLE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from SYS_ROLE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <sql id='TABLE_SEQUENCE'>SEQ_SYS_ROLE.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.SysRole" keyProperty="id">
+  <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into SYS_ROLE (
+    	ID, 
+    	ROLE_CODE, 
+    	ROLE_NAME, 
+      	ROLE_PARENT,
+      	IS_WORKING,
+      	SHOW_INDEX,
+      	ZZJGDM,
+      	ZZJGMC
+    )
+    values (
+    	#{id}, 
+    	#{roleCode,jdbcType=VARCHAR}, 
+    	#{roleName,jdbcType=VARCHAR}, 
+      	#{roleParent,jdbcType=INTEGER},
+      	#{isWorking,jdbcType=INTEGER},
+      	#{showIndex,jdbcType=INTEGER},
+      	#{zzjgdm,jdbcType=VARCHAR},
+      	#{zzjgmc,jdbcType=VARCHAR}
+    )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysRole" >
+    insert into SYS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="roleCode != null" >
+        ROLE_CODE,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="roleParent != null" >
+        ROLE_PARENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParent != null" >
+        #{roleParent,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysRole" >
+    update SYS_ROLE
+    <set >
+      <if test="roleCode != null" >
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParent != null" >
+        ROLE_PARENT = #{roleParent,jdbcType=INTEGER},
+      </if>
+      <if test="isWorking != null" >
+        IS_WORKING = #{isWorking,jdbcType=INTEGER},
+      </if>
+      <if test="showIndex != null" >
+        SHOW_INDEX = #{showIndex,jdbcType=INTEGER},
+      </if>
+      <if test="zzjgdm!=null">
+      	ZZJGDM=#{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgmc!=null">
+      	ZZJGMC=#{zzjgmc,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysRole" >
+    update SYS_ROLE
+    set ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_PARENT = #{roleParent,jdbcType=INTEGER},
+      ZZJGDM=#{zzjgdm,jdbcType=VARCHAR},
+      ZZJGMC=#{zzjgmc,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 查询所有档案处理角色 -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM SYS_ROLE
+    WHERE IS_WORKING = 1
+    ORDER BY SHOW_INDEX
+  </select>
+  
+  <select id="queryByCondition" resultMap="BaseResultMap" 
+  parameterType="java.util.Map" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM SYS_ROLE
+    WHERE 1 = 1
+   	<if test="roleName != null" >
+      AND ROLE_NAME like '%${roleName}%'
+    </if>
+    <!-- 查询 -->
+   	<if test="roleCode != null" >
+      AND ZZJGDM = #{roleCode}
+    </if>
+    <if test="isWorking != null and  isWorking != ''" >
+      AND IS_WORKING = #{isWorking}
+    </if>
+    <if test="userId != null">
+	START WITH SYS_ROLE.ID = (SELECT UR.ROLE_ID FROM SYS_USER_ROLE UR WHERE UR.USER_ID= #{userId,jdbcType=INTEGER})
+	CONNECT BY SYS_ROLE.ROLE_PARENT = PRIOR SYS_ROLE.ID
+    </if>
+    ORDER BY SHOW_INDEX
+  </select>
+  
+  <select id="selectByRoleCode" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
+    where 1=1
+    <if test="code !=null ">
+    AND ROLE_CODE = #{code}
+    </if>
+  </select>
+  <select id="selectMaxSHOW_INDEX" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select MAX(SHOW_INDEX) from SYS_ROLE where ROLE_CODE = #{code}
+  </select>
+  <select id="selectRoleListIncloudNoWork" resultMap="BaseResultMap" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM SYS_ROLE
+    ORDER BY SHOW_INDEX
+  </select>
+  <select id="selectByRoleids" parameterType="String" resultMap="BaseResultMap">
+  		${sql}
+  </select>
+  
+</mapper>

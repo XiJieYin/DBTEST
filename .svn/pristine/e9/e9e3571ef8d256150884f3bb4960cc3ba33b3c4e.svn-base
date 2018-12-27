@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoKctjDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoKctj">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="DALX" property="dalx" jdbcType="VARCHAR" />
+		<result column="DALX_ID" property="dalxId" jdbcType="DECIMAL" />
+		<result column="ND" property="nd" jdbcType="VARCHAR" />
+		<result column="ND_KS" property="ndKs" jdbcType="VARCHAR" />
+		<result column="ND_JS" property="ndJs" jdbcType="VARCHAR" />
+		<result column="JZSL" property="jzsl" jdbcType="DECIMAL" />
+		<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+		<result column="BCQX" property="bcqx" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DALX, DALX_ID, ND, ND_KS, ND_JS, JZSL, ORG_ID, ORG_NAME, BCQX
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from INFO_KCTJ
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from INFO_KCTJ
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.gx.hz.pojo.InfoKctj">
+		insert into INFO_KCTJ (ID, DALX, DALX_ID,
+		ND, ND_KS, ND_JS, JZSL,
+		ORG_ID, ORG_NAME, BCQX
+		)
+		values (#{id,jdbcType=DECIMAL}, #{dalx,jdbcType=VARCHAR},
+		#{dalxId,jdbcType=DECIMAL},
+		#{nd,jdbcType=VARCHAR}, #{ndKs,jdbcType=VARCHAR}, #{ndJs,jdbcType=VARCHAR},
+		#{jzsl,jdbcType=DECIMAL},
+		#{orgId,jdbcType=DECIMAL}, #{orgName,jdbcType=VARCHAR}, #{bcqx,jdbcType=DECIMAL}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoKctj">
+		insert into INFO_KCTJ
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="dalx != null">
+				DALX,
+			</if>
+			<if test="dalxId != null">
+				DALX_ID,
+			</if>
+			<if test="nd != null">
+				ND,
+			</if>
+			<if test="ndKs != null">
+				ND_KS,
+			</if>
+			<if test="ndJs != null">
+				ND_JS,
+			</if>
+			<if test="jzsl != null">
+				JZSL,
+			</if>
+			<if test="orgId != null">
+				ORG_ID,
+			</if>
+			<if test="orgName != null">
+				ORG_NAME,
+			</if>
+			<if test="bcqx != null">
+				BCQX,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="dalx != null">
+				#{dalx,jdbcType=VARCHAR},
+			</if>
+			<if test="dalxId != null">
+				#{dalxId,jdbcType=DECIMAL},
+			</if>
+			<if test="nd != null">
+				#{nd,jdbcType=VARCHAR},
+			</if>
+			<if test="ndKs != null">
+				#{ndKs,jdbcType=VARCHAR},
+			</if>
+			<if test="ndJs != null">
+				#{ndJs,jdbcType=VARCHAR},
+			</if>
+			<if test="jzsl != null">
+				#{jzsl,jdbcType=DECIMAL},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=DECIMAL},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="bcqx != null">
+				#{bcqx,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoKctj">
+		update INFO_KCTJ
+		<set>
+			<if test="dalx != null">
+				DALX = #{dalx,jdbcType=VARCHAR},
+			</if>
+			<if test="dalxId != null">
+				DALX_ID = #{dalxId,jdbcType=DECIMAL},
+			</if>
+			<if test="nd != null">
+				ND = #{nd,jdbcType=VARCHAR},
+			</if>
+			<if test="ndKs != null">
+				ND_KS = #{ndKs,jdbcType=VARCHAR},
+			</if>
+			<if test="ndJs != null">
+				ND_JS = #{ndJs,jdbcType=VARCHAR},
+			</if>
+			<if test="jzsl != null">
+				JZSL = #{jzsl,jdbcType=DECIMAL},
+			</if>
+			<if test="orgId != null">
+				ORG_ID = #{orgId,jdbcType=DECIMAL},
+			</if>
+			<if test="orgName != null">
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="bcqx != null">
+				BCQX = #{bcqx,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoKctj">
+		update INFO_KCTJ
+		set DALX = #{dalx,jdbcType=VARCHAR},
+		DALX_ID = #{dalxId,jdbcType=DECIMAL},
+		ND = #{nd,jdbcType=VARCHAR},
+		ND_KS = #{ndKs,jdbcType=VARCHAR},
+		ND_JS = #{ndJs,jdbcType=VARCHAR},
+		JZSL = #{jzsl,jdbcType=DECIMAL},
+		ORG_ID = #{orgId,jdbcType=DECIMAL},
+		ORG_NAME = #{orgName,jdbcType=VARCHAR},
+		BCQX = #{bcqx,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<!-- 查询组织机构下的所有卷宗 -->
+	<select id="queryByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select count(JZ.id) jzsl,JZ.org_name orgName,JZ.org_code orgCode
+		FROM dos_jz jz  WHERE 1 = 1 AND jz.SATAE =3
+		<if test="dalxName !=null">
+			AND jz.jzlx = #{dalxName}
+		</if>
+		<if test="nd!=null">
+			AND jz.ND = #{nd}
+		</if>
+		<if test="bcqx!=null">
+			AND jz.BCQX = #{bcqx}
+		</if>
+		<if test="orgCode !=null">
+		and JZ.org_code = #{orgCode}
+		</if>
+			<if test="datas != null">
+			and
+			<foreach collection="datas" index="index" item="item" open="("
+				separator="or" close=")">
+				jz.ORG_CODE in #{item}
+			</foreach>
+		</if>
+		GROUP BY JZ.org_code,JZ.org_name
+	</select>
+</mapper>

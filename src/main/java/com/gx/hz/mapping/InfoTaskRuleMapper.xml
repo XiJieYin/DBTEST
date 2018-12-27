@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoTaskRuleDao" >
+
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoTaskRule" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="RULE_NAME" property="ruleName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CJR" property="cjr" jdbcType="INTEGER" />
+    <result column="XGR" property="xgr" jdbcType="INTEGER" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    
+    <collection property="dList" ofType="com.gx.hz.pojo.InfoTaskRuleDetail">
+		<id column="detailId" property="id" />
+		<result column="roleName" property="roleName" />
+		<result column="roleName" property="roleName" />
+		<result column="parentId" property="parentId" />
+		<result column="ruleId" property="ruleId" />
+		<result column="parentName" property="parentName" />
+	</collection>
+	
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    T.ID, T.RULE_NAME, T.CREATE_TIME, T.UPDATE_TIME, T.CJR, T.XGR, T.IS_ENABLE, T.ORG_CODE, T.BZ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM INFO_TASK_RULE T
+    where T.ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM INFO_TASK_RULE T
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from INFO_TASK_RULE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <sql id='TABLE_SEQUENCE'>SEQ_INFO_TASK_RULE.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.InfoTaskRule" keyProperty="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+	    insert into INFO_TASK_RULE (
+	    	ID, 
+	    	RULE_NAME, 
+	    	CREATE_TIME, 
+	      	CJR, 
+	      	IS_ENABLE, 
+	      	ORG_CODE)
+	    values (
+	    	#{id,jdbcType=INTEGER}, 
+	    	#{ruleName,jdbcType=VARCHAR}, 
+	    	#{createTime,jdbcType=TIMESTAMP}, 
+	        #{cjr,jdbcType=INTEGER},
+	      	#{isEnable,jdbcType=INTEGER}, 
+	      	#{orgCode,jdbcType=VARCHAR}
+	    )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoTaskRule" >
+    insert into INFO_TASK_RULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ruleName != null" >
+        RULE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="cjr != null" >
+        CJR,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ruleName != null" >
+        #{ruleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjr != null" >
+        #{cjr,jdbcType=INTEGER},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoTaskRule" >
+    update INFO_TASK_RULE
+    <set >
+      <if test="ruleName != null" >
+        RULE_NAME = #{ruleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjr != null" >
+        CJR = #{cjr,jdbcType=INTEGER},
+      </if>
+      <if test="xgr != null" >
+        XGR = #{xgr,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoTaskRule" >
+    update INFO_TASK_RULE
+    set RULE_NAME = #{ruleName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CJR = #{cjr,jdbcType=INTEGER},
+      XGR = #{xgr,jdbcType=INTEGER},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryByCondition" resultMap="BaseResultMap" parameterType="map">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM INFO_TASK_RULE T
+    WHERE 1 = 1
+    <if test="isEnable != null and isEnable != ''" >
+        AND T.IS_ENABLE = #{isEnable}
+    </if>
+    <if test="ruleName != null and ruleName != ''" >
+        AND T.RULE_NAME like '%${ruleName}%'
+    </if>
+  </select>
+  
+  <select id="getRuleAndDetail" resultMap="BaseResultMap">
+  	SELECT
+	<include refid="Base_Column_List" />,
+		D.ID detailId,
+		D.ROLE_NAME roleName,
+		D.ROLE_ID roleId,
+		D.RULE_ID ruleId,
+		D.PARENT_ID parentId,
+		D.PARENT_NAME parentName
+	FROM
+		INFO_TASK_RULE T
+	LEFT JOIN INFO_TASK_RULE_DETAIL D ON T . ID = D .RULE_ID
+  </select>
+  </mapper>

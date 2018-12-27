@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictDdDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictDd" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="DDMC" property="ddmc" jdbcType="VARCHAR" />
+    <result column="DDDZ" property="dddz" jdbcType="VARCHAR" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DICT_DM" property="dictDm" jdbcType="VARCHAR" />
+    <result column="ZZJGMC" property="zzjgmc"  jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CODE, DDMC, DDDZ, IS_ENABLE, REMARK, DICT_DM
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">  	
+  	select dd.*,org.ZZJGMC from DICT_DD dd left join DICT_ORG org on dd.DICT_DM = org.ZZJGDM
+  	where dd.DELETESTATUS = 0
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >    
+ 	select dd.*,org.ZZJGMC from DICT_DD dd left join DICT_ORG org on dd.DICT_DM = org.ZZJGDM
+    where dd.ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from DICT_DD
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_DICT_DD.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DictDd" >
+   <selectKey  keyProperty="id" resultType="long" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DICT_DD (ID, CODE, DDMC, 
+      DDDZ, IS_ENABLE, REMARK, 
+      DICT_DM)
+    values (#{id,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{ddmc,jdbcType=VARCHAR}, 
+      #{dddz,jdbcType=VARCHAR}, #{isEnable,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{dictDm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective">
+    <selectKey  keyProperty="id" resultType="long" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into DICT_DD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="ddmc != null" >
+        DDMC,
+      </if>
+      <if test="dddz != null" >
+        DDDZ,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="dictDm != null" >
+        DICT_DM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmc != null" >
+        #{ddmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dddz != null" >
+        #{dddz,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDm != null" >
+        #{dictDm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictDd" >
+    update DICT_DD
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmc != null" >
+        DDMC = #{ddmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dddz != null" >
+        DDDZ = #{dddz,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDm != null" >
+        DICT_DM = #{dictDm,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null" >
+        DELETESTATUS = #{deleteStatus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DictDd" >
+    update DICT_DD
+    set CODE = #{code,jdbcType=VARCHAR},
+      DDMC = #{ddmc,jdbcType=VARCHAR},
+      DDDZ = #{dddz,jdbcType=VARCHAR},
+      IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DICT_DM = #{dictDm,jdbcType=VARCHAR},
+      DELETESTATUS = #{deleteStatus,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL} and DELETESTATUS = 0
+  </update>
+  
+  <select id="queryByCondition" resultMap="BaseResultMap">
+  select dd.*,org.ZZJGMC from DICT_DD dd left join DICT_ORG org on dd.DICT_DM = org.ZZJGDM
+  where 1 = 1
+  <if test="ddmc!=null">
+  AND  dd.DDMC like '%${ddmc}%'
+  </if>
+  and dd.DELETESTATUS = 0
+ order by ID desc
+  </select>
+  
+  <select id="selectByDDMC" resultMap="BaseResultMap" parameterType="java.lang.String" > 	
+ 	select dd.*,org.ZZJGMC from DICT_DD dd left join DICT_ORG org on dd.DICT_DM = org.ZZJGDM
+    where dd.DDMC = #{DDMC,jdbcType=VARCHAR} and dd.DELETESTATUS = 0
+  </select>
+</mapper>

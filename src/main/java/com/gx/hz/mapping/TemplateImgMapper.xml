@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TemplateImgDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.TemplateImg" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+    <result column="IMG_ID" property="imgId" jdbcType="DECIMAL" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+    <result column="ZONE" property="zone" jdbcType="VARCHAR" />
+    <result column="NO" property="no" jdbcType="VARCHAR" />
+    <result column="STIGMA" property="stigma" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gx.hz.pojo.TemplateImgWithBLOBs" extends="BaseResultMap" >
+    <result column="IMG" property="img" jdbcType="CLOB" />
+    <result column="IMG_PREVIEW" property="imgPreview" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FILE_TYPE, IMG_ID, TITLE, CREATE_USER, CREATE_USER_ID, CREATE_TIME, YEAR, ZONE, 
+    NO, STIGMA
+  </sql>
+  <sql id="Blob_Column_List" >
+    IMG, IMG_PREVIEW
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TM_TEMPLATE_IMG_MANAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByPrimaryKeys" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TM_TEMPLATE_IMG_MANAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TM_TEMPLATE_IMG_MANAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_TM_TEMPLATE_IMG_MANAGE.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.TemplateImgWithBLOBs" >
+	  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+	  	select <include refid="TABLE_SEQUENCE"/> from dual
+	  </selectKey>
+    insert into TM_TEMPLATE_IMG_MANAGE (ID, FILE_TYPE, IMG_ID, 
+      TITLE, CREATE_USER, CREATE_USER_ID, 
+      CREATE_TIME, YEAR, ZONE, 
+      NO, STIGMA, IMG, IMG_PREVIEW
+      )
+    values (#{id,jdbcType=DECIMAL}, #{fileType,jdbcType=VARCHAR}, #{imgId,jdbcType=DECIMAL}, 
+      #{title,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createUserId,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{year,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR}, 
+      #{no,jdbcType=VARCHAR}, #{stigma,jdbcType=VARCHAR}, #{img,jdbcType=CLOB}, #{imgPreview,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.TemplateImgWithBLOBs" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+	  	select <include refid="TABLE_SEQUENCE"/> from dual
+	  </selectKey>
+    insert into TM_TEMPLATE_IMG_MANAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fileType != null" >
+        FILE_TYPE,
+      </if>
+      <if test="imgId != null" >
+        IMG_ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="zone != null" >
+        ZONE,
+      </if>
+      <if test="no != null" >
+        NO,
+      </if>
+      <if test="stigma != null" >
+        STIGMA,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+      <if test="imgPreview != null" >
+        IMG_PREVIEW,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="imgId != null" >
+        #{imgId,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null" >
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="stigma != null" >
+        #{stigma,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=CLOB},
+      </if>
+      <if test="imgPreview != null" >
+        #{imgPreview,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.TemplateImgWithBLOBs" >
+    update TM_TEMPLATE_IMG_MANAGE
+    <set >
+      <if test="fileType != null" >
+        FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="imgId != null" >
+        IMG_ID = #{imgId,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="year != null" >
+        YEAR = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null" >
+        ZONE = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        NO = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="stigma != null" >
+        STIGMA = #{stigma,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=CLOB},
+      </if>
+      <if test="imgPreview != null" >
+        IMG_PREVIEW = #{imgPreview,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gx.hz.pojo.TemplateImgWithBLOBs" >
+    update TM_TEMPLATE_IMG_MANAGE
+    set FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      IMG_ID = #{imgId,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      YEAR = #{year,jdbcType=VARCHAR},
+      ZONE = #{zone,jdbcType=VARCHAR},
+      NO = #{no,jdbcType=VARCHAR},
+      STIGMA = #{stigma,jdbcType=VARCHAR},
+      IMG = #{img,jdbcType=CLOB},
+      IMG_PREVIEW = #{imgPreview,jdbcType=CLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.TemplateImg" >
+    update TM_TEMPLATE_IMG_MANAGE
+    set FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      IMG_ID = #{imgId,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      YEAR = #{year,jdbcType=VARCHAR},
+      ZONE = #{zone,jdbcType=VARCHAR},
+      NO = #{no,jdbcType=VARCHAR},
+      STIGMA = #{stigma,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="queryByCondition" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from TM_TEMPLATE_IMG_MANAGE where 1=1
+    <if test="title!=null">
+    and TITLE like '%${title}%' 
+    </if>
+    <if test="fileType!=null">
+    and FILE_TYPE like '%${fileType}%'  
+    </if>
+    <if test="year!=null">
+    and YEAR like '%${year}%'  
+    </if>
+    order by ID DESC
+  </select>
+  
+  <!-- 获取所有的识别模板 -->
+  <select id="selectAllTem" resultMap="ResultMapWithBLOBs" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TM_TEMPLATE_IMG_MANAGE
+  </select>
+  
+  <!-- 获取所有的识别模板 -->
+  <select id="selectByMatId" resultMap="ResultMapWithBLOBs" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TM_TEMPLATE_IMG_MANAGE t where  t.File_Type in (
+    	SELECT id FROM DICT_MATERIAL T WHERE  T.PARENT_ID= #{parentId}
+    )
+  </select>
+  
+</mapper>

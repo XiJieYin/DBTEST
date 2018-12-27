@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.SysChartConfigDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysChartConfig" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PANEL_NAME" property="panelName" jdbcType="VARCHAR" />
+    <result column="GIVE_ORDER" property="giveOrder" jdbcType="DECIMAL" />
+    <result column="NEW_ORDER" property="newOrder" jdbcType="DECIMAL" />
+    <result column="GIVE_SIZE" property="giveSize" jdbcType="VARCHAR" />
+    <result column="NEW_SIZE" property="newSize" jdbcType="VARCHAR" />
+    <result column="GIVE_HEIGHT" property="giveHeight" jdbcType="VARCHAR" />
+    <result column="NEW_HEIGHT" property="newHeight" jdbcType="VARCHAR" />
+    <result column="CHART_NUMBER" property="chartNumber" jdbcType="DECIMAL" />
+    <result column="UPDATE_USERID" property="updateUserid" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="IS_DEL" property="isDel" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PANEL_NAME, GIVE_ORDER, NEW_ORDER, GIVE_SIZE, NEW_SIZE, GIVE_HEIGHT, NEW_HEIGHT, 
+    CHART_NUMBER, UPDATE_USERID, UPDATE_DATE, IS_DEL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CHART_CONFIG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_CHART_CONFIG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gx.hz.pojo.SysChartConfig" >
+    insert into SYS_CHART_CONFIG (ID, PANEL_NAME, GIVE_ORDER, 
+      NEW_ORDER, GIVE_SIZE, NEW_SIZE, 
+      GIVE_HEIGHT, NEW_HEIGHT, CHART_NUMBER, 
+       UPDATE_USERID, UPDATE_DATE, 
+      IS_DEL)
+    values (#{id,jdbcType=DECIMAL}, #{panelName,jdbcType=VARCHAR}, #{giveOrder,jdbcType=DECIMAL}, 
+      #{newOrder,jdbcType=DECIMAL}, #{giveSize,jdbcType=VARCHAR}, #{newSize,jdbcType=VARCHAR}, 
+      #{giveHeight,jdbcType=VARCHAR}, #{newHeight,jdbcType=VARCHAR}, #{chartNumber,jdbcType=DECIMAL}, 
+      #{updateUserid,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{isDel,jdbcType=DECIMAL})
+  </insert>
+  
+ <sql id="TABLE_SEQUENCE">SEQ_SYS_CHART_CONFIG.nextval</sql>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysChartConfig" keyProperty="id" useGeneratedKeys="true">>
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into SYS_CHART_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="panelName != null" >
+        PANEL_NAME,
+      </if>
+      <if test="giveOrder != null" >
+        GIVE_ORDER,
+      </if>
+      <if test="newOrder != null" >
+        NEW_ORDER,
+      </if>
+      <if test="giveSize != null" >
+        GIVE_SIZE,
+      </if>
+      <if test="newSize != null" >
+        NEW_SIZE,
+      </if>
+      <if test="giveHeight != null" >
+        GIVE_HEIGHT,
+      </if>
+      <if test="newHeight != null" >
+        NEW_HEIGHT,
+      </if>
+      <if test="chartNumber != null" >
+        CHART_NUMBER,
+      </if>
+      <if test="updateUserid != null" >
+        UPDATE_USERID,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="panelName != null" >
+        #{panelName,jdbcType=VARCHAR},
+      </if>
+      <if test="giveOrder != null" >
+        #{giveOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="newOrder != null" >
+        #{newOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="giveSize != null" >
+        #{giveSize,jdbcType=VARCHAR},
+      </if>
+      <if test="newSize != null" >
+        #{newSize,jdbcType=VARCHAR},
+      </if>
+      <if test="giveHeight != null" >
+        #{giveHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="newHeight != null" >
+        #{newHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="chartNumber != null" >
+        #{chartNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="updateUserid != null" >
+        #{updateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysChartConfig" >
+    update SYS_CHART_CONFIG
+    <set >
+      <if test="panelName != null" >
+        PANEL_NAME = #{panelName,jdbcType=VARCHAR},
+      </if>
+      <if test="giveOrder != null" >
+        GIVE_ORDER = #{giveOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="newOrder != null" >
+        NEW_ORDER = #{newOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="giveSize != null" >
+        GIVE_SIZE = #{giveSize,jdbcType=VARCHAR},
+      </if>
+      <if test="newSize != null" >
+        NEW_SIZE = #{newSize,jdbcType=VARCHAR},
+      </if>
+      <if test="giveHeight != null" >
+        GIVE_HEIGHT = #{giveHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="newHeight != null" >
+        NEW_HEIGHT = #{newHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="chartNumber != null" >
+        CHART_NUMBER = #{chartNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="updateUserid != null" >
+        UPDATE_USERID = #{updateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysChartConfig" >
+    update SYS_CHART_CONFIG
+    set PANEL_NAME = #{panelName,jdbcType=VARCHAR},
+      GIVE_ORDER = #{giveOrder,jdbcType=DECIMAL},
+      NEW_ORDER = #{newOrder,jdbcType=DECIMAL},
+      GIVE_SIZE = #{giveSize,jdbcType=VARCHAR},
+      NEW_SIZE = #{newSize,jdbcType=VARCHAR},
+      GIVE_HEIGHT = #{giveHeight,jdbcType=VARCHAR},
+      NEW_HEIGHT = #{newHeight,jdbcType=VARCHAR},
+      CHART_NUMBER = #{chartNumber,jdbcType=DECIMAL},
+      UPDATE_USERID = #{updateUserid,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      IS_DEL = #{isDel,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+      <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CHART_CONFIG where IS_DEL =1
+  </select>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DnsmClgfDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.DnsmClgf">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="GFMC" property="gfmc" jdbcType="VARCHAR" />
+		<result column="FBDW" property="fbdw" jdbcType="VARCHAR" />
+		<result column="BB" property="bb" jdbcType="VARCHAR" />
+		<result column="LLCS" property="llcs" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="FBSJ" property="fbsj" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, GFMC, FBDW, BB, LLCS, URL, FBSJ
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from DNSM_CLGF
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from DNSM_CLGF
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_DNSM_CLGF.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.DnsmClgf">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DNSM_CLGF (ID, GFMC, FBDW,
+		BB, LLCS, URL, FBSJ)
+		values (#{id,jdbcType=DECIMAL}, #{gfmc,jdbcType=VARCHAR},
+		#{fbdw,jdbcType=VARCHAR},
+		#{bb,jdbcType=VARCHAR}, #{llcs,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.DnsmClgf">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DNSM_CLGF
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="gfmc != null">
+				GFMC,
+			</if>
+			<if test="fbdw != null">
+				FBDW,
+			</if>
+			<if test="bb != null">
+				BB,
+			</if>
+			<if test="llcs != null">
+				LLCS,
+			</if>
+			<if test="url != null">
+				URL,
+			</if>
+			<if test="fbsj != null">
+				FBSJ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="gfmc != null">
+				#{gfmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fbdw != null">
+				#{fbdw,jdbcType=VARCHAR},
+			</if>
+			<if test="bb != null">
+				#{bb,jdbcType=VARCHAR},
+			</if>
+			<if test="llcs != null">
+				#{llcs,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="fbsj != null">
+				#{fbsj,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DnsmClgf">
+		update DNSM_CLGF
+		<set>
+			<if test="gfmc != null">
+				GFMC = #{gfmc,jdbcType=VARCHAR},
+			</if>
+			<if test="fbdw != null">
+				FBDW = #{fbdw,jdbcType=VARCHAR},
+			</if>
+			<if test="bb != null">
+				BB = #{bb,jdbcType=VARCHAR},
+			</if>
+			<if test="llcs != null">
+				LLCS = #{llcs,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="fbsj != null">
+				FBSJ = #{fbsj,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DnsmClgf">
+		update DNSM_CLGF
+		set GFMC = #{gfmc,jdbcType=VARCHAR},
+		FBDW = #{fbdw,jdbcType=VARCHAR},
+		BB = #{bb,jdbcType=VARCHAR},
+		LLCS = #{llcs,jdbcType=VARCHAR},
+		URL = #{url,jdbcType=VARCHAR},
+		FBSJ = #{fbsj,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="queryByCondition" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from DNSM_CLGF
+		where 1=1
+		<if test="gfmc!=null">
+		and	GFMC like '%${gfmc}%'
+		</if>
+		order by FBSJ DESC
+	</select>
+</mapper>

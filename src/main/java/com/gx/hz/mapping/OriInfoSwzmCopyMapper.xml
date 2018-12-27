@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OriInfoSwzmCopyDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.OriInfoSwzmCopy" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="LRRYMC" property="lrrymc" jdbcType="VARCHAR" />
+    <result column="LRSJ" property="lrsj" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="YWTPBH" property="ywtpbh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="ZJHM" property="zjhm" jdbcType="VARCHAR" />
+    <result column="SWRQ" property="swrq" jdbcType="TIMESTAMP" />
+    <result column="YWP_ID" property="ywpId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, LRRYMC, LRSJ, SATAE, YWTPBH, XM, XB, ZJHM, SWRQ, YWP_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORI_INFO_SWZM_COPY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ORI_INFO_SWZM_COPY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_ORI_INFO_SWZM_COPY.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.OriInfoSwzmCopy" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into ORI_INFO_SWZM_COPY (ID, USER_ID, LRRYMC, 
+      LRSJ, SATAE, YWTPBH, 
+      XM, XB, ZJHM, SWRQ, 
+      YWP_ID)
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{lrrymc,jdbcType=VARCHAR}, 
+      #{lrsj,jdbcType=TIMESTAMP}, #{satae,jdbcType=DECIMAL}, #{ywtpbh,jdbcType=VARCHAR}, 
+      #{xm,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{zjhm,jdbcType=VARCHAR}, #{swrq,jdbcType=TIMESTAMP}, 
+      #{ywpId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.OriInfoSwzmCopy" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into ORI_INFO_SWZM_COPY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC,
+      </if>
+      <if test="lrsj != null" >
+        LRSJ,
+      </if>
+      <if test="satae != null" >
+        SATAE,
+      </if>
+      <if test="ywtpbh != null" >
+        YWTPBH,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="xb != null" >
+        XB,
+      </if>
+      <if test="zjhm != null" >
+        ZJHM,
+      </if>
+      <if test="swrq != null" >
+        SWRQ,
+      </if>
+      <if test="ywpId != null" >
+        YWP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="ywtpbh != null" >
+        #{ywtpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="swrq != null" >
+        #{swrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ywpId != null" >
+        #{ywpId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.OriInfoSwzmCopy" >
+    update ORI_INFO_SWZM_COPY
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="ywtpbh != null" >
+        YWTPBH = #{ywtpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        ZJHM = #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="swrq != null" >
+        SWRQ = #{swrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ywpId != null" >
+        YWP_ID = #{ywpId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.OriInfoSwzmCopy" >
+    update ORI_INFO_SWZM_COPY
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      YWTPBH = #{ywtpbh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      XB = #{xb,jdbcType=VARCHAR},
+      ZJHM = #{zjhm,jdbcType=VARCHAR},
+      SWRQ = #{swrq,jdbcType=TIMESTAMP},
+      YWP_ID = #{ywpId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <select id="selectByTPBH" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_SWZM_COPY
+        where YWTPBH = #{tpbh,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByInfoPrimaryId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_SWZM_COPY
+        where YWP_ID = #{id,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="selectByTPBHAndUserId" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_SWZM_COPY
+        where YWTPBH = #{tpbh} and USER_ID=#{userId}
+    </select>
+</mapper>

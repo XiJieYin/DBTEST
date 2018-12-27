@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.ImportTJDAO" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.ImportTJ" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="JZ_ID" property="jzId" jdbcType="DECIMAL" />
+    <result column="SXM" property="sxm" jdbcType="VARCHAR" />
+    <result column="ZRZ" property="zrz" jdbcType="VARCHAR" />
+    <result column="BT" property="bt" jdbcType="VARCHAR" />
+    <result column="SJ" property="sj" jdbcType="TIMESTAMP" />
+    <result column="ZSYH" property="zsyh" jdbcType="DECIMAL" />
+    <result column="ZZYH" property="zzyh" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+    <result column="ZT" property="zt" jdbcType="DECIMAL" />
+    <result column="WH" property="wh" jdbcType="VARCHAR" />
+    <result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+    <result column="PHMC" property="phmc" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, JZ_ID, SXM, ZRZ, BT, SJ, ZSYH, ZZYH, BZ, CJSJ, ZT, WH,RW_ID,PHMC,CODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from IMPORT_TJ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from IMPORT_TJ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_IMPORT_TJ.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.ImportTJ" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into IMPORT_TJ (ID, JZ_ID, SXM, 
+      ZRZ, BT, SJ, ZSYH, 
+      ZZYH, BZ, CJSJ, ZT, 
+      WH,RW_ID)
+    values (#{id,jdbcType=DECIMAL}, #{jzId,jdbcType=DECIMAL}, #{sxm,jdbcType=VARCHAR}, 
+      #{zrz,jdbcType=VARCHAR}, #{bt,jdbcType=VARCHAR}, #{sj,jdbcType=TIMESTAMP}, #{zsyh,jdbcType=DECIMAL}, 
+      #{zzyh,jdbcType=DECIMAL}, #{bz,jdbcType=VARCHAR}, #{cjsj,jdbcType=TIMESTAMP}, #{zt,jdbcType=DECIMAL}, 
+      #{wh,jdbcType=VARCHAR},#{rwId,jdbcType=DECIMAL},#{phmc,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.ImportTJ" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into IMPORT_TJ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="jzId != null" >
+        JZ_ID,
+      </if>
+      <if test="sxm != null" >
+        SXM,
+      </if>
+      <if test="zrz != null" >
+        ZRZ,
+      </if>
+      <if test="bt != null" >
+        BT,
+      </if>
+      <if test="sj != null" >
+        SJ,
+      </if>
+      <if test="zsyh != null" >
+        ZSYH,
+      </if>
+      <if test="zzyh != null" >
+        ZZYH,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="zt != null" >
+        ZT,
+      </if>
+      <if test="wh != null" >
+        WH,
+      </if>
+      <if test="rwId != null" >
+        RW_ID,
+      </if>
+      <if test="phmc != null" >
+        PHMC,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="jzId != null" >
+        #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="sxm != null" >
+        #{sxm,jdbcType=VARCHAR},
+      </if>
+      <if test="zrz != null" >
+        #{zrz,jdbcType=VARCHAR},
+      </if>
+      <if test="bt != null" >
+        #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zsyh != null" >
+        #{zsyh,jdbcType=DECIMAL},
+      </if>
+      <if test="zzyh != null" >
+        #{zzyh,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=DECIMAL},
+      </if>
+      <if test="wh != null" >
+        #{wh,jdbcType=VARCHAR},
+      </if>
+       <if test="rwId != null" >
+        #{rwId,jdbcType=DECIMAL},
+      </if>
+        <if test="phmc != null" >
+        #{phmc,jdbcType=VARCHAR},
+      </if>
+       <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.ImportTJ" >
+    update IMPORT_TJ
+    <set >
+      <if test="jzId != null" >
+        JZ_ID = #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="sxm != null" >
+        SXM = #{sxm,jdbcType=VARCHAR},
+      </if>
+      <if test="zrz != null" >
+        ZRZ = #{zrz,jdbcType=VARCHAR},
+      </if>
+      <if test="bt != null" >
+        BT = #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        SJ = #{sj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zsyh != null" >
+        ZSYH = #{zsyh,jdbcType=DECIMAL},
+      </if>
+      <if test="zzyh != null" >
+        ZZYH = #{zzyh,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zt != null" >
+        ZT = #{zt,jdbcType=DECIMAL},
+      </if>
+      <if test="wh != null" >
+        WH = #{wh,jdbcType=VARCHAR},
+      </if>
+      <if test="rwId != null" >
+        RW_ID = #{rwId,jdbcType=DECIMAL},
+      </if>
+        <if test="phmc != null" >
+        PHMC = #{phmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.ImportTJ" >
+    update IMPORT_TJ
+    set JZ_ID = #{jzId,jdbcType=DECIMAL},
+      SXM = #{sxm,jdbcType=VARCHAR},
+      ZRZ = #{zrz,jdbcType=VARCHAR},
+      BT = #{bt,jdbcType=VARCHAR},
+      SJ = #{sj,jdbcType=TIMESTAMP},
+      ZSYH = #{zsyh,jdbcType=DECIMAL},
+      ZZYH = #{zzyh,jdbcType=DECIMAL},
+      BZ = #{bz,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      ZT = #{zt,jdbcType=DECIMAL},
+      WH = #{wh,jdbcType=VARCHAR},
+       RW_ID = #{rwId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+    <select id="queryByCondition" resultMap="BaseResultMap">
+  select * from IMPORT_TJ
+  where 1 = 1
+  <if test="zt!=null">
+  	AND zt = #{zt}
+  </if>
+  <if test="phmc!=null">
+  	AND phmc = #{phmc}
+  </if>
+  <if test="code!=null">
+  	AND code = #{code}
+  </if>
+  order by CAST(SXM AS INTEGER)
+  </select>
+  
+   <select id="queryByConditions" resultMap="BaseResultMap">
+  select * from IMPORT_TJ
+  where 1 = 1
+  <if test="jzId!=null">
+  and JZ_ID = #{jzId}
+  </if>
+  <if test="phmc!=null">
+  and phmc = #{phmc}
+  </if>
+  <if test="code!=null">
+  	AND code = #{code}
+  </if>
+<!--   	 <if test="rwIds != null" >任务ID
+    	AND
+	   	 <foreach item="rwId" index="index" collection="rwIds" open="(" separator="or" close=")">  
+	      RW_ID in  #{rwId}  
+	   	 </foreach>
+	   	 </if> -->
+  order by CAST(SXM AS INTEGER)
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+  select * from IMPORT_TJ
+  </select>
+</mapper>

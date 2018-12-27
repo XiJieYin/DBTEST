@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OriConsistencyDetailDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.OriConsistencyDetail">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PRIMARY_ID" property="primaryId" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="SATAE" property="satae" jdbcType="DECIMAL" />
+		<result column="JZID" property="jzId" jdbcType="DECIMAL" />
+		<result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+		<result column="TPBH" property="tpbh" jdbcType="VARCHAR" />
+		<result column="YWLXZH" property="ywlxzh" jdbcType="VARCHAR" />
+		<result column="ZD" property="zd" jdbcType="VARCHAR" />
+		<result column="YWLX" property="ywlx" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PRIMARY_ID, NAME, CREATE_TIME, UPDATE_TIME,
+		SATAE,JZID,JZBH,TPBH,YWLXZH,ZD,YWLX
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ORI_CONSISTENCY_DETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from ORI_CONSISTENCY_DETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_ORI_CONSISTENCY_DETAIL.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.OriConsistencyDetail">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into ORI_CONSISTENCY_DETAIL (ID, PRIMARY_ID, NAME, CREATE_TIME,
+		UPDATE_TIME,
+		SATAE)
+		values (#{id,jdbcType=DECIMAL}, #{primaryId,jdbcType=DECIMAL},
+		#{name,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{satae,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.OriConsistencyDetail">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into ORI_CONSISTENCY_DETAIL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="primaryId != null">
+				PRIMARY_ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="satae != null">
+				SATAE,
+			</if>
+			<if test="jzId != null">
+				JZID,
+			</if>
+			<if test="jzbh != null">
+				JZBH,
+			</if>
+			<if test="tpbh != null">
+				TPBH,
+			</if>
+			<if test="ywlxzh != null">
+				YWLXZH,
+			</if>
+			<if test="zd != null">
+				ZD,
+			</if>
+			<if test="ywlx != null">
+				YWLX,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="primaryId != null">
+				#{primaryId,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="satae != null">
+				#{satae,jdbcType=DECIMAL},
+			</if>
+			<if test="jzId != null">
+				#{jzId,jdbcType=DECIMAL},
+			</if>
+			<if test="jzbh != null">
+				#{jzbh,jdbcType=VARCHAR},
+			</if>
+			<if test="tpbh != null">
+				#{tpbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ywlxzh != null">
+				#{ywlxzh,jdbcType=VARCHAR},
+			</if>
+			<if test="zd != null">
+				#{zd,jdbcType=VARCHAR},
+			</if>
+			<if test="ywlx != null">
+				#{ywlx,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.OriConsistencyDetail">
+		update ORI_CONSISTENCY_DETAIL
+		<set>
+			<if test="primaryId != null">
+				PRIMARY_ID = #{primaryId,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="satae != null">
+				SATAE = #{satae,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.OriConsistencyDetail">
+		update ORI_CONSISTENCY_DETAIL
+		set PRIMARY_ID = #{primaryId,jdbcType=DECIMAL},
+		NAME = #{name,jdbcType=VARCHAR},
+
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		SATAE = #{satae,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<select id="getConsistencyDetailByPrimaryId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from ORI_CONSISTENCY_DETAIL
+		where PRIMARY_ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<select id="findDetailByNameAndTpbh" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ORI_CONSISTENCY_DETAIL
+		where NAME = #{name,jdbcType=VARCHAR} and TPBH= #{tpbh,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findDetailByTpbh" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ORI_CONSISTENCY_DETAIL
+		where TPBH= #{tpbh,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByTPBH">
+		delete from ORI_CONSISTENCY_DETAIL where TPBH=#{tpbh}
+	</delete>
+	
+	<delete id="deleteByTPBHAndName">
+		delete from ORI_CONSISTENCY_DETAIL 
+			where 
+		TPBH=#{tpbh} and NAME =#{name}
+	</delete>
+
+	<delete id="deleteByJZBH">
+		delete from ORI_CONSISTENCY_DETAIL where JZBH=#{jzbh}
+	</delete>
+	
+	<select id="getConsistencyDetailsByJzbh" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ORI_CONSISTENCY_DETAIL
+		where JZBH = #{jzbh,jdbcType=VARCHAR}
+	</select>
+</mapper>

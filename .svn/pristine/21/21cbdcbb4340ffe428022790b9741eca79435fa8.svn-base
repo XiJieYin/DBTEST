@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoDaCxRzXxDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoDaCxRzXx" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USERID" property="userid" jdbcType="DECIMAL" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="SSDWMC" property="ssdwmc" jdbcType="VARCHAR" />
+    <result column="ZZJGDM" property="zzjgdm" jdbcType="VARCHAR" />
+    <result column="CDLX" property="cdlx" jdbcType="DECIMAL" />
+    <result column="CXSJ" property="cxsj" jdbcType="TIMESTAMP" />
+    <result column="CXJG" property="cxjg" jdbcType="DECIMAL" />
+    <result column="CXNR" property="cxnr" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USERID, USERNAME, SSDWMC,ZZJGDM, CDLX, CXSJ, CXJG, CXNR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_DACXRZXX
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_DACXRZXX
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoDaCxRzXx" >
+    insert into INFO_DACXRZXX (ID, USERID, USERNAME, 
+      SSDWMC,ZZJGDM, CDLX, CXSJ, 
+      CXJG, CXNR)
+    values (#{id,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR}, 
+      #{ssdwmc,jdbcType=VARCHAR},#{zzjgdm,jdbcType=VARCHAR}, #{cdlx,jdbcType=DECIMAL}, #{cxsj,jdbcType=TIMESTAMP}, 
+      #{cxjg,jdbcType=DECIMAL}, #{cxnr,jdbcType=VARCHAR})
+  </insert>
+  <sql id='TABLE_SEQUENCE'>SEQ_INFO_DACXRZXX.nextval</sql>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoDaCxRzXx" keyProperty="id">
+  	<selectKey  keyProperty="id" resultType="long" order="BEFORE" >
+  		select 
+  		<include refid="TABLE_SEQUENCE"/> 
+  		from dual
+  	</selectKey>
+    insert into INFO_DACXRZXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="ssdwmc != null" >
+        SSDWMC,
+      </if>
+      <if test="zzjgdm != null" >
+        ZZJGDM,
+      </if>
+      <if test="cdlx != null" >
+        CDLX,
+      </if>
+      <if test="cxsj != null" >
+        CXSJ,
+      </if>
+      <if test="cxjg != null" >
+        CXJG,
+      </if>
+      <if test="cxnr != null" >
+        CXNR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="ssdwmc != null" >
+        #{ssdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgdm != null" >
+        #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlx != null" >
+        #{cdlx,jdbcType=DECIMAL},
+      </if>
+      <if test="cxsj != null" >
+        #{cxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cxjg != null" >
+        #{cxjg,jdbcType=DECIMAL},
+      </if>
+      <if test="cxnr != null" >
+        #{cxnr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoDaCxRzXx" >
+    update INFO_DACXRZXX
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="ssdwmc != null" >
+        SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgdm != null" >
+        ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlx != null" >
+        CDLX = #{cdlx,jdbcType=DECIMAL},
+      </if>
+      <if test="cxsj != null" >
+        CXSJ = #{cxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cxjg != null" >
+        CXJG = #{cxjg,jdbcType=DECIMAL},
+      </if>
+      <if test="cxnr != null" >
+        CXNR = #{cxnr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoDaCxRzXx" >
+    update INFO_DACXRZXX
+    set USERID = #{userid,jdbcType=DECIMAL},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      SSDWMC = #{ssdwmc,jdbcType=VARCHAR},
+      ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      CDLX = #{cdlx,jdbcType=DECIMAL},
+      CXSJ = #{cxsj,jdbcType=TIMESTAMP},
+      CXJG = #{cxjg,jdbcType=DECIMAL},
+      CXNR = #{cxnr,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 分页查询 -->
+  <select id="queryByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+  select chrz.* 
+  from INFO_DACXRZXX chrz
+		where 1=1
+		<if test="userid !=null">
+		AND chrz.USERID = #{userid}
+		</if>
+		<if test="username !=null">
+		AND chrz.USERNAME =#{username}
+		</if>
+		<if test="ssdwmc !=null">
+		AND chrz.SSDWMC = #{ssdwmc}
+		</if>
+		<if test="zzjgdm !=null">
+		AND chrz.ZZJGDM = #{zzjgdm}
+		</if>
+		<if test="cdlx !=null">
+		AND chrz.CDLX = #{cdlx}
+		</if>
+		<if test="cjsj !=null">
+		AND chrz.CXSJ &gt;=#{cjsj}
+		</if>
+		<if test="cjsjs !=null">
+		AND chrz.CXSJ &lt;= #{cjsjs}
+		</if>
+		<if test="cxjg !=null">
+		AND chrz.CXJG = #{cxjg}
+		</if>
+		<if test="cxnr !=null">
+		AND chrz.CXNR = #{cxnr}
+		</if>
+		order by chrz.CXSJ DESC
+		</select>
+</mapper>

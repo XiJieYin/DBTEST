@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoYcrzDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoYcrz" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+    <result column="USER_Name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, TYPE, BZ, JZBH, CJSJ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_YCRZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByYcrz" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+   select * from (select * from INFO_YCRZ yc join SYS_USER su on YC.USER_ID = SU.id where yc.jzbh = '#{jzbh}' 
+   and type = #{type} order by YC.id DESC) where rownum=1;
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_YCRZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+   <sql id="TABLE_SEQUENCE">SEQ_INFO_YCFK.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoYcrz" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_YCRZ (ID, USER_ID, TYPE, 
+      BZ, JZBH, CJSJ)
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, 
+      #{bz,jdbcType=VARCHAR}, #{jzbh,jdbcType=VARCHAR}, #{cjsj,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoYcrz" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_YCRZ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoYcrz" >
+    update INFO_YCRZ
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="jzbh != null" >
+        JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoYcrz" >
+    update INFO_YCRZ
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      BZ = #{bz,jdbcType=VARCHAR},
+      JZBH = #{jzbh,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+    <select id="selectByTypeAndId" resultMap="BaseResultMap" >
+    SELECT * from( 
+     select yc.id,yc.type,yc.jzbh,yc.cjsj ,SU.USER_NAME,yc.bz
+     from info_ycrz yc join SYS_USER su on SU.id = yc .USER_ID where YC.jzbh = #{jzbh} and
+     YC.type = #{type} ORDER BY id DESC ) where rownum  = 1
+  	</select>
+  	
+    <select id="selectByJzbhToType" resultMap="BaseResultMap" >
+     select type from INFO_YCRZ where jzbh = #{jzbh} GROUP BY type
+  </select>
+  
+  
+</mapper>

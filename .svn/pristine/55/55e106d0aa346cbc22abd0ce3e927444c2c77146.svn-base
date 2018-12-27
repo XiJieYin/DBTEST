@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="T_GUIDA">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.Guida">
+		<result column="GUIDAID" property="guidaid" jdbcType="VARCHAR" />
+		<result column="DATYPEID" property="datypeid" jdbcType="VARCHAR" />
+		<result column="DACODE" property="dacode" jdbcType="VARCHAR" />
+		<result column="QZCODE" property="qzcode" jdbcType="VARCHAR" />
+		<result column="FLCODE" property="flcode" jdbcType="OTHER" />
+		<result column="MLCODE" property="mlcode" jdbcType="OTHER" />
+		<result column="AJCODE" property="ajcode" jdbcType="OTHER" />
+		<result column="SXCODE" property="sxcode" jdbcType="OTHER" />
+		<result column="NAME" property="name" jdbcType="OTHER" />
+		<result column="SEX" property="sex" jdbcType="OTHER" />
+		<result column="IDCODE" property="idcode" jdbcType="VARCHAR" />
+		<result column="STRCODE" property="strcode" jdbcType="VARCHAR" />
+		<result column="MIJID" property="mijid" jdbcType="VARCHAR" />
+		<result column="DTIME" property="dtime" jdbcType="OTHER" />
+		<result column="ADDRESS" property="address" jdbcType="OTHER" />
+		<result column="HUCODE" property="hucode" jdbcType="OTHER" />
+		<result column="JWHCODE" property="jwhcode" jdbcType="OTHER" />
+		<result column="ZQZCODE" property="zqzcode" jdbcType="OTHER" />
+		<result column="QYZCODE" property="qyzcode" jdbcType="OTHER" />
+		<result column="QRTYPE" property="qrtype" jdbcType="OTHER" />
+		<result column="HZGXI" property="hzgxi" jdbcType="OTHER" />
+		<result column="FILEDWID" property="filedwid" jdbcType="OTHER" />
+		<result column="YEHAO" property="yehao" jdbcType="OTHER" />
+		<result column="BAOGQXID" property="baogqxid" jdbcType="OTHER" />
+		<result column="CZRKB" property="czrkb" jdbcType="DECIMAL" />
+		<result column="RKSJXX" property="rksjxx" jdbcType="DECIMAL" />
+		<result column="SPB" property="spb" jdbcType="DECIMAL" />
+		<result column="SPCL1" property="spcl1" jdbcType="DECIMAL" />
+		<result column="SPCL2" property="spcl2" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="OTHER" />
+		<result column="CREATIONTIME" property="creationtime" jdbcType="TIMESTAMP" />
+		<result column="CREATEDBYUSERID" property="createdbyuserid"
+			jdbcType="VARCHAR" />
+		<result column="CREATEDBYUSERNAME" property="createdbyusername"
+			jdbcType="OTHER" />
+		<result column="GUIDANGTIME" property="guidangtime" jdbcType="TIMESTAMP" />
+		<result column="GUIDANGBYUSERID" property="guidangbyuserid"
+			jdbcType="VARCHAR" />
+		<result column="GUIDANGBYUSERNAME" property="guidangbyusername"
+			jdbcType="OTHER" />
+		<result column="LASTMODIFIEDBYUSERID" property="lastmodifiedbyuserid"
+			jdbcType="VARCHAR" />
+		<result column="LASTMODIFIEDBYUSERNAME" property="lastmodifiedbyusername"
+			jdbcType="OTHER" />
+		<result column="LASTMODIFICATIONTIME" property="lastmodificationtime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="TABLE_SEQUENCE">SEQ_T_GUIDA.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.Guida">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into T_GUIDA (GUIDAID, DATYPEID, DACODE,
+		QZCODE, FLCODE, MLCODE,
+		AJCODE, SXCODE, NAME, SEX,
+		IDCODE, STRCODE, MIJID,
+		DTIME, ADDRESS, HUCODE, JWHCODE,
+		ZQZCODE, QYZCODE, QRTYPE,
+		HZGXI, FILEDWID, YEHAO, BAOGQXID,
+		CZRKB, RKSJXX, SPB,
+		SPCL1, SPCL2, REMARK,
+		CREATIONTIME, CREATEDBYUSERID, CREATEDBYUSERNAME,
+		GUIDANGTIME, GUIDANGBYUSERID, GUIDANGBYUSERNAME,
+		LASTMODIFIEDBYUSERID, LASTMODIFIEDBYUSERNAME,
+		LASTMODIFICATIONTIME)
+		values (#{guidaid,jdbcType=VARCHAR}, #{datypeid,jdbcType=VARCHAR},
+		#{dacode,jdbcType=VARCHAR},
+		#{qzcode,jdbcType=VARCHAR}, #{flcode,jdbcType=OTHER}, #{mlcode,jdbcType=OTHER},
+		#{ajcode,jdbcType=OTHER}, #{sxcode,jdbcType=OTHER},
+		#{name,jdbcType=OTHER}, #{sex,jdbcType=OTHER},
+		#{idcode,jdbcType=VARCHAR}, #{strcode,jdbcType=VARCHAR},
+		#{mijid,jdbcType=VARCHAR},
+		#{dtime,jdbcType=OTHER}, #{address,jdbcType=OTHER}, #{hucode,jdbcType=OTHER},
+		#{jwhcode,jdbcType=OTHER},
+		#{zqzcode,jdbcType=OTHER}, #{qyzcode,jdbcType=OTHER}, #{qrtype,jdbcType=OTHER},
+		#{hzgxi,jdbcType=OTHER}, #{filedwid,jdbcType=OTHER},
+		#{yehao,jdbcType=OTHER}, #{baogqxid,jdbcType=OTHER},
+		#{czrkb,jdbcType=DECIMAL}, #{rksjxx,jdbcType=DECIMAL},
+		#{spb,jdbcType=DECIMAL},
+		#{spcl1,jdbcType=DECIMAL}, #{spcl2,jdbcType=DECIMAL}, #{remark,jdbcType=OTHER},
+		#{creationtime,jdbcType=TIMESTAMP},
+		#{createdbyuserid,jdbcType=VARCHAR},
+		#{createdbyusername,jdbcType=OTHER},
+		#{guidangtime,jdbcType=TIMESTAMP},
+		#{guidangbyuserid,jdbcType=VARCHAR},
+		#{guidangbyusername,jdbcType=OTHER},
+		#{lastmodifiedbyuserid,jdbcType=VARCHAR},
+		#{lastmodifiedbyusername,jdbcType=OTHER},
+		#{lastmodificationtime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.Guida">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into T_GUIDA
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="guidaid != null">
+				GUIDAID,
+			</if>
+			<if test="datypeid != null">
+				DATYPEID,
+			</if>
+			<if test="dacode != null">
+				DACODE,
+			</if>
+			<if test="qzcode != null">
+				QZCODE,
+			</if>
+			<if test="flcode != null">
+				FLCODE,
+			</if>
+			<if test="mlcode != null">
+				MLCODE,
+			</if>
+			<if test="ajcode != null">
+				AJCODE,
+			</if>
+			<if test="sxcode != null">
+				SXCODE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+			<if test="idcode != null">
+				IDCODE,
+			</if>
+			<if test="strcode != null">
+				STRCODE,
+			</if>
+			<if test="mijid != null">
+				MIJID,
+			</if>
+			<if test="dtime != null">
+				DTIME,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="hucode != null">
+				HUCODE,
+			</if>
+			<if test="jwhcode != null">
+				JWHCODE,
+			</if>
+			<if test="zqzcode != null">
+				ZQZCODE,
+			</if>
+			<if test="qyzcode != null">
+				QYZCODE,
+			</if>
+			<if test="qrtype != null">
+				QRTYPE,
+			</if>
+			<if test="hzgxi != null">
+				HZGXI,
+			</if>
+			<if test="filedwid != null">
+				FILEDWID,
+			</if>
+			<if test="yehao != null">
+				YEHAO,
+			</if>
+			<if test="baogqxid != null">
+				BAOGQXID,
+			</if>
+			<if test="czrkb != null">
+				CZRKB,
+			</if>
+			<if test="rksjxx != null">
+				RKSJXX,
+			</if>
+			<if test="spb != null">
+				SPB,
+			</if>
+			<if test="spcl1 != null">
+				SPCL1,
+			</if>
+			<if test="spcl2 != null">
+				SPCL2,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="creationtime != null">
+				CREATIONTIME,
+			</if>
+			<if test="createdbyuserid != null">
+				CREATEDBYUSERID,
+			</if>
+			<if test="createdbyusername != null">
+				CREATEDBYUSERNAME,
+			</if>
+			<if test="guidangtime != null">
+				GUIDANGTIME,
+			</if>
+			<if test="guidangbyuserid != null">
+				GUIDANGBYUSERID,
+			</if>
+			<if test="guidangbyusername != null">
+				GUIDANGBYUSERNAME,
+			</if>
+			<if test="lastmodifiedbyuserid != null">
+				LASTMODIFIEDBYUSERID,
+			</if>
+			<if test="lastmodifiedbyusername != null">
+				LASTMODIFIEDBYUSERNAME,
+			</if>
+			<if test="lastmodificationtime != null">
+				LASTMODIFICATIONTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="guidaid != null">
+				#{guidaid,jdbcType=VARCHAR},
+			</if>
+			<if test="datypeid != null">
+				#{datypeid,jdbcType=VARCHAR},
+			</if>
+			<if test="dacode != null">
+				#{dacode,jdbcType=VARCHAR},
+			</if>
+			<if test="qzcode != null">
+				#{qzcode,jdbcType=VARCHAR},
+			</if>
+			<if test="flcode != null">
+				#{flcode,jdbcType=OTHER},
+			</if>
+			<if test="mlcode != null">
+				#{mlcode,jdbcType=OTHER},
+			</if>
+			<if test="ajcode != null">
+				#{ajcode,jdbcType=OTHER},
+			</if>
+			<if test="sxcode != null">
+				#{sxcode,jdbcType=OTHER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=OTHER},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=OTHER},
+			</if>
+			<if test="idcode != null">
+				#{idcode,jdbcType=VARCHAR},
+			</if>
+			<if test="strcode != null">
+				#{strcode,jdbcType=VARCHAR},
+			</if>
+			<if test="mijid != null">
+				#{mijid,jdbcType=VARCHAR},
+			</if>
+			<if test="dtime != null">
+				#{dtime,jdbcType=OTHER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=OTHER},
+			</if>
+			<if test="hucode != null">
+				#{hucode,jdbcType=OTHER},
+			</if>
+			<if test="jwhcode != null">
+				#{jwhcode,jdbcType=OTHER},
+			</if>
+			<if test="zqzcode != null">
+				#{zqzcode,jdbcType=OTHER},
+			</if>
+			<if test="qyzcode != null">
+				#{qyzcode,jdbcType=OTHER},
+			</if>
+			<if test="qrtype != null">
+				#{qrtype,jdbcType=OTHER},
+			</if>
+			<if test="hzgxi != null">
+				#{hzgxi,jdbcType=OTHER},
+			</if>
+			<if test="filedwid != null">
+				#{filedwid,jdbcType=OTHER},
+			</if>
+			<if test="yehao != null">
+				#{yehao,jdbcType=OTHER},
+			</if>
+			<if test="baogqxid != null">
+				#{baogqxid,jdbcType=OTHER},
+			</if>
+			<if test="czrkb != null">
+				#{czrkb,jdbcType=DECIMAL},
+			</if>
+			<if test="rksjxx != null">
+				#{rksjxx,jdbcType=DECIMAL},
+			</if>
+			<if test="spb != null">
+				#{spb,jdbcType=DECIMAL},
+			</if>
+			<if test="spcl1 != null">
+				#{spcl1,jdbcType=DECIMAL},
+			</if>
+			<if test="spcl2 != null">
+				#{spcl2,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=OTHER},
+			</if>
+			<if test="creationtime != null">
+				#{creationtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdbyuserid != null">
+				#{createdbyuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="createdbyusername != null">
+				#{createdbyusername,jdbcType=OTHER},
+			</if>
+			<if test="guidangtime != null">
+				#{guidangtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="guidangbyuserid != null">
+				#{guidangbyuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="guidangbyusername != null">
+				#{guidangbyusername,jdbcType=OTHER},
+			</if>
+			<if test="lastmodifiedbyuserid != null">
+				#{lastmodifiedbyuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="lastmodifiedbyusername != null">
+				#{lastmodifiedbyusername,jdbcType=OTHER},
+			</if>
+			<if test="lastmodificationtime != null">
+				#{lastmodificationtime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gx.hz.dao.SysChartDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysChart">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="SYPB" jdbcType="VARCHAR" property="sypb" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TITLE, STATUS, SYPB
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CHART
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SYS_CHART
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_SYS_CHART.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.SysChart">
+  <selectKey keyProperty="id" order="BEFORE" resultType="int">
+  	select <include refid="TABLE_SEQUENCE" /> from dual
+  </selectKey>
+    insert into SYS_CHART (ID, USER_ID, TITLE, 
+      STATUS, SYPB)
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL}, #{sypb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysChart">
+  <selectKey keyProperty="id" order="BEFORE" resultType="int">
+  	select <include refid="TABLE_SEQUENCE" /> from dual
+  </selectKey>
+    insert into SYS_CHART
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="sypb != null">
+        SYPB,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="sypb != null">
+        #{sypb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysChart">
+    update SYS_CHART
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="sypb != null">
+        SYPB = #{sypb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+      
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysChart">
+    update SYS_CHART
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      SYPB = #{sypb,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from SYS_CHART 
+    where 1=1
+    <if test="title!=null">
+    and TITLE like '%${title}%' 
+    </if>
+    <if test="userId!=null">
+    and USER_ID like '%${userId}%' 
+    </if>
+    <if test="status!=null">
+    and STATUS like '%${status}%'  
+    </if>
+    order by ID DESC
+  </select>
+  
+  <update id="updateOthersStatus" parameterType="com.gx.hz.pojo.SysChart">
+    	update SYS_CHART SET Status = 2  where id &lt;&gt; #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoRwryjhDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoRwryjh" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="RYLX" property="rylx" jdbcType="VARCHAR" />
+    <result column="RYBH" property="rybh" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="JHKSSJ" property="jhkssj" jdbcType="TIMESTAMP" />
+    <result column="JHJSSJ" property="jhjssj" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+    <result column="RWZS" property="rwzs" jdbcType="DECIMAL" />
+    <result column="RWWCSL" property="rwwcsl" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RYLX, RYBH, USER_ID, JHKSSJ, JHJSSJ, SATAE, RW_ID, RWZS, RWWCSL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_RWRYJH
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_RWRYJH
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_INFO_RWRYJH.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoRwryjh" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into INFO_RWRYJH (ID, RYLX, RYBH, 
+      USER_ID, JHKSSJ, JHJSSJ, 
+      SATAE, RW_ID, RWZS,
+      RWWCSL)
+    values (#{id,jdbcType=DECIMAL}, #{rylx,jdbcType=VARCHAR}, #{rybh,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=DECIMAL}, #{jhkssj,jdbcType=TIMESTAMP}, #{jhjssj,jdbcType=TIMESTAMP}, 
+      #{satae,jdbcType=DECIMAL}, #{rwId,jdbcType=DECIMAL}, #{rwzs,jdbcType=DECIMAL},
+      #{rwwcsl,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoRwryjh" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into INFO_RWRYJH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="rylx != null" >
+        RYLX,
+      </if>
+      <if test="rybh != null" >
+        RYBH,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="jhkssj != null" >
+        JHKSSJ,
+      </if>
+      <if test="jhjssj != null" >
+        JHJSSJ,
+      </if>
+      <if test="satae != null" >
+        SATAE,
+      </if>
+      <if test="rwId != null" >
+        RW_ID,
+      </if>
+      <if test="rwzs != null" >
+        RWZS,
+      </if>
+      <if test="rwwcsl != null" >
+        RWWCSL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="rylx != null" >
+        #{rylx,jdbcType=VARCHAR},
+      </if>
+      <if test="rybh != null" >
+        #{rybh,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jhkssj != null" >
+        #{jhkssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhjssj != null" >
+        #{jhjssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="rwId != null" >
+        #{rwId,jdbcType=DECIMAL},
+      </if>
+      <if test="rwzs != null" >
+        #{rwzs,jdbcType=DECIMAL},
+      </if>
+      <if test="rwwcsl != null" >
+        #{rwwcsl,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoRwryjh" >
+    update INFO_RWRYJH
+    <set >
+      <if test="rylx != null" >
+        RYLX = #{rylx,jdbcType=VARCHAR},
+      </if>
+      <if test="rybh != null" >
+        RYBH = #{rybh,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jhkssj != null" >
+        JHKSSJ = #{jhkssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhjssj != null" >
+        JHJSSJ = #{jhjssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="rwId != null" >
+        RW_ID = #{rwId,jdbcType=DECIMAL},
+      </if>
+      <if test="rwzs != null" >
+        RWZS = #{rwzs,jdbcType=DECIMAL},
+      </if>
+      <if test="rwwcsl != null" >
+        RWWCSL = #{rwwcsl,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoRwryjh" >
+    update INFO_RWRYJH
+    set RYLX = #{rylx,jdbcType=VARCHAR},
+      RYBH = #{rybh,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      JHKSSJ = #{jhkssj,jdbcType=TIMESTAMP},
+      JHJSSJ = #{jhjssj,jdbcType=TIMESTAMP},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      RW_ID = #{rwId,jdbcType=DECIMAL},
+      RWZS = #{rwzs,jdbcType=DECIMAL},
+      RWWCSL = #{rwwcsl,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+
+
+
+    <select id="getJHByRWID" parameterType="long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from INFO_RWRYJH
+        where RW_ID = #{rwId,jdbcType=DECIMAL}
+    </select>
+
+
+    <update id="updateRwryjbSatae2CancleByRWID" >
+            update INFO_RWRYJH
+            set SATAE = 0
+            where RW_ID=#{rwId}
+    </update>
+    <update id="updateRwryjbSatae2UsedByID" >
+            update INFO_RWRYJH
+            set SATAE = 1
+            where ID=#{id}
+    </update>
+</mapper>

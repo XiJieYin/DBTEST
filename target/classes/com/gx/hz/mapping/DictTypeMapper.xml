@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictTypeDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictType">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="IS_ENABLE" property="isEnable" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="DATE" />
+		<result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+		<result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+		<result column="SHOW_INDEX" property="showIndex" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CODE, TYPE, NAME, IS_ENABLE, REMARK, CREATE_TIME,
+		UPDATE_TIME,CREATE_USER,UPDATE_USER,SHOW_INDEX
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TYPE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TYPE
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		DELETE FROM DICT_TYPE where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TYPE
+		where IS_ENABLE = 1
+		<if test="name!=null">
+			AND NAME like '%${name}%'
+		</if>
+		order by id
+	</select>
+
+
+	<update id="updateByCondition" parameterType="com.gx.hz.pojo.DictType">
+		update DICT_TYPE
+		set
+		TYPE = #{type,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictTypeValue">
+		update DICT_TYPE
+		<set>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=DATE},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				CREATE_USER = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="showIndex != null">
+				SHOW_INDEX = #{showIndex,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<sql id="TABLE_SEQUENCE">SEQ_DICT_TYPE.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.DictType">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DICT_TYPE (ID, CODE, TYPE,
+		NAME, IS_ENABLE, REMARK,
+		CREATE_TIME, UPDATE_TIME, CREATE_USER,
+		UPDATE_USER, SHOW_INDEX)
+		values (#{id,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{isEnable,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE},
+		#{createUser,jdbcType=VARCHAR},
+		#{updateUser,jdbcType=VARCHAR}, #{showIndex,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.DictType">
+		insert into DICT_TYPE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="createUser != null">
+				CREATE_USER,
+			</if>
+			<if test="updateUser != null">
+				UPDATE_USER,
+			</if>
+			<if test="showIndex != null">
+				SHOW_INDEX,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=DATE},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=DATE},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				#{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="showIndex != null">
+				#{showIndex,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.SysUserDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysUser" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="LOGIN_ID" property="loginId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="DECIMAL" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="POLICE_NUM" property="policeNum" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="USER_NUM" property="userNum" jdbcType="VARCHAR" />
+    <result column="ROLENAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLECODE" property="roleCode" jdbcType="VARCHAR" />
+    <association property="sur" javaType="com.gx.hz.pojo.SysUserRole">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+	     <result property="roleId" column="role_id"/>
+     </association>
+     <association property="zzjgmc" javaType="com.gx.hz.pojo.DICTORG">
+     	<id property="zzjgdm" column="zzjgdm"/>
+     	<result property="zzjgmc" column="zzjgmc"/>
+     </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    s.ID, s.LOGIN_ID, s.USER_NAME, s.PASSWORD, s.PHONE, s.EMAIL, s.IS_ENABLE, s.ORG_CODE,s.CREATE_TIME, 
+    s.REMARK, s.SEX, s.ID_CARD, s.POLICE_NUM, s.LAST_UPDATE_TIME,s.USER_NUM,d.zzjgmc AS zzjgmc
+  </sql>
+  <sql id="Base_Column_List1" >
+    ID, LOGIN_ID, USER_NAME, PASSWORD, PHONE,EMAIL, IS_ENABLE,ORG_CODE,CREATE_TIME, 
+    REMARK, SEX, ID_CARD,POLICE_NUM, LAST_UPDATE_TIME,USER_NUM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List1" />
+    from SYS_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+ <sql id='TABLE_SEQUENCE'>SEQ_SYS_USER.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.SysUser" keyProperty="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into SYS_USER (ID, LOGIN_ID, USER_NAME, 
+      PASSWORD, PHONE, EMAIL, 
+      IS_ENABLE, ORG_CODE, CREATE_TIME, 
+      REMARK, SEX, ID_CARD, 
+      POLICE_NUM, LAST_UPDATE_TIME, USER_NUM)
+    values (#{id,jdbcType=DECIMAL}, #{loginId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{isEnable,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{sex,jdbcType=DECIMAL}, #{idCard,jdbcType=VARCHAR}, 
+      #{policeNum,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP} , #{userNum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysUser" >
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="loginId != null" >
+        LOGIN_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="policeNum != null" >
+        POLICE_NUM,
+      </if>
+      <if test="userNum != null" >
+        USER_NUM,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="policeNum != null" >
+        #{policeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="userNum != null" >
+        #{USER_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysUser" >
+    update SYS_USER
+    <set >
+      <if test="loginId != null" >
+        LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="policeNum != null" >
+        POLICE_NUM = #{policeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="userNum != null" >
+        USER_NUM = #{userNum,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysUser" >
+    update SYS_USER
+    set LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      IS_ENABLE = #{isEnable,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=DECIMAL},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      POLICE_NUM = #{policeNum,jdbcType=VARCHAR},
+      USER_NUM = #{userNum,jdbcType=VARCHAR},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+  </select>
+  <select id="queryByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+	select 
+    <include refid="Base_Column_List" />
+    from SYS_USER  s LEFT OUTER JOIN DICT_ORG d on d.ZZJGDM=s.ORG_CODE
+    where 1 = 1 and is_enable!=0
+    <if test="userName != null" >
+      AND USER_NAME like '%${userName}%'
+    </if>
+    <if test="loginId != null" >
+      AND LOGIN_ID = #{loginId}
+    </if>
+    <if test="orgCode != null" >
+      AND ORG_CODE = #{orgCode}
+    </if>
+    <if test="userNum != null" >
+      AND USER_NUM = #{userNum}
+    </if>
+    <if test="roleCode!=null">
+    	AND LOGIN_ID like '%${roleCode}%'
+    </if>
+    order by id
+  </select>
+  
+  <!-- 查询新用户ID -->
+  <select id="queryIdByUserName" parameterType="String" resultType="Integer">
+  	select ID from SYS_USER where USER_NAME=#{userName}
+  </select>
+  
+  <!-- 根据用户的组织机构编号查询组织机构名称 -->
+ <!-- <select id="getMcByBh" resultType="BaseResultMap" parameterType="java.util.Map">
+    select org.* from SYS_USER us left join DICT_ORG org on 
+    us.ORG_CODE = org.ZZJGDM
+     where 1 =1
+    <if test="zzjgdm != null" >
+      AND org.zzjgdm=#{zzjgdm}
+    </if>
+  </select> -->
+  
+	<!-- 新增用户时为用户设置权限 -->
+  <insert id="addRS" parameterType="map" >
+      insert into SYS_USER_ROLE values (SEQ_SYS_USER_ROLE.nextval,#{userId},#{roleId})
+  </insert>
+  <!-- 删除用户角色表数据 -->
+  <delete id="deleRS" parameterType="int">
+    delete from SYS_USER_ROLE where USER_ID=#{userId}
+  </delete>
+  <!-- 假删除 -->
+  <update id="fakeDel"  parameterType="int" >
+    update sys_user set is_enable=0,last_update_time=sysdate where id =#{id}
+  </update>
+  <!-- 查询用户菜单 -->
+ <select id="queryUserMenu" resultType="com.gx.hz.pojo.SysMenu" parameterType="com.gx.hz.pojo.SysUser">
+ select 
+ 	sm.id, sm.menu_name menuName,sm.menu_url menuUrl,sm.icon_cls iconCls,sm.parent_id parentId,sm.bg_pic bgPic,sm.role_kind roleKind,sm.menu_Type menuType 
+ 	from sys_role_menu srm,sys_menu  sm,sys_user_role sur 
+ where 
+ 	srm.role_Id =sur.role_id 
+ 	and sm.id=srm.menu_id
+ 	and sur.user_id=#{id}
+ order by show_index
+ </select>
+ 
+ <!-- 检查登录 -->
+  <select id="checkUserLogin" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    	u.id,u.login_id ,u.password,u.user_name,u.org_code,u.id_card ,u.phone,u.user_num,ur.role_id , 
+    	sr.role_name roleName, sr.role_code roleCode
+    from 
+    	sys_user u, sys_user_role ur, sys_role sr 
+    where 
+    	u.id = ur.user_id and sr.id=ur.role_id and u.is_enable = 1 and  u.login_id=#{loginId} and u.password=#{password}
+  </select>
+  
+  <!-- 重置密码 -->
+  <update id="resetPWD"  parameterType="com.gx.hz.pojo.SysUser" >
+      update sys_user set password=#{password} where id=#{id}
+  </update>
+
+
+    <select id="getUsersByRole" resultType="com.gx.hz.pojo.SysUser" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select su.* from SYS_USER su, SYS_USER_ROLE sur, SYS_ROLE sr where su.ID=sur.USER_ID and sr.ID=sur.ROLE_ID and sr.ID=#{roleId}
+    </select>
+    
+    <select id="getUsersByRoleCode" resultType="com.gx.hz.pojo.SysUser" resultMap="BaseResultMap" >
+        select su.* from SYS_USER su, SYS_USER_ROLE sur, SYS_ROLE sr where su.ID=sur.USER_ID and sr.ID=sur.ROLE_ID and sr.ROLE_CODE=#{roleCode} and su.ORG_CODE=#{orgCode}
+        <if test="name !=null">
+            AND su.USER_NAME  like '%${name}%'
+        </if>
+    </select>
+
+    <select id="getUserByCodeAndOrgCode" resultType="com.gx.hz.pojo.SysUser" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select su.* from SYS_USER su, SYS_USER_ROLE sur, SYS_ROLE sr where su.ID=sur.USER_ID and sr.ID=sur.ROLE_ID and sr.ROLE_CODE=#{roleCode}  and su.ORG_CODE=#{orgCode}
+    </select>
+    <select id="getRoleCodeAll" resultType="com.gx.hz.pojo.SysRole">
+    	select distinct *  from SYS_ROLE
+    </select>
+    
+    <update id="setRoleIds" parameterType="com.gx.hz.pojo.SysUser">
+    	UPDATE SYS_USER SET ROLEIDS = #{roleIds} where id = #{id}
+    </update>
+    
+    <!-- pki登录验证 -->
+  <select id="checkUserByPki" parameterType="String" resultMap="BaseResultMap">
+  	select * from SYS_USER where ID_CARD=#{idCard}
+  </select>
+</mapper>

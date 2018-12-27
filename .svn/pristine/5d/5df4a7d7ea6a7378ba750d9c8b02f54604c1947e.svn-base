@@ -1,0 +1,15 @@
+package com.demo;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import com.gx.common.utils.DateUtil;
+
+public class DemoStr {
+	public static void main(String[] args) throws ParseException {
+		System.out.println(DateUtil.format(new Date(), "yyyy-MM-dd HH"));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+		System.out.println(sdf.parse(DateUtil.format(new Date(), "yyyy-MM-dd HH")));
+		
+	}
+}

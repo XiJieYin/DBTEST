@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoTxmDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoTxm" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="BH" property="bh" jdbcType="VARCHAR" />
+    <result column="BHFW" property="bhfw" jdbcType="VARCHAR" />
+    <result column="LX" property="lx" jdbcType="VARCHAR" />
+    <result column="DYSJ" property="dysj" jdbcType="TIMESTAMP" />
+    <result column="DYR" property="dyr" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="SATAS" property="satas" jdbcType="DECIMAL" />
+    <result column="KSFW" property="ksfw" jdbcType="VARCHAR" />
+    <result column="JSFW" property="jsfw" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="jsfw" jdbcType="TIMESTAMP" />
+    <result column="DYCS" property="dycs" jdbcType="DECIMAL" />
+    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BH, BHFW, LX, DYSJ, DYR, USER_ID, SATAS, KSFW, JSFW,CJSJ,ORGCODE,LXBH,DYCS,PARENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_TXM
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+    <select id="selectByParentId" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_TXM
+    where PARENT_ID = #{parentId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update INFO_TXM set satas = 0 where id =#{id}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_INFO_TXM.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoTxm" >
+  <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_TXM (ID, BH, BHFW, 
+      LX, DYSJ, DYR, USER_ID, 
+      SATAS, KSFW, JSFW,CJSJ,ORGCODE,LXBH,DYCS)
+    values (#{id,jdbcType=DECIMAL}, #{bh,jdbcType=VARCHAR}, #{bhfw,jdbcType=VARCHAR}, 
+      #{lx,jdbcType=VARCHAR}, #{dysj,jdbcType=TIMESTAMP}, #{dyr,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL}, 
+      #{satas,jdbcType=DECIMAL}, #{ksfw,jdbcType=VARCHAR}, #{jsfw,jdbcType=VARCHAR}, #{cjsj,jdbcType=VARCHAR},#{orgcode,jdbcType=VARCHAR},#{lxbh,jdbcType=VARCHAR},#{dycs,jdbcType=DECIMAL},#{parent_id,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoTxm" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into INFO_TXM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bh != null" >
+        BH,
+      </if>
+      <if test="bhfw != null" >
+        BHFW,
+      </if>
+      <if test="lx != null" >
+        LX,
+      </if>
+      <if test="dysj != null" >
+        DYSJ,
+      </if>
+      <if test="dyr != null" >
+        DYR,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="satas != null" >
+        SATAS,
+      </if>
+      <if test="ksfw != null" >
+        KSFW,
+      </if>
+      <if test="jsfw != null" >
+        JSFW,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="dycs != null" >
+        DYCS,
+      </if>
+        <if test="parentId != null" >
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="bh != null" >
+        #{bh,jdbcType=VARCHAR},
+      </if>
+      <if test="bhfw != null" >
+        #{bhfw,jdbcType=VARCHAR},
+      </if>
+      <if test="lx != null" >
+        #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="dysj != null" >
+        #{dysj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dyr != null" >
+        #{dyr,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="satas != null" >
+        #{satas,jdbcType=DECIMAL},
+      </if>
+      <if test="ksfw != null" >
+        #{ksfw,jdbcType=VARCHAR},
+      </if>
+      <if test="jsfw != null" >
+        #{jsfw,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dycs != null" >
+        #{dycs,jdbcType=DECIMAL},
+      </if>
+        <if test="parentId != null" >
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoTxm" >
+    update INFO_TXM
+    <set >
+      <if test="bh != null" >
+        BH = #{bh,jdbcType=VARCHAR},
+      </if>
+      <if test="bhfw != null" >
+        BHFW = #{bhfw,jdbcType=VARCHAR},
+      </if>
+      <if test="lx != null" >
+        LX = #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="dysj != null" >
+        DYSJ = #{dysj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dyr != null" >
+        DYR = #{dyr,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="satas != null" >
+        SATAS = #{satas,jdbcType=DECIMAL},
+      </if>
+      <if test="ksfw != null" >
+        KSFW = #{ksfw,jdbcType=VARCHAR},
+      </if>
+      <if test="jsfw != null" >
+        JSFW = #{jsfw,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dycs != null" >
+        DYCS = #{dycs,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoTxm" >
+    update INFO_TXM
+    set BH = #{bh,jdbcType=VARCHAR},
+      BHFW = #{bhfw,jdbcType=VARCHAR},
+      LX = #{lx,jdbcType=VARCHAR},
+      DYSJ = #{dysj,jdbcType=TIMESTAMP},
+      DYR = #{dyr,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      SATAS = #{satas,jdbcType=DECIMAL},
+      KSFW = #{ksfw,jdbcType=VARCHAR},
+      JSFW = #{jsfw,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      LXBH = #{lxbh,jdbcType=VARCHAR},
+      DYCS = #{dycs,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <update id="updateByTxmbh" >
+    update INFO_TXM
+    set satas = 2
+    where BH = #{txmbh,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByTXmbh" resultMap="BaseResultMap">
+  select * from INFO_TXM where bh=#{txmbh,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select * from INFO_TXM where 1=1
+		<if test="bh !=null">
+		AND bh like '%${bh}%'
+		</if>
+		<if test="satas !=null">
+		AND satas = #{satas}
+		</if>
+		<if test="lx !=null">
+		AND lx = #{lx}
+		</if>
+		<if test="dyr !=null">
+		AND dyr = #{dyr}
+		</if>
+		<if test="startTime !=null">
+		AND dysj &gt;= #{startTime}
+		</if>
+		<if test="endTime !=null">
+		AND dysj &lt; = #{endTime}
+		</if>
+		<if test="parentId !=null">
+		AND parent_id  = #{parentId}
+		</if>
+	<!-- 	 <if test="ids != null" >条形码
+    	AND
+	   	 <foreach item="id" index="index" collection="ids" open="(" separator="or" close=")">  
+	      bh in  #{id}  
+	   	 </foreach>
+	   	 </if> -->
+		order by id
+		</select>
+		
+</mapper>

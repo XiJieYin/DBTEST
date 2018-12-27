@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.SysUserRoleDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysUserRole" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, ROLE_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from SYS_USER_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByUserId" parameterType="int" >
+    delete from SYS_USER_ROLE
+    where USER_ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_SYS_USER_ROLE.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.SysUserRole" keyProperty="id">
+  	<selectKey keyProperty="id"  resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into SYS_USER_ROLE (ID, USER_ID, ROLE_ID
+      )
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysUserRole"  >
+    insert into SYS_USER_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysUserRole" >
+    update SYS_USER_ROLE
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysUserRole" >
+    update SYS_USER_ROLE
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="getRoleIdByUserId" parameterType="int" resultMap="BaseResultMap">
+  	select t.* from SYS_USER_ROLE t where t.USER_ID = #{userId}
+  </select>
+  <select id="getRolesIdByUserId" parameterType="int" resultType="com.gx.hz.pojo.SysUser">
+  	select * from SYS_USER  where ID = #{userId}
+  </select>
+  
+  
+
+</mapper>

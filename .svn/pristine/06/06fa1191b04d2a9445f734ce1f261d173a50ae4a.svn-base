@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictTableDao">
+
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictTable">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+		<result column="LBH" property="lbh" jdbcType="VARCHAR" />
+		<result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="BZ" property="bz" jdbcType="VARCHAR" />
+		<result column="IS_ENABLE" property="isEnable" jdbcType="DECIMAL" />
+		<result column="TABLE_CODE" property="tableCode" jdbcType="VARCHAR" />
+		<result column="ENTERING_TABLE" property="enteringTable" jdbcType="VARCHAR" />
+		<collection property="colList" ofType="com.gx.hz.pojo.DictColumn">
+			<id column="COL_ID" property="id" />
+			<result column="EN_NAME" property="enName" />
+			<result column="CN_NAME" property="cnName" />
+			<result column="TYPE" property="type" />
+			<result column="COL_IS_ENABLE" property="isEnable" />
+		</collection>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, TABLE_NAME, LBH, INSERT_TIME, UPDATE_TIME, BZ, IS_ENABLE, TABLE_CODE, ENTERING_TABLE
+	</sql>
+
+	<sql id="Tab_Column_List">
+		T.ID,
+		T.TABLE_NAME,
+		T.LBH,
+		T.INSERT_TIME,
+		T.UPDATE_TIME,
+		T.BZ,
+		T.IS_ENABLE,
+		T.TABLE_CODE,
+		T.ENTERING_TABLE
+	</sql>
+
+	<sql id="Col_Column_List">
+		C.ID AS COL_ID,
+		C.EN_NAME,
+		C.CN_NAME,
+		C.TYPE
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TABLE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from DICT_TABLE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<sql id='TABLE_SEQUENCE'>SEQ_DICT_MATERIAL.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.DictTable"
+		keyProperty="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DICT_TABLE (ID, TABLE_NAME, LBH,
+		INSERT_TIME, UPDATE_TIME, BZ,
+		IS_ENABLE, TABLE_CODE)
+		values (#{id,jdbcType=DECIMAL}, #{tableName,jdbcType=VARCHAR},
+		#{lbh,jdbcType=VARCHAR},
+		#{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{bz,jdbcType=VARCHAR},
+		#{isEnable,jdbcType=DECIMAL}, #{tableCode,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.DictTable">
+		insert into DICT_TABLE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tableName != null">
+				TABLE_NAME,
+			</if>
+			<if test="lbh != null">
+				LBH,
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="bz != null">
+				BZ,
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE,
+			</if>
+			<if test="tableCode != null">
+				TABLE_CODE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tableName != null">
+				#{tableName,jdbcType=VARCHAR},
+			</if>
+			<if test="lbh != null">
+				#{lbh,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bz != null">
+				#{bz,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=DECIMAL},
+			</if>
+			<if test="tableCode != null">
+				#{tableCode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictTable">
+		update DICT_TABLE
+		<set>
+			<if test="tableName != null">
+				TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+			</if>
+			<if test="lbh != null">
+				LBH = #{lbh,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bz != null">
+				BZ = #{bz,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+			</if>
+			<if test="tableCode != null">
+				TABLE_CODE = #{tableCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DictTable">
+		update DICT_TABLE
+		set TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+		LBH = #{lbh,jdbcType=VARCHAR},
+		INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		BZ = #{bz,jdbcType=VARCHAR},
+		IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+		TABLE_CODE = #{tableCode,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="queryByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_TABLE
+		where 1 = 1
+		<if test="tableName != null">
+			AND TABLE_NAME like '%${tableName}%'
+		</if>
+		<if test="lbh != null">
+			AND LBH = #{lbh}
+		</if>
+		order by id
+	</select>
+
+	<!-- 保存材料字段关联关系 -->
+	<sql id='TABLE_SEQUENCE2'>SEQ_DICT_TABLE_COLUMN.NEXTVAL</sql>
+	<insert id="insertTabAndCol" parameterType="map" keyProperty="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE2" />
+			from dual
+		</selectKey>
+		insert into DICT_TABLE_COLUMN (ID, COLUMN_ID, TABLE_ID)
+		values (
+		#{id,jdbcType=INTEGER},
+		#{columnId},
+		#{tableId}
+		)
+	</insert>
+
+	<!-- 查询材料关联的字段信息 -->
+	<select id="getTabAndColByTabId" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Tab_Column_List" />
+		,
+		<include refid="Col_Column_List" />
+		FROM DICT_TABLE T,DICT_COLUMN C,DICT_TABLE_COLUMN TC
+		where
+		T.ID=TC.TABLE_ID
+		AND TC.COLUMN_ID=C.ID
+		<if test="tableId != null and tableId != ''">
+			AND T.ID = #{tableId}
+		</if>
+		ORDER BY T.ID
+	</select>
+
+	<!-- 根据材料ID删除材料跟字段关联信息 -->
+	<delete id="delTabAndColByTabId" parameterType="int">
+		delete from DICT_TABLE_COLUMN
+		where table_ID = #{tableId}
+	</delete>
+	
+	<!-- 查询所有有效的录入表信息 -->
+	<select id="selectAll" resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM DICT_TABLE
+		WHERE IS_ENABLE = 1
+	</select>
+</mapper>

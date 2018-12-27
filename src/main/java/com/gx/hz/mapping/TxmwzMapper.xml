@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TxmwzDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Txmwz" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ZZJGDM" property="zzjgdm" jdbcType="VARCHAR" />
+    <result column="CLBM" property="clbm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ZZJGDM, CLBM, TXMSX
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TXMWZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TXMWZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+   <sql id='TABLE_SEQUENCE'>SEQ_TXMWZ.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Txmwz" keyProperty="id">
+  <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into TXMWZ (ID, ZZJGDM, CLBM, 
+      TXMSX)
+    values (#{id,jdbcType=DECIMAL}, #{zzjgdm,jdbcType=VARCHAR}, #{clbm,jdbcType=VARCHAR}, 
+      #{txmsx,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Txmwz" keyProperty="id">
+     <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into TXMWZ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="zzjgdm != null" >
+        ZZJGDM,
+      </if>
+      <if test="clbm != null" >
+        CLBM,
+      </if>
+      <if test="txmsx != null" >
+        TXMSX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="zzjgdm != null" >
+        #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="clbm != null" >
+        #{clbm,jdbcType=VARCHAR},
+      </if>
+      <if test="txmsx != null" >
+        #{txmsx,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Txmwz" >
+    update TXMWZ
+    <set >
+      <if test="zzjgdm != null" >
+        ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="clbm != null" >
+        CLBM = #{clbm,jdbcType=VARCHAR},
+      </if>
+      <if test="txmsx != null" >
+        TXMSX = #{txmsx,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Txmwz" >
+    update TXMWZ
+    set ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      CLBM = #{clbm,jdbcType=VARCHAR},
+      TXMSX = #{txmsx,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryByCodeAndZzjgdm" resultMap="BaseResultMap">
+  	select * from TXMWZ where ZZJGDM = #{zzjgdm,jdbcType=VARCHAR} and CLBM = #{clbm,jdbcType=VARCHAR}
+  </select>
+</mapper>

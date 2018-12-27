@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OriTplrjlDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.OriTplrjl" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TPBH" property="tpbh" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TPBH, USER_ID, JZBH, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORI_TPLRJL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ORI_TPLRJL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_ORI_TPLRJL.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.OriTplrjl" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+      select
+      <include refid="TABLE_SEQUENCE" />
+      from dual
+    </selectKey>
+    insert into ORI_TPLRJL (ID, TPBH, USER_ID, 
+      JZBH, CREATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{tpbh,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL}, 
+      #{jzbh,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.OriTplrjl" >
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+      select
+      <include refid="TABLE_SEQUENCE" />
+      from dual
+    </selectKey>
+    insert into ORI_TPLRJL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tpbh != null" >
+        TPBH,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="tpbh != null" >
+        #{tpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.OriTplrjl" >
+    update ORI_TPLRJL
+    <set >
+      <if test="tpbh != null" >
+        TPBH = #{tpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.OriTplrjl" >
+    update ORI_TPLRJL
+    set TPBH = #{tpbh,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      JZBH = #{jzbh,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+
+  <select id="findOriTplrjlByJZBHAndUserId" resultMap="BaseResultMap" >
+    select *
+    from ORI_TPLRJL
+    where JZBH=#{jzbh,jdbcType=VARCHAR} and USER_ID=#{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="findOriTplrjlTPByJZBHAndUserId" resultType="String" >
+    select TPBH
+    from ORI_TPLRJL
+    where JZBH=#{jzbh,jdbcType=VARCHAR} and USER_ID=#{userId,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="findCountLrByJzbhAndUserId" resultType="int">
+    select count(id) from ORI_TPLRJL where JZBH = #{jzbh} and USER_ID=#{userId,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+    <select id="findOriTplrjlByTpbh" resultMap="BaseResultMap" >
+        select *
+        from ORI_TPLRJL
+        where TPBH=#{tpbh,jdbcType=VARCHAR} and USER_ID=#{userId,jdbcType=VARCHAR}
+    </select>
+
+
+
+    <delete id="deleteOriTplrjlByTpbhAndUserId" >
+        delete from ORI_TPLRJL where TPBH=#{tpbh,jdbcType=VARCHAR} and USER_ID=#{userId,jdbcType=VARCHAR}
+    </delete>
+
+
+</mapper>

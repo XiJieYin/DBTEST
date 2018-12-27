@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoTaskDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoTask" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="TASK_TYPE" property="taskType" jdbcType="DECIMAL" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ASSIGNS_PERSON" property="assignsPerson" jdbcType="DECIMAL" />
+    <result column="RECORDER" property="recorder" jdbcType="VARCHAR"/>
+    <result column="ASSIGNER" property="assigner" jdbcType="VARCHAR"/>
+    <association property="org" javaType="com.gx.hz.pojo.Organization">
+        <id property="zzjgdm" column="zzjgdm" />
+        <result property="zzjgmc" column="zzjgmc" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, TASK_TYPE, ORG_CODE, CREATE_TIME, ASSIGNS_PERSON
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_TASK
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from INFO_TASK
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_INFO_TASK.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoTask" keyProperty="id">
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into INFO_TASK (ID, USER_ID, TASK_TYPE, 
+      ORG_CODE, CREATE_TIME, ASSIGNS_PERSON
+      )
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{taskType,jdbcType=DECIMAL}, 
+      #{orgCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{assignsPerson,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoTask" keyProperty="id">
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into INFO_TASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="taskType != null" >
+        TASK_TYPE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="assignsPerson != null" >
+        ASSIGNS_PERSON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=DECIMAL},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignsPerson != null" >
+        #{assignsPerson,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoTask" >
+    update INFO_TASK
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="taskType != null" >
+        TASK_TYPE = #{taskType,jdbcType=DECIMAL},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assignsPerson != null" >
+        ASSIGNS_PERSON = #{assignsPerson,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoTask" >
+    update INFO_TASK
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      TASK_TYPE = #{taskType,jdbcType=DECIMAL},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ASSIGNS_PERSON = #{assignsPerson,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+	<include refid="Base_Column_List"/>
+	from INFO_TASK
+  </select>
+  
+  <select id="queryByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	SELECT
+		it.*, org.zzjgmc, su1.user_name recorder, su2.user_name assigner
+	FROM
+		DICT_ORG org 
+	RIGHT JOIN INFO_TASK it ON it.org_Code = org.zzjgdm
+	LEFT JOIN SYS_USER su1 ON su1.id = it.user_id 
+	LEFT JOIN SYS_USER su2 ON su2.id = it.assigns_person 
+	WHERE 1=1
+    <if test="orgCode != null" >
+      AND it.ORG_CODE = #{orgCode}
+    </if>
+    order by it.create_time DESC
+  </select>
+  
+  <!-- 根据用户名查询用户ID -->
+  <select id="queryUserIdByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select ID from SYS_USER where USER_NAME = #{userName,jdbcType=VARCHAR}
+  </select>
+</mapper>

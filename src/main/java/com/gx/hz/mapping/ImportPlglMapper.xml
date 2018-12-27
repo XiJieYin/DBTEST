@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.ImportPlglDAO">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.ImportPlgl">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PHMC" property="phmc" jdbcType="VARCHAR" />
+		<result column="QSH" property="qsh" jdbcType="DECIMAL" />
+		<result column="ZZH" property="zzh" jdbcType="DECIMAL" />
+		<result column="TMLX" property="tmlx" jdbcType="DECIMAL" />
+		<result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PHMC, QSH, ZZH, TMLX,RW_ID,CODE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from IMPORT_PLGL
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from IMPORT_PLGL
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_IMPORT_PLGL.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.ImportPlgl">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into IMPORT_PLGL (ID, PHMC, QSH,
+		ZZH, TMLX)
+		values (#{id,jdbcType=DECIMAL}, #{phmc,jdbcType=VARCHAR},
+		#{qsh,jdbcType=DECIMAL},
+		#{zzh,jdbcType=DECIMAL}, #{tmlx,jdbcType=DECIMAL},#{rwId,jdbcType=DECIMAL},#{code,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.ImportPlgl">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into IMPORT_PLGL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="phmc != null">
+				PHMC,
+			</if>
+			<if test="qsh != null">
+				QSH,
+			</if>
+			<if test="zzh != null">
+				ZZH,
+			</if>
+			<if test="tmlx != null">
+				TMLX,
+			</if>
+			<if test="rwId != null">
+				RW_ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="phmc != null">
+				#{phmc,jdbcType=VARCHAR},
+			</if>
+			<if test="qsh != null">
+				#{qsh,jdbcType=DECIMAL},
+			</if>
+			<if test="zzh != null">
+				#{zzh,jdbcType=DECIMAL},
+			</if>
+			<if test="tmlx != null">
+				#{tmlx,jdbcType=DECIMAL},
+			</if>
+			<if test="rwId != null">
+				#{rwId,jdbcType=DECIMAL},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.ImportPlgl">
+		update IMPORT_PLGL
+		<set>
+			<if test="phmc != null">
+				PHMC = #{phmc,jdbcType=VARCHAR},
+			</if>
+			<if test="qsh != null">
+				QSH = #{qsh,jdbcType=DECIMAL},
+			</if>
+			<if test="zzh != null">
+				ZZH = #{zzh,jdbcType=DECIMAL},
+			</if>
+			<if test="tmlx != null">
+				TMLX = #{tmlx,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.ImportPlgl">
+		update IMPORT_PLGL
+		set PHMC = #{phmc,jdbcType=VARCHAR},
+		QSH = #{qsh,jdbcType=DECIMAL},
+		ZZH = #{zzh,jdbcType=DECIMAL},
+		TMLX = #{tmlx,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<select id="queryByCondition" resultMap="BaseResultMap">
+		select * from IMPORT_PLGL where tmlx = #{tmlx}
+		<if test="phmc !=null">
+			and phmc like '%${phmc}%'
+		</if>
+		<if test="rwId !=null">
+			and rw_id = #{rwId}
+		</if>
+		order by id desc
+	</select>
+</mapper>

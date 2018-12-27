@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dbtest.dao.BaseDao" >
+	<update id="createTriggerId" statementType="STATEMENT">
+		create or replace trigger ID_${table} 
+			before insert on ${table}      
+			for each row   
+		declare     
+			nextid number;
+			existsame number;
+			existmaxid number;
+		begin      
+			if :new.ID IS NULL or :new.ID=0 THEN        
+				select SEQ_${table}.nextval into nextid from sys.dual;    
+				select max(ID) into existmaxid from ${table} ;
+				if <![CDATA[nextid > existmaxid ]]> then
+					select (max(ID)+1) into nextid from ${table} ;
+				elsif nextid = existmaxid then
+					select SEQ_${table}.nextval into nextid from sys.dual;    
+				elsif <![CDATA[nextid < existmaxid]]> then
+					select (max(ID)+1) into nextid from ${table} ;
+				end if;
+				select count(1) into existsame from ${table}  where ID = nextid;		
+				if existsame >0 then      
+					select (max(ID)+1) into nextid from ${table} ;     
+				end if;
+				:new.ID:=nextid;   
+			else     
+				select count(1) into existsame from ${table}  where ID = :new.ID;     
+				if existsame >0 then      
+					select (max(ID)+1) into nextid from ${table} ;     
+					:new.ID:=nextid;   
+				end if;     
+			end if;     
+		end ID_${table} ;
+	</update>
+	<update id="createTriggerGuid" statementType="STATEMENT">
+		create or replace trigger GID_${table}
+			before insert on ${table}     
+			for each row   
+		declare     
+			uuid VARCHAR2(64);
+		begin   
+			if :new.GUID is NULL THEN
+				select get_uuid() into uuid from sys.dual;
+				:new.GUID:=uuid;
+			end if;
+		end GID_${table};
+	</update>
+	<delete id="dropTrigger">
+		declare
+		      num   number;
+		begin
+		    select count(1) into num from all_triggers WHERE table_name='${table}' and TRIGGER_NAME = 'ID_${table}' ;
+		    if num > 0 then
+		        execute immediate 'drop trigger ID_${table}' ;
+		    end if;
+		    select count(1) into num from all_triggers WHERE table_name='${table}' and TRIGGER_NAME = 'GID_${table}' ;
+		    if num > 0 then
+		        execute immediate 'drop trigger GID_${table}' ;
+		    end if;
+		end;		
+	</delete>
+	
+	<update id="createGetGuid">
+		CREATE OR REPLACE
+		FUNCTION get_uuid
+		RETURN VARCHAR
+		IS
+		guid VARCHAR (50);
+		BEGIN
+		guid := lower(RAWTOHEX(sys_guid()));
+		RETURN
+		substr(guid,1,8)||'-'||substr(guid,9,4)||'-'||substr(guid,13,4)||'-'||substr(guid,17,4)||'-'||substr(guid,21,12);
+		END get_uuid;
+	</update>
+</mapper>

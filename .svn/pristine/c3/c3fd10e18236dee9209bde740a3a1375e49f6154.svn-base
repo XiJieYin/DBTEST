@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoRwryglxxbDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoRwryglxxb" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+    <result column="RYLX" property="rylx" jdbcType="DECIMAL"/>
+    <result column="RYBH" property="rybh" jdbcType="VARCHAR" />
+    <result column="RYMC" property="rymc" jdbcType="VARCHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="RW_ID" property="rwId" jdbcType="DECIMAL"/>
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL"/>
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR"/>
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RWBH, RYLX, RYBH, RYMC, BZ ,RW_ID, USER_ID,ROLE_CODE,ROLE_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_RWRYGLXXB
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_RWRYGLXXB
+    where USER_ID = #{userId}
+  </select>
+  
+    <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_RWRYGLXXB
+    where ROLE_ID = #{roleId}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_RWRYGLXXB
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_INFO_RWRYGLXXB.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoRwryglxxb" useGeneratedKeys="true">
+  	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into INFO_RWRYGLXXB (ID, RWBH, RYLX, 
+      RYBH, RYMC, BZ,RW_ID, USER_ID,ROLE_CODE)
+    values (#{id,jdbcType=DECIMAL}, #{rwbh,jdbcType=VARCHAR}, #{rylx}, 
+      #{rybh,jdbcType=VARCHAR}, #{rymc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR},#{rwId,jdbcType=DECIMAL},#{userId,jdbcType=DECIMAL},#{roleCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoRwryglxxb" >
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into INFO_RWRYGLXXB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="rwbh != null" >
+        RWBH,
+      </if>
+      <if test="rylx != null" >
+        RYLX,
+      </if>
+      <if test="rybh != null" >
+        RYBH,
+      </if>
+      <if test="rymc != null" >
+        RYMC,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="rwbh != null" >
+        #{rwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rylx != null" >
+        #{rylx},
+      </if>
+      <if test="rybh != null" >
+        #{rybh,jdbcType=VARCHAR},
+      </if>
+      <if test="rymc != null" >
+        #{rymc,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+
+
+    <insert id="insertSelectiveByRW" parameterType="com.gx.hz.pojo.InfoRwryglxxb" >
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select <include refid="TABLE_SEQUENCE"/> from dual
+        </selectKey>
+        insert into INFO_RWRYGLXXB
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+
+            <if test="rylx != null" >
+                RYLX,
+            </if>
+            <if test="rwId != null" >
+                RW_ID,
+            </if>
+            <if test="userId != null" >
+                USER_ID,
+            </if>
+            <if test="bz != null" >
+                BZ,
+            </if>
+            <if test="roleCode != null" >
+                ROLE_CODE,
+            </if>
+            <if test="roleId != null" >
+                ROLE_ID,
+            </if>
+                RWBH,
+                RYBH,
+                RYMC,
+
+        </trim>
+        <trim prefix="select " suffix="" >
+            <if test="id != null" >
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="rylx != null" >
+                #{rylx},
+            </if>
+            <if test="rwId != null" >
+                #{rwId,jdbcType=DECIMAL},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="bz != null" >
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCode != null" >
+                #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=DECIMAL},
+            </if>
+            ir.RWBH,
+            su.USER_NUM,
+            su.USER_NAME
+            from SYS_USER su,INFO_RWJBXX ir where ir.ID=#{rwId} and su.ID=#{userId}
+
+
+        </trim>
+    </insert>
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoRwryglxxb" >
+    update INFO_RWRYGLXXB
+    <set >
+      <if test="rwbh != null" >
+        RWBH = #{rwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rylx != null" >
+        RYLX = #{rylx},
+      </if>
+      <if test="rybh != null" >
+        RYBH = #{rybh,jdbcType=VARCHAR},
+      </if>
+      <if test="rymc != null" >
+        RYMC = #{rymc,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoRwryglxxb" >
+    update INFO_RWRYGLXXB
+    set RWBH = #{rwbh,jdbcType=VARCHAR},
+      RYLX = #{rylx},
+      RYBH = #{rybh,jdbcType=VARCHAR},
+      RYMC = #{rymc,jdbcType=VARCHAR},
+      BZ = #{bz,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="getRwryName" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"></include>
+  	 from 
+  	INFO_RWRYGLXXB
+  	where 1=1
+  	<if test="rwId !=null">
+  	AND RW_ID = #{rwId}
+  	</if>
+  </select>
+  <select id="getRwryByRwIdAndRoleCode" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"></include>
+  	 from
+  	INFO_RWRYGLXXB where
+
+  	 RW_ID = #{rwId}   AND  ROLE_CODE=#{code}
+
+  </select>
+
+
+    <delete id="deleteRwryglxxbByRWID" >
+        delete from INFO_RWRYGLXXB where RW_ID=#{id}
+    </delete>
+</mapper>

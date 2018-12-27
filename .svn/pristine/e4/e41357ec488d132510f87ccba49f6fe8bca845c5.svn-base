@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.AnjuanVDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.AnjuanV">
+		<result column="ANJUANID" property="anjuanid" jdbcType="VARCHAR" />
+		<result column="DACODE" property="dacode" jdbcType="VARCHAR" />
+		<result column="FLCODE" property="flcode" jdbcType="OTHER" />
+		<result column="MLCODE" property="mlcode" jdbcType="OTHER" />
+		<result column="SXCODE" property="sxcode" jdbcType="OTHER" />
+		<result column="TIMING" property="timing" jdbcType="OTHER" />
+		<result column="BAOGQXNAME" property="baogqxname" jdbcType="VARCHAR" />
+		<result column="FTIMESTAR" property="ftimestar" jdbcType="OTHER" />
+		<result column="FTIMEEND" property="ftimeend" jdbcType="OTHER" />
+		<result column="YESHU" property="yeshu" jdbcType="OTHER" />
+		<result column="FENSHU" property="fenshu" jdbcType="VARCHAR" />
+		<result column="BIANZDWNAME" property="bianzdwname" jdbcType="VARCHAR" />
+		<result column="BIANZBMNAME" property="bianzbmname" jdbcType="VARCHAR" />
+		<result column="AJTYPENAME" property="ajtypename" jdbcType="VARCHAR" />
+		<result column="LIJTIME" property="lijtime" jdbcType="TIMESTAMP" />
+		<result column="LEIBIE" property="leibie" jdbcType="OTHER" />
+		<result column="STRCODENAME" property="strcodename" jdbcType="VARCHAR" />
+		<result column="CREATIONTIME" property="creationtime" jdbcType="TIMESTAMP" />
+		<result column="CREATEDBYUSERNAME" property="createdbyusername"
+			jdbcType="OTHER" />
+		<result column="LASTMODIFICATIONTIME" property="lastmodificationtime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="TABLE_SEQUENCE">SEQ_T_ANJUAN_V.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.AnjuanV">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into T_ANJUAN_V (ANJUANID, DACODE, FLCODE,
+		MLCODE, SXCODE, TIMING, BAOGQXNAME,
+		FTIMESTAR, FTIMEEND, YESHU,
+		FENSHU, BIANZDWNAME, BIANZBMNAME,
+		AJTYPENAME, LIJTIME, LEIBIE,
+		STRCODENAME, CREATIONTIME, CREATEDBYUSERNAME,
+		LASTMODIFICATIONTIME)
+		values (#{anjuanid,jdbcType=VARCHAR}, #{dacode,jdbcType=VARCHAR},
+		#{flcode,jdbcType=OTHER},
+		#{mlcode,jdbcType=OTHER}, #{sxcode,jdbcType=OTHER}, #{timing,jdbcType=OTHER},
+		#{baogqxname,jdbcType=VARCHAR},
+		#{ftimestar,jdbcType=OTHER}, #{ftimeend,jdbcType=OTHER}, #{yeshu,jdbcType=OTHER},
+		#{fenshu,jdbcType=VARCHAR}, #{bianzdwname,jdbcType=VARCHAR},
+		#{bianzbmname,jdbcType=VARCHAR},
+		#{ajtypename,jdbcType=VARCHAR}, #{lijtime,jdbcType=TIMESTAMP}, #{leibie,jdbcType=OTHER},
+		#{strcodename,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP},
+		#{createdbyusername,jdbcType=OTHER},
+		#{lastmodificationtime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.AnjuanV">
+		<selectKey keyProperty="anjuanid" resultType="java.lang.String" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into T_ANJUAN_V
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="anjuanid != null">
+				ANJUANID,
+			</if>
+			<if test="dacode != null">
+				DACODE,
+			</if>
+			<if test="flcode != null">
+				FLCODE,
+			</if>
+			<if test="mlcode != null">
+				MLCODE,
+			</if>
+			<if test="sxcode != null">
+				SXCODE,
+			</if>
+			<if test="timing != null">
+				TIMING,
+			</if>
+			<if test="baogqxname != null">
+				BAOGQXNAME,
+			</if>
+			<if test="ftimestar != null">
+				FTIMESTAR,
+			</if>
+			<if test="ftimeend != null">
+				FTIMEEND,
+			</if>
+			<if test="yeshu != null">
+				YESHU,
+			</if>
+			<if test="fenshu != null">
+				FENSHU,
+			</if>
+			<if test="bianzdwname != null">
+				BIANZDWNAME,
+			</if>
+			<if test="bianzbmname != null">
+				BIANZBMNAME,
+			</if>
+			<if test="ajtypename != null">
+				AJTYPENAME,
+			</if>
+			<if test="lijtime != null">
+				LIJTIME,
+			</if>
+			<if test="leibie != null">
+				LEIBIE,
+			</if>
+			<if test="strcodename != null">
+				STRCODENAME,
+			</if>
+			<if test="creationtime != null">
+				CREATIONTIME,
+			</if>
+			<if test="createdbyusername != null">
+				CREATEDBYUSERNAME,
+			</if>
+			<if test="lastmodificationtime != null">
+				LASTMODIFICATIONTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="anjuanid != null">
+				#{anjuanid,jdbcType=VARCHAR},
+			</if>
+			<if test="dacode != null">
+				#{dacode,jdbcType=VARCHAR},
+			</if>
+			<if test="flcode != null">
+				#{flcode,jdbcType=OTHER},
+			</if>
+			<if test="mlcode != null">
+				#{mlcode,jdbcType=OTHER},
+			</if>
+			<if test="sxcode != null">
+				#{sxcode,jdbcType=OTHER},
+			</if>
+			<if test="timing != null">
+				#{timing,jdbcType=OTHER},
+			</if>
+			<if test="baogqxname != null">
+				#{baogqxname,jdbcType=VARCHAR},
+			</if>
+			<if test="ftimestar != null">
+				#{ftimestar,jdbcType=OTHER},
+			</if>
+			<if test="ftimeend != null">
+				#{ftimeend,jdbcType=OTHER},
+			</if>
+			<if test="yeshu != null">
+				#{yeshu,jdbcType=OTHER},
+			</if>
+			<if test="fenshu != null">
+				#{fenshu,jdbcType=VARCHAR},
+			</if>
+			<if test="bianzdwname != null">
+				#{bianzdwname,jdbcType=VARCHAR},
+			</if>
+			<if test="bianzbmname != null">
+				#{bianzbmname,jdbcType=VARCHAR},
+			</if>
+			<if test="ajtypename != null">
+				#{ajtypename,jdbcType=VARCHAR},
+			</if>
+			<if test="lijtime != null">
+				#{lijtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="leibie != null">
+				#{leibie,jdbcType=OTHER},
+			</if>
+			<if test="strcodename != null">
+				#{strcodename,jdbcType=VARCHAR},
+			</if>
+			<if test="creationtime != null">
+				#{creationtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdbyusername != null">
+				#{createdbyusername,jdbcType=OTHER},
+			</if>
+			<if test="lastmodificationtime != null">
+				#{lastmodificationtime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+</mapper>

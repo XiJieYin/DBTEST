@@ -1,0 +1,28 @@
+package com.demo;
+
+import java.util.List;
+import java.util.Map;
+
+import com.dbtest.dao.BaseDao;
+import com.dbtest.demo.DBFactory;
+
+public class Demo10 {
+	
+	public static void main(String[] args) {
+		BaseDao baseDao = DBFactory.getBaseDao();
+		List<Map<String, Object>> result = baseDao.select("select t.table_name,f.comments from user_tables t inner join user_tab_comments f on t.table_name = f.table_name");
+		System.out.println(result.size());
+		int count = 0;
+		for (Map<String, Object> map : result) {
+			String TABLE_NAME = map.get("TABLE_NAME").toString();
+//			int r = baseDao.createTrigger(TABLE_NAME);
+			int r = baseDao.dropTrigger(TABLE_NAME);
+			System.out.println(TABLE_NAME);
+			if (r>0) {
+				count++;	
+			}
+			//break;
+		}
+		System.out.println("更新了"+count+"个表");
+	}
+}

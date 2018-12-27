@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TemplateImgXDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.TemplateImgX" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TEMP_ID" property="tempId" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="NO" property="no" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gx.hz.pojo.TemplateImgX" extends="BaseResultMap" >
+    <result column="IMG" property="img" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TEMP_ID, STATUS, NO
+  </sql>
+  <sql id="Blob_Column_List" >
+    IMG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TM_TEMPLATE_IMG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TM_TEMPLATE_IMG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_TM_TEMPLATE_IMG.nextval</sql>
+  
+  <insert id="insert" parameterType="com.gx.hz.pojo.TemplateImgX" >
+	  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+	  	select <include refid="TABLE_SEQUENCE"/> from dual
+	  </selectKey>
+    insert into TM_TEMPLATE_IMG (ID ,TEMP_ID, STATUS, 
+      NO, IMG)
+    values (#{id,jdbcType=DECIMAL},#{tempId,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
+      #{no,jdbcType=VARCHAR}, #{img,jdbcType=BLOB})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.TemplateImgX" >
+  <selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into TM_TEMPLATE_IMG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tempId != null" >
+        TEMP_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="no != null" >
+        NO,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="tempId != null" >
+        #{tempId,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.TemplateImgX" >
+    update TM_TEMPLATE_IMG
+    <set >
+      <if test="tempId != null" >
+        TEMP_ID = #{tempId,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="no != null" >
+        NO = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=BLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gx.hz.pojo.TemplateImgX" >
+    update TM_TEMPLATE_IMG
+    set TEMP_ID = #{tempId,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      NO = #{no,jdbcType=VARCHAR},
+      IMG = #{img,jdbcType=BLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.TemplateImgX" >
+    update TM_TEMPLATE_IMG
+    set TEMP_ID = #{tempId,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      NO = #{no,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateStstusByNo" parameterType="com.gx.hz.pojo.TemplateImgX" >
+    update TM_TEMPLATE_IMG
+    set STATUS = #{status,jdbcType=DECIMAL},
+    TEMP_ID = #{tempId,jdbcType=DECIMAL}
+    where NO = #{no,jdbcType=VARCHAR}
+  </update>
+  <select id="queryByCondition" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" />
+    from TM_TEMPLATE_IMG 
+    where 1=1
+    <if test="tempId!=null">
+    and TEMP_ID = '${tempId}' 
+    </if>
+    <if test="status!=null">
+    and STATUS like '%${status}%'  
+    </if>
+    order by ID DESC
+  </select>
+</mapper>

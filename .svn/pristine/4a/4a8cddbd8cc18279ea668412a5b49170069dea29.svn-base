@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="T_GUIDA_V" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.GuidaV" >
+    <result column="GUIDAID" property="guidaid" jdbcType="VARCHAR" />
+    <result column="DATYPENAME" property="datypename" jdbcType="VARCHAR" />
+    <result column="DACODE" property="dacode" jdbcType="VARCHAR" />
+    <result column="FLCODE" property="flcode" jdbcType="OTHER" />
+    <result column="MLCODE" property="mlcode" jdbcType="OTHER" />
+    <result column="AJCODE" property="ajcode" jdbcType="OTHER" />
+    <result column="SXCODE" property="sxcode" jdbcType="OTHER" />
+    <result column="NAME" property="name" jdbcType="OTHER" />
+    <result column="SEX" property="sex" jdbcType="OTHER" />
+    <result column="IDCODE" property="idcode" jdbcType="VARCHAR" />
+    <result column="STRCODENAME" property="strcodename" jdbcType="VARCHAR" />
+    <result column="DTIME" property="dtime" jdbcType="OTHER" />
+    <result column="ADDRESS" property="address" jdbcType="OTHER" />
+    <result column="FILEDWID" property="filedwid" jdbcType="OTHER" />
+    <result column="YEHAO" property="yehao" jdbcType="OTHER" />
+    <result column="BAOGQXNAME" property="baogqxname" jdbcType="OTHER" />
+    <result column="CZRKB" property="czrkb" jdbcType="DECIMAL" />
+    <result column="RKSJXX" property="rksjxx" jdbcType="DECIMAL" />
+    <result column="SPB" property="spb" jdbcType="DECIMAL" />
+    <result column="SPCL1" property="spcl1" jdbcType="DECIMAL" />
+    <result column="CREATIONTIME" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEDBYUSERNAME" property="createdbyusername" jdbcType="OTHER" />
+    <result column="LASTMODIFICATIONTIME" property="lastmodificationtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="TABLE_SEQUENCE">SEQ_T_GUIDA_V.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.GuidaV" >
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into T_GUIDA_V (GUIDAID, DATYPENAME, DACODE, 
+      FLCODE, MLCODE, AJCODE, SXCODE, 
+      NAME, SEX, IDCODE, STRCODENAME, 
+      DTIME, ADDRESS, FILEDWID, 
+      YEHAO, BAOGQXNAME, CZRKB, 
+      RKSJXX, SPB, SPCL1, 
+      CREATIONTIME, CREATEDBYUSERNAME, LASTMODIFICATIONTIME
+      )
+    values (#{guidaid,jdbcType=VARCHAR}, #{datypename,jdbcType=VARCHAR}, #{dacode,jdbcType=VARCHAR}, 
+      #{flcode,jdbcType=OTHER}, #{mlcode,jdbcType=OTHER}, #{ajcode,jdbcType=OTHER}, #{sxcode,jdbcType=OTHER}, 
+      #{name,jdbcType=OTHER}, #{sex,jdbcType=OTHER}, #{idcode,jdbcType=VARCHAR}, #{strcodename,jdbcType=VARCHAR}, 
+      #{dtime,jdbcType=OTHER}, #{address,jdbcType=OTHER}, #{filedwid,jdbcType=OTHER}, 
+      #{yehao,jdbcType=OTHER}, #{baogqxname,jdbcType=OTHER}, #{czrkb,jdbcType=DECIMAL}, 
+      #{rksjxx,jdbcType=DECIMAL}, #{spb,jdbcType=DECIMAL}, #{spcl1,jdbcType=DECIMAL}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{createdbyusername,jdbcType=OTHER}, #{lastmodificationtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.GuidaV" >
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+    insert into T_GUIDA_V
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="guidaid != null" >
+        GUIDAID,
+      </if>
+      <if test="datypename != null" >
+        DATYPENAME,
+      </if>
+      <if test="dacode != null" >
+        DACODE,
+      </if>
+      <if test="flcode != null" >
+        FLCODE,
+      </if>
+      <if test="mlcode != null" >
+        MLCODE,
+      </if>
+      <if test="ajcode != null" >
+        AJCODE,
+      </if>
+      <if test="sxcode != null" >
+        SXCODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="idcode != null" >
+        IDCODE,
+      </if>
+      <if test="strcodename != null" >
+        STRCODENAME,
+      </if>
+      <if test="dtime != null" >
+        DTIME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="filedwid != null" >
+        FILEDWID,
+      </if>
+      <if test="yehao != null" >
+        YEHAO,
+      </if>
+      <if test="baogqxname != null" >
+        BAOGQXNAME,
+      </if>
+      <if test="czrkb != null" >
+        CZRKB,
+      </if>
+      <if test="rksjxx != null" >
+        RKSJXX,
+      </if>
+      <if test="spb != null" >
+        SPB,
+      </if>
+      <if test="spcl1 != null" >
+        SPCL1,
+      </if>
+      <if test="creationtime != null" >
+        CREATIONTIME,
+      </if>
+      <if test="createdbyusername != null" >
+        CREATEDBYUSERNAME,
+      </if>
+      <if test="lastmodificationtime != null" >
+        LASTMODIFICATIONTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="guidaid != null" >
+        #{guidaid,jdbcType=VARCHAR},
+      </if>
+      <if test="datypename != null" >
+        #{datypename,jdbcType=VARCHAR},
+      </if>
+      <if test="dacode != null" >
+        #{dacode,jdbcType=VARCHAR},
+      </if>
+      <if test="flcode != null" >
+        #{flcode,jdbcType=OTHER},
+      </if>
+      <if test="mlcode != null" >
+        #{mlcode,jdbcType=OTHER},
+      </if>
+      <if test="ajcode != null" >
+        #{ajcode,jdbcType=OTHER},
+      </if>
+      <if test="sxcode != null" >
+        #{sxcode,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=OTHER},
+      </if>
+      <if test="idcode != null" >
+        #{idcode,jdbcType=VARCHAR},
+      </if>
+      <if test="strcodename != null" >
+        #{strcodename,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null" >
+        #{dtime,jdbcType=OTHER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=OTHER},
+      </if>
+      <if test="filedwid != null" >
+        #{filedwid,jdbcType=OTHER},
+      </if>
+      <if test="yehao != null" >
+        #{yehao,jdbcType=OTHER},
+      </if>
+      <if test="baogqxname != null" >
+        #{baogqxname,jdbcType=OTHER},
+      </if>
+      <if test="czrkb != null" >
+        #{czrkb,jdbcType=DECIMAL},
+      </if>
+      <if test="rksjxx != null" >
+        #{rksjxx,jdbcType=DECIMAL},
+      </if>
+      <if test="spb != null" >
+        #{spb,jdbcType=DECIMAL},
+      </if>
+      <if test="spcl1 != null" >
+        #{spcl1,jdbcType=DECIMAL},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdbyusername != null" >
+        #{createdbyusername,jdbcType=OTHER},
+      </if>
+      <if test="lastmodificationtime != null" >
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

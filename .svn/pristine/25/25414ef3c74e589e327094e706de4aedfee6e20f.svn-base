@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.StatisticChartDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.StatisticChart" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CHART_NAME" property="chartName" jdbcType="VARCHAR" />
+    <result column="CHART_X_INDEX" property="chartXIndex" jdbcType="DECIMAL" />
+    <result column="CHART_Y_INDEX" property="chartYIndex" jdbcType="DECIMAL" />
+    <result column="ID_NAME" property="idName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CHART_NAME, CHART_X_INDEX, CHART_Y_INDEX, ID_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from STATISTIC_CHART
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from STATISTIC_CHART
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gx.hz.pojo.StatisticChart" >
+    insert into STATISTIC_CHART (ID, CHART_NAME, CHART_X_INDEX, 
+      CHART_Y_INDEX, ID_NAME)
+    values (#{id,jdbcType=DECIMAL}, #{chartName,jdbcType=VARCHAR}, #{chartXIndex,jdbcType=DECIMAL}, 
+      #{chartYIndex,jdbcType=DECIMAL}, #{idName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.StatisticChart" >
+    insert into STATISTIC_CHART
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="chartName != null" >
+        CHART_NAME,
+      </if>
+      <if test="chartXIndex != null" >
+        CHART_X_INDEX,
+      </if>
+      <if test="chartYIndex != null" >
+        CHART_Y_INDEX,
+      </if>
+      <if test="idName != null" >
+        ID_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="chartName != null" >
+        #{chartName,jdbcType=VARCHAR},
+      </if>
+      <if test="chartXIndex != null" >
+        #{chartXIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="chartYIndex != null" >
+        #{chartYIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="idName != null" >
+        #{idName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.StatisticChart" >
+    update STATISTIC_CHART
+    <set >
+      <if test="chartName != null" >
+        CHART_NAME = #{chartName,jdbcType=VARCHAR},
+      </if>
+      <if test="chartXIndex != null" >
+        CHART_X_INDEX = #{chartXIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="chartYIndex != null" >
+        CHART_Y_INDEX = #{chartYIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="idName != null" >
+        ID_NAME = #{idName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.StatisticChart" >
+    update STATISTIC_CHART
+    set CHART_NAME = #{chartName,jdbcType=VARCHAR},
+      CHART_X_INDEX = #{chartXIndex,jdbcType=DECIMAL},
+      CHART_Y_INDEX = #{chartYIndex,jdbcType=DECIMAL},
+      ID_NAME = #{idName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+ 	SELECT
+		<include refid="Base_Column_List" />
+	FROM
+		STATISTIC_CHART
+	ORDER BY
+		CHART_X_INDEX,
+		CHART_Y_INDEX
+  </select>
+  
+  <update id="updateByIdName" parameterType="com.gx.hz.pojo.StatisticChart" >
+  	update STATISTIC_CHART
+    <set >
+      <if test="chartXIndex != null" >
+        CHART_X_INDEX = #{chartXIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="chartYIndex != null" >
+        CHART_Y_INDEX = #{chartYIndex,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID_NAME = #{idName,jdbcType=VARCHAR}
+  </update>
+</mapper>

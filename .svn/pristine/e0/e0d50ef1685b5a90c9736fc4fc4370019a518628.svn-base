@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoClglLogDao" >
+
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoClglLog" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="LJDW_DM" property="ljdwDm" jdbcType="VARCHAR" />
+    <result column="LJDW_NAME" property="ljdwName" jdbcType="VARCHAR" />
+    <result column="CLLX" property="cllx" jdbcType="DECIMAL" />
+    <result column="CZLX" property="czlx" jdbcType="DECIMAL" />
+    <result column="CZSJ" property="czsj" jdbcType="TIMESTAMP" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="CZJG" property="czjg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_NAME, USER_ID, LJDW_DM, LJDW_NAME, CLLX, CZLX, CZSJ, ROLE_CODE, ROLE_ID, 
+    ROLE_NAME, CZJG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_CLGL_LOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from INFO_CLGL_LOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoClglLog" >
+    insert into INFO_CLGL_LOG (ID, USER_NAME, USER_ID, 
+      LJDW_DM, LJDW_NAME, CLLX, 
+      CZLX, CZSJ, ROLE_CODE, 
+      ROLE_ID, ROLE_NAME, CZJG
+      )
+    values (#{id,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL}, 
+      #{ljdwDm,jdbcType=VARCHAR}, #{ljdwName,jdbcType=VARCHAR}, #{cllx,jdbcType=DECIMAL}, 
+      #{czlx,jdbcType=DECIMAL}, #{czsj,jdbcType=TIMESTAMP}, #{roleCode,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=DECIMAL}, #{roleName,jdbcType=VARCHAR}, #{czjg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <sql id='TABLE_SEQUENCE'>SEQ_INFO_DACXRZXX.nextval</sql>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoClglLog" >
+  	<selectKey  keyProperty="id" resultType="int" order="BEFORE" >
+  		select 
+  		<include refid="TABLE_SEQUENCE"/> 
+  		from dual
+  	</selectKey>
+    insert into INFO_CLGL_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="ljdwDm != null" >
+        LJDW_DM,
+      </if>
+      <if test="ljdwName != null" >
+        LJDW_NAME,
+      </if>
+      <if test="cllx != null" >
+        CLLX,
+      </if>
+      <if test="czlx != null" >
+        CZLX,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="roleCode != null" >
+        ROLE_CODE,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="czjg != null" >
+        CZJG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="ljdwDm != null" >
+        #{ljdwDm,jdbcType=VARCHAR},
+      </if>
+      <if test="ljdwName != null" >
+        #{ljdwName,jdbcType=VARCHAR},
+      </if>
+      <if test="cllx != null" >
+        #{cllx,jdbcType=DECIMAL},
+      </if>
+      <if test="czlx != null" >
+        #{czlx,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="czjg != null" >
+        #{czjg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoClglLog" >
+    update INFO_CLGL_LOG
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="ljdwDm != null" >
+        LJDW_DM = #{ljdwDm,jdbcType=VARCHAR},
+      </if>
+      <if test="ljdwName != null" >
+        LJDW_NAME = #{ljdwName,jdbcType=VARCHAR},
+      </if>
+      <if test="cllx != null" >
+        CLLX = #{cllx,jdbcType=DECIMAL},
+      </if>
+      <if test="czlx != null" >
+        CZLX = #{czlx,jdbcType=DECIMAL},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleCode != null" >
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="czjg != null" >
+        CZJG = #{czjg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoClglLog" >
+    update INFO_CLGL_LOG
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      LJDW_DM = #{ljdwDm,jdbcType=VARCHAR},
+      LJDW_NAME = #{ljdwName,jdbcType=VARCHAR},
+      CLLX = #{cllx,jdbcType=DECIMAL},
+      CZLX = #{czlx,jdbcType=DECIMAL},
+      CZSJ = #{czsj,jdbcType=TIMESTAMP},
+      ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      CZJG = #{czjg,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 分页查询 -->
+  <select id="queryByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+  select chrz.* 
+  from INFO_CLGL_LOG chrz
+		where 1=1
+		<if test="userid !=null">
+		AND chrz.USER_ID = #{userid}
+		</if>
+		<if test="userName !=null">
+		AND chrz.USER_NAME =#{userName}
+		</if>
+		<if test="ljdwMc !=null">
+		AND chrz.LJDW_NAME = #{ljdwMc}
+		</if>
+		<if test="zzjgdm !=null">
+		AND chrz.LJDW_DM = #{zzjgdm}
+		</if>
+		<if test="cllx !=null">
+		AND chrz.CLLX = #{cllx}
+		</if>
+		<if test="cjsj !=null">
+		AND chrz.CZSJ &gt;=#{cjsj}
+		</if>
+		<if test="cjsjs !=null">
+		AND chrz.CZSJ &lt;= #{cjsjs}
+		</if>
+		order by chrz.ID DESC
+	</select>
+</mapper>

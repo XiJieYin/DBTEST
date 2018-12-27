@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TmTmtpxxbDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.TmTmtpxxb">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TPBH" property="tpbh" jdbcType="VARCHAR" />
+		<result column="IMGPATH" property="imgpath" jdbcType="VARCHAR" />
+		<result column="BH" property="bh" jdbcType="VARCHAR" />
+		<result column="SXM" property="sxm" jdbcType="DECIMAL" />
+		<result column="UPLOAD_TIME" property="uploadTime" jdbcType="TIMESTAMP" />
+		<result column="UPLOAD_USER" property="uploadUser" jdbcType="VARCHAR" />
+		<result column="LX" property="lx" jdbcType="DECIMAL" />
+		<result column="SATAE" property="satae" jdbcType="DECIMAL" />
+		<result column="IS_LR" property="isLr" jdbcType="DECIMAL" />
+		<result column="CLEAN_SATAE" property="cleanSatae" jdbcType="DECIMAL" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="CHILD_NUM" property="childNum" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithTMBH" type="com.gx.hz.pojo.TmTmtpxxb">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TPBH" property="tpbh" jdbcType="VARCHAR" />
+		<result column="IMGPATH" property="imgpath" jdbcType="VARCHAR" />
+		<result column="BH" property="bh" jdbcType="VARCHAR" />
+		<result column="SXM" property="sxm" jdbcType="DECIMAL" />
+		<result column="UPLOAD_TIME" property="uploadTime" jdbcType="TIMESTAMP" />
+		<result column="UPLOAD_USER" property="uploadUser" jdbcType="VARCHAR" />
+		<result column="LX" property="lx" jdbcType="DECIMAL" />
+		<result column="SATAE" property="satae" jdbcType="DECIMAL" />
+		<result column="IS_LR" property="isLr" jdbcType="DECIMAL" />
+		<result column="CLEAN_SATAE" property="cleanSatae" jdbcType="DECIMAL" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="CHILD_NUM" property="childNum" jdbcType="VARCHAR" />
+		<result column="TMBH" property="tmbh" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TPBH, IMGPATH, BH, SXM, UPLOAD_TIME, UPLOAD_USER, LX, SATAE,IS_LR,CLEAN_SATAE,FILE_NAME,CHILD_NUM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from TM_TMTPXXB
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		TM_TMTPXXB
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_TM_TMTPXXB.nextval</sql>
+
+	<insert id="insert" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into TM_TMTPXXB (ID, TPBH, IMGPATH,
+		BH, SXM, UPLOAD_TIME,
+		UPLOAD_USER, LX, SATAE,IS_LR,CLEAN_SATAE)
+		values (#{id,jdbcType=DECIMAL},
+		#{tpbh,jdbcType=VARCHAR},
+		#{imgpath,jdbcType=VARCHAR},
+		#{bh,jdbcType=VARCHAR}, #{sxm,jdbcType=DECIMAL},
+		#{uploadTime,jdbcType=TIMESTAMP},
+		#{uploadUser,jdbcType=VARCHAR},
+		#{lx,jdbcType=DECIMAL},
+		#{satae,jdbcType=DECIMAL},
+		#{isLr,jdbcType=DECIMAL},
+		#{cleanSatae,jdbcType=DECIMAL},)
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into TM_TMTPXXB
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tpbh != null">
+				TPBH,
+			</if>
+			<if test="imgpath != null">
+				IMGPATH,
+			</if>
+			<if test="bh != null">
+				BH,
+			</if>
+			<if test="sxm != null">
+				SXM,
+			</if>
+			<if test="uploadTime != null">
+				UPLOAD_TIME,
+			</if>
+			<if test="uploadUser != null">
+				UPLOAD_USER,
+			</if>
+			<if test="lx != null">
+				LX,
+			</if>
+		 <if test="satae != null" >
+              SATAE,
+          </if>
+		 <if test="isLr != null" >
+              IS_LR,
+          </if>
+		 <if test="cleanSatae != null" >
+             CLEAN_SATAE,
+          </if>
+		 <if test="fileName != null" >
+             FILE_NAME,
+          </if>
+		 <if test="childNum != null" >
+             CHILD_NUM,
+          </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tpbh != null">
+				#{tpbh,jdbcType=VARCHAR},
+			</if>
+			<if test="imgpath != null">
+				#{imgpath,jdbcType=VARCHAR},
+			</if>
+			<if test="bh != null">
+				#{bh,jdbcType=VARCHAR},
+			</if>
+			<if test="sxm != null">
+				#{sxm,jdbcType=DECIMAL},
+			</if>
+			<if test="uploadTime != null">
+				#{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uploadUser != null">
+				#{uploadUser,jdbcType=VARCHAR},
+			</if>
+			<if test="lx != null">
+				#{lx,jdbcType=DECIMAL},
+			</if>
+			 <if test="satae != null" >
+        	#{satae,jdbcType=DECIMAL},
+       		</if>
+			 <if test="isLr != null" >
+        	#{isLr,jdbcType=DECIMAL},
+       		</if>
+			 <if test="cleanSatae != null" >
+        	  #{cleanSatae,jdbcType=DECIMAL},
+       		</if>
+			 <if test="fileName != null" >
+        	  #{fileName,jdbcType=VARCHAR},
+       		</if>
+			 <if test="childNum != null" >
+        	  #{childNum,jdbcType=VARCHAR},
+       		</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		update TM_TMTPXXB
+		<set>
+			<if test="tpbh != null">
+				TPBH = #{tpbh,jdbcType=VARCHAR},
+			</if>
+			<if test="imgpath != null">
+				IMGPATH = #{imgpath,jdbcType=VARCHAR},
+			</if>
+			<if test="bh != null">
+				BH = #{bh,jdbcType=VARCHAR},
+			</if>
+			<if test="sxm != null">
+				SXM = #{sxm,jdbcType=DECIMAL},
+			</if>
+			<if test="uploadTime != null">
+				UPLOAD_TIME = #{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uploadUser != null">
+				UPLOAD_USER = #{uploadUser,jdbcType=VARCHAR},
+			</if>
+			<if test="lx != null">
+				LX = #{lx,jdbcType=DECIMAL},
+			</if>
+			 <if test="satae != null" >
+                SATAE = #{satae,jdbcType=DECIMAL},
+            </if>
+			 <if test="isLr != null" >
+                IS_LR = #{isLr,jdbcType=DECIMAL},
+            </if>
+			 <if test="cleanSatae != null" >
+                 CLEAN_SATAE = #{cleanSatae,jdbcType=DECIMAL},
+            </if>
+			 <if test="fileName != null" >
+                 FILE_NAME = #{fileName,jdbcType=VARCHAR},
+            </if>
+			 <if test="childNum != null" >
+                 CHILD_NUM = #{childNum,jdbcType=VARCHAR},
+            </if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		update TM_TMTPXXB
+		set TPBH = #{tpbh,jdbcType=VARCHAR},
+		IMGPATH =
+		#{imgpath,jdbcType=VARCHAR},
+		BH = #{bh,jdbcType=VARCHAR},
+		SXM =
+		#{sxm,jdbcType=DECIMAL},
+		UPLOAD_TIME =
+		#{uploadTime,jdbcType=TIMESTAMP},
+		UPLOAD_USER =
+		#{uploadUser,jdbcType=VARCHAR},
+		LX = #{lx,jdbcType=DECIMAL},
+		SATAE = #{satae,jdbcType=DECIMAL},
+		IS_LR = #{isLr,jdbcType=DECIMAL},
+		CLEAN_SATAE = #{cleanSatae,jdbcType=DECIMAL}
+		where ID =
+		#{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectByTpbh" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1=1 and satae=1
+		<if test="tpbh !=null">
+			AND TPBH = #{tpbh,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectByJZBHAndTpbh" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1=1 and satae=1  AND TPBH = #{tpbh,jdbcType=VARCHAR}  AND BH = #{jzbh,jdbcType=VARCHAR}
+
+	</select>
+
+
+	<select id="selectByJZBHAndFileNameToNum" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1=1 and satae=1  and CHILD_NUM=0 AND FILE_NAME  like '%${filename}%'  AND BH = #{jzbh,jdbcType=VARCHAR}
+
+	</select>
+	<select id="selectByJZBHAndLikeFileName" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1=1 and satae=1   AND FILE_NAME  like '%${filename}%'  AND BH = #{jzbh,jdbcType=VARCHAR}
+
+	</select>
+	<select id="selectByJZBHAndFileName" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1=1 and satae=1  AND FILE_NAME = #{filename,jdbcType=VARCHAR}  AND BH = #{jzbh,jdbcType=VARCHAR}
+
+	</select>
+
+
+
+	<select id="selectNoPassTPByJzbh" resultMap="ResultMapWithTMBH">
+		SELECT tt.*,ttg.TMBH FROM TM_TMYTPGLXXB ttg LEFT JOIN TM_TMTPXXB tt 
+		ON ttg.TPBH = tt.TPBH 
+		where  ttg.TMBH in (
+		        	select OP.TMBH as tmbh from  ORI_INFO_PRIMARY op where OP.SATAE=3 and  OP.JZBH= #{jzbh,jdbcType=VARCHAR}
+		        ) and  tt.SATAE=1 
+		order by tt.SXM ASC
+	</select>
+	<select id="selectByTpbhAllSatea" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1=1
+		<if test="tpbh !=null">
+			AND TPBH = #{tpbh,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<!-- 修改查询出来的存在顺序码的图片 -->
+	<update id="updateSxmByTpbh" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		update TM_TMTPXXB
+		<set>
+		SXM =#{sxm,jdbcType=DECIMAL},
+		</set>
+		where 1=1 and TPBH = #{tpbh,jdbcType=VARCHAR}
+	</update>
+	<update id="updateSxmByJzbhAndFileName" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		update TM_TMTPXXB
+		<set>
+		SXM =#{sxm,jdbcType=DECIMAL},
+		</set>
+		where 1=1 and BH = #{jzbh,jdbcType=VARCHAR} AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByJzbh" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1 = 1
+		<if test="jzbh!=null">
+			AND BH = #{jzbh,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectByJzbhForSatea" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where 1 = 1  AND BH = #{jzbh,jdbcType=VARCHAR} and    SATAE=  #{satae,jdbcType=DECIMAL}
+
+	</select>
+	<select id="queryByCondition" resultMap="BaseResultMap">
+		select * from TM_TMTPXXB where SATAE=1
+		<if test="jzbh !=null">
+			AND BH = #{jzbh}
+		</if>
+		<if test="tpbh !=null">
+			AND TPBH like '%${tpbh}%'
+		</if>
+		<if test="sxm !=null">
+			AND SXM = #{SXM}
+		</if>
+		<if test="uploadTime !=null">
+			AND UPLOAD_TIME &lt;= #{uploadTime}
+		</if>
+		order by SXM , CHILD_NUM ASC
+	</select>
+	
+	<select id="findLrTPByJZTM" parameterType="java.lang.String" resultMap="ResultMapWithTMBH">
+		SELECT tt.*,ttg.TMBH FROM TM_TMYTPGLXXB ttg LEFT JOIN TM_TMTPXXB tt 
+		ON ttg.TPBH = tt.TPBH
+		WHERE TMBH IN (SELECT TMBH FROM TM_TMXXB_YW  WHERE JZBH = #{jzbh,jdbcType=VARCHAR} ) 
+	</select>
+	
+	<select id="getTmTmtpxxbConditionNotConnect" resultMap="BaseResultMap">
+        select tm.* from TM_TMTPXXB tm
+
+
+
+        where tm.SATAE=1 and (tm.TPBH not in (select xb.TPBH from TM_TMYTPGLXXB xb )
+         
+        <!-- 用前台传的状态用来区分查询的数据 -->
+        <if test="state == null"> 
+        or tm.TPBH in (select xb1.TPBH from TM_TMYTPGLXXB xb1 where xb1.TMBH=#{tmbh}) 
+		</if>
+        )
+		
+		<if test="jzbh !=null">
+			AND tm.BH = #{jzbh}
+		</if>
+		<if test="tpbh !=null">
+			AND tm.TPBH like '%${tpbh}%'
+		</if>
+		<if test="sxm !=null">
+			AND tm.SXM = #{sxm}
+		</if>
+		<if test="fileName !=null">
+			AND tm.FILE_NAME like  '%${fileName}%'
+		</if>
+		<if test="uploadTime !=null">
+			AND tm.UPLOAD_TIME &lt;= #{uploadTime}
+		</if>
+
+		order by tm.SXM asc,tm.UPLOAD_TIME ,ID ,SXM ASC
+	</select>
+	<select id="queryByConditionByTmId" resultMap="BaseResultMap">
+		select tm.* from TM_TMTPXXB tm , TM_TMYTPGLXXB txx   where txx.TMBH=#{tmbh,jdbcType=VARCHAR} and TM.SATAE=1 and txx.TPBH=tm.TPBH ORDER BY SXM ASC
+	</select>
+
+
+    <!-- 假删除 -->
+    <update id="fakeDel">
+        update TM_TMTPXXB set satae=0 where  tpbh=#{tpbh}
+    </update>
+    <!-- 设置录入 -->
+    <update id="updateLr">
+        update TM_TMTPXXB set IS_LR=1 where  id=#{id}
+    </update>
+    <!-- 设置录入 -->
+    <update id="updateLrBytpbh">
+        update TM_TMTPXXB set IS_LR=1 where   tpbh=#{tpbh}
+    </update>
+    <!-- 设置不清晰 -->
+    <update id="updateCleanSataeBytpbh">
+        update TM_TMTPXXB set CLEAN_SATAE =0 where   tpbh=#{tpbh}
+    </update>
+
+
+    <select id="findCountLrByJzbh" resultType="int">
+        select count(id) from TM_TMTPXXB where BH = #{jzbh} and IS_LR = 1 and satae=1
+    </select>
+    
+    <!-- 通过图片编号查询返回图片信息 -->
+    <select id="selectByTPBH" resultMap="BaseResultMap">
+		select 
+			<include refid="Base_Column_List" />
+		from TM_TMTPXXB where 
+		TPBH = #{tpbh,jdbcType=VARCHAR}
+	</select>
+	
+	    <!-- 通过图片编号查询返回图片信息 -->
+    <select id="selectByJzbhs" resultMap="BaseResultMap">
+		select  tpbh,
+			IMGPATH
+		from TM_TMTPXXB where 
+		bh = #{jzbh,jdbcType=VARCHAR} and satae = 1
+	</select>
+	
+	<!-- 通过图片编号更新图片信息 -->
+	<update id="updateByTpbh" parameterType="com.gx.hz.pojo.TmTmtpxxb">
+		update TM_TMTPXXB
+		<set>
+			<if test="imgpath != null">
+				IMGPATH = #{imgpath,jdbcType=VARCHAR},
+			</if>
+			<if test="bh != null">
+				BH = #{bh,jdbcType=VARCHAR},
+			</if>
+			<if test="sxm != null">
+				SXM = #{sxm,jdbcType=DECIMAL},
+			</if>
+			<if test="uploadTime != null">
+				UPLOAD_TIME = #{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uploadUser != null">
+				UPLOAD_USER = #{uploadUser,jdbcType=VARCHAR},
+			</if>
+			<if test="lx != null">
+				LX = #{lx,jdbcType=DECIMAL},
+			</if>
+			 <if test="satae != null" >
+                SATAE = #{satae,jdbcType=DECIMAL},
+            </if>
+			 <if test="isLr != null" >
+                IS_LR = #{isLr,jdbcType=DECIMAL},
+            </if>
+			 <if test="cleanSatae != null" >
+                 CLEAN_SATAE = #{cleanSatae,jdbcType=DECIMAL},
+            </if>
+			 <if test="childNum != null" >
+                 CHILD_NUM = #{childNum,jdbcType=VARCHAR},
+            </if>
+		</set>
+		where TPBH = #{tpbh,jdbcType=VARCHAR}
+	</update>
+	
+</mapper>

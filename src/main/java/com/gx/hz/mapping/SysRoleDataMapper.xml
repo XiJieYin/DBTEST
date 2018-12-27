@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.SysRoleDataDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.SysRoleData" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName"  jdbcType="VARCHAR"/>
+    <result column="SFYX" property="sfyx"  jdbcType="DECIMAL"/>
+    <result column="SSJGDM" property="ssjgdm"  jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROLE_ID, ORG_ID,ORG_NAME,SFYX,SSJGDM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE_DATA_LAYERS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_ROLE_DATA_LAYERS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_SYS_ROLE_DATA.nextval</sql>
+  
+  <insert id="insert" parameterType="com.gx.hz.pojo.SysRoleData" keyProperty="id">
+  <selectKey keyProperty="id" resultType="long" order="BEFORE">
+  	select <include refid="TABLE_SEQUENCE"/> from dual
+  </selectKey>
+    insert into SYS_ROLE_DATA_LAYERS (ID, ROLE_ID, ORG_ID,ORG_NAME,SFYX,SSJGDM
+      )
+    values (#{id,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}, #{orgId,jdbcType=VARCHAR},#{orgName,jdbcType=VARCHAR},#{sfyx,jdbcType=DECIMAL},#{ssjgdm,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <!-- 批量插入 -->
+  <insert id="insertBatch" parameterType="java.util.List" >
+	    insert into SYS_ROLE_DATA_LAYERS (ID, ROLE_ID, ORG_ID)
+	    <!--序列Oracle自增 -->
+	    select SEQ_SYS_ROLE_DATA.NEXTVAL ID ,A.* from(
+	    <foreach collection="list" item="item" index="index" separator="union all">
+	    select 
+	      #{item.roleId} ROLE_ID,
+	      #{item.orgId} ORG_ID
+	    from dual
+	    </foreach>
+	    ) A
+  </insert>
+  
+  <!-- 批量删除 -->
+  <delete id="delBatch">
+   	delete SYS_ROLE_DATA_LAYERS where id in
+       <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
+          #{id}
+       </foreach>
+  </delete>
+  
+  
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.SysRoleData" >
+    insert into SYS_ROLE_DATA_LAYERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.SysRoleData" >
+    update SYS_ROLE_DATA_LAYERS
+    <set >
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.SysRoleData" >
+    update SYS_ROLE_DATA_LAYERS
+    set ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="queryDataWithRoleId" resultType="map" parameterType="long">
+  	SELECT 
+	  ZZJGDM AS ORGID,
+	  ZZJGMC AS ORGNAME,
+	  SSJGDM AS PARENTID,
+	  T.ROLE_ID AS ROLEID,
+	  T.ID AS ROLEORGID
+	FROM DICT_ORG D
+  	LEFT JOIN
+  		(SELECT ID,ORG_ID,ROLE_ID FROM SYS_ROLE_DATA_LAYERS WHERE ROLE_ID = #{id,jdbcType=DECIMAL}) T
+  	ON D.ZZJGDM = T.ORG_ID
+  	ORDER BY D.SHOWINDEX
+  </select>
+  
+  <!-- 根据角色主键查询拥有的组织权限 -->
+  <select id="queryOrgDatahRoleId" resultMap="BaseResultMap" parameterType="int">
+  SELECT srdl.ORG_ID ,do.ZZJGMC ,do.SFYX,do.SSJGDM
+	 FROM SYS_ROLE_DATA_LAYERS srdl
+	left join DICT_ORG do on DO.ZZJGDM = srdl.ORG_ID
+	where srdl.ROLE_ID=#{id,jdbcType=DECIMAL}
+  </select>
+  
+</mapper>

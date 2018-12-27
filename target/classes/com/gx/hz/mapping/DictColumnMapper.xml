@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DictColumnDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.DictColumn">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="EN_NAME" property="enName" jdbcType="VARCHAR" />
+		<result column="CN_NAME" property="cnName" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="INTEGER" />
+		<result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+		<result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="CREATE_PERSON" property="createPerson"
+			jdbcType="INTEGER" />
+		<result column="UPDATE_PERSON" property="updatePerson"
+			jdbcType="TIMESTAMP" />
+		<result column="COLUMN_LENGTH" property="columnLength"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, EN_NAME, CN_NAME, TYPE, IS_ENABLE, INSERT_TIME,
+		UPDATE_TIME,
+		CREATE_PERSON, UPDATE_PERSON, COLUMN_LENGTH
+	</sql>
+
+	<sql id="Col_Column_List">
+		C.ID, C.EN_NAME,
+		C.CN_NAME, C.TYPE, C.COLUMN_LENGTH,
+		MC.IS_ENABLE, C.INSERT_TIME,
+		C.UPDATE_TIME, C.CREATE_PERSON,
+		C.UPDATE_PERSON
+	</sql>
+
+	<sql id="Tab_col_Column_List">
+		C.ID, C.EN_NAME,
+		C.CN_NAME, C.TYPE, C.COLUMN_LENGTH,
+		C.INSERT_TIME,
+		C.UPDATE_TIME, C.CREATE_PERSON,
+		C.UPDATE_PERSON
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_COLUMN
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		DICT_COLUMN
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<sql id='TABLE_SEQUENCE'>SEQ_DICT_COLUMN.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.DictColumn"
+		keyProperty="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DICT_COLUMN (ID, EN_NAME, CN_NAME,
+		TYPE, IS_ENABLE,
+		INSERT_TIME,
+		UPDATE_TIME, CREATE_PERSON, UPDATE_PERSON,COLUMN_LENGTH
+		)
+		values (#{id,jdbcType=INTEGER}, #{enName,jdbcType=VARCHAR},
+		#{cnName,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{isEnable,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=INTEGER},
+		#{updatePerson,jdbcType=TIMESTAMP},
+		#{columnLength,jdbcType=INTEGER}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.DictColumn">
+		insert into DICT_COLUMN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="enName != null">
+				EN_NAME,
+			</if>
+			<if test="cnName != null">
+				CN_NAME,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE,
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="createPerson != null">
+				CREATE_PERSON,
+			</if>
+			<if test="updatePerson != null">
+				UPDATE_PERSON,
+			</if>
+			<if test="columnLength != null">
+				COLUMN_LENGTH,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="enName != null">
+				#{enName,jdbcType=VARCHAR},
+			</if>
+			<if test="cnName != null">
+				#{cnName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=INTEGER},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createPerson != null">
+				#{createPerson,jdbcType=INTEGER},
+			</if>
+			<if test="updatePerson != null">
+				#{updatePerson,jdbcType=TIMESTAMP},
+			</if>
+			<if test="columnLength != null">
+				#{columnLength,jdbcType=INTEGER}
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DictColumn">
+		update DICT_COLUMN
+		<set>
+			<if test="enName != null">
+				EN_NAME = #{enName,jdbcType=VARCHAR},
+			</if>
+			<if test="cnName != null">
+				CN_NAME = #{cnName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="isEnable != null">
+				IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+			</if>
+			<if test="insertTime != null">
+				INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createPerson != null">
+				CREATE_PERSON = #{createPerson,jdbcType=INTEGER},
+			</if>
+			<if test="updatePerson != null">
+				UPDATE_PERSON = #{updatePerson,jdbcType=TIMESTAMP},
+			</if>
+			<if test="columnLength != null">
+				COLUMN_LENGTH = #{columnLength,jdbcType=INTEGER}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DictColumn">
+		update DICT_COLUMN
+		set EN_NAME = #{enName,jdbcType=VARCHAR},
+		CN_NAME =
+		#{cnName,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=INTEGER},
+		IS_ENABLE =
+		#{isEnable,jdbcType=INTEGER},
+		INSERT_TIME =
+		#{insertTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP},
+		CREATE_PERSON =
+		#{createPerson,jdbcType=INTEGER},
+		UPDATE_PERSON =
+		#{updatePerson,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from DICT_COLUMN
+		WHERE IS_ENABLE = 1
+	</select>
+
+	<!-- 根据材料ID获取配置的字段的集合 -->
+	<select id="getColsByMatId" resultMap="BaseResultMap"
+		parameterType="int">
+		SELECT
+		<include refid="Col_Column_List" />
+		FROM DICT_MATERIAL M,DICT_COLUMN C,DICT_MATERIAL_COLUMN MC
+		where
+		M.ID=MC.MATERIAL_ID
+		AND MC.COLUMN_ID=C.ID AND M.ID = #{materialId}
+		ORDER BY MC.IS_ENABLE DESC,C.ID
+	</select>
+
+	<!-- 查询材料关联的字段信息 -->
+	<select id="getColsByTabId" parameterType="int" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Tab_col_Column_List" />
+		FROM DICT_TABLE T,DICT_COLUMN C,DICT_TABLE_COLUMN TC
+		where
+		T.ID=TC.TABLE_ID
+		AND TC.COLUMN_ID=C.ID
+		AND T.ID = #{tableId}
+		ORDER BY
+		C.ID
+	</select>
+
+	<select id="queryByCondition" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM DICT_COLUMN t
+		WHERE 1 = 1
+		<if test="cnName != null">
+			AND t.CN_NAME like '%${cnName}%'
+		</if>
+		ORDER BY ID
+	</select>
+</mapper>

@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.DosJzDao">
+	<resultMap id="BaseResultMap" type="com.gx.hz.pojo.DosJz">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="AJ_ID" property="ajId" jdbcType="DECIMAL" />
+		<result column="JZLX" property="jzlx" jdbcType="VARCHAR" />
+		<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+		<result column="BCQX" property="bcqx" jdbcType="VARCHAR" />
+		<result column="JZJS" property="jzjs" jdbcType="DECIMAL" />
+		<result column="JZYS" property="jzys" jdbcType="DECIMAL" />
+		<result column="LJDW" property="ljdw" jdbcType="VARCHAR" />
+		<result column="QZH" property="qzh" jdbcType="VARCHAR" />
+		<result column="LBH" property="lbh" jdbcType="VARCHAR" />
+		<result column="AJH" property="ajh" jdbcType="VARCHAR" />
+		<result column="QZSJ" property="qzsj" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="RECORD_PERSON" property="recordPerson"
+			jdbcType="VARCHAR" />
+		<result column="JZTM" property="jztm" jdbcType="VARCHAR" />
+		<result column="SATAE" property="satae" jdbcType="DECIMAL" />
+		<result column="KSSJ" property="kssj" jdbcType="TIMESTAMP" />
+		<result column="JSSJ" property="jssj" jdbcType="TIMESTAMP" />
+		<result column="DD_ID" property="ddId" jdbcType="DECIMAL" />
+		<result column="DDMC" property="ddmc" jdbcType="VARCHAR" />
+		<result column="TXMBH" property="txmbh" jdbcType="VARCHAR" />
+		<result column="MLH" property="mlh" jdbcType="VARCHAR" />
+		<result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+		<result column="SHZT" property="shzt" jdbcType="DECIMAL" />
+		<result column="TMSHZT" property="tmshzt" jdbcType="DECIMAL" />
+		<result column="TMLX" property="tmlx" jdbcType="DECIMAL" />
+		<result column="SL" property="sl" jdbcType="DECIMAL" />
+		<result column="JZLX_CODE" property="jzlxCode" jdbcType="DECIMAL" />
+		<result column="SMZT" property="smzt" jdbcType="DECIMAL" />
+		<result column="LRZT" property="lrzt" jdbcType="DECIMAL" />
+		<result column="TMZT" property="tmzt" jdbcType="DECIMAL" />
+		<result column="RWJZSHZT" property="rwjzshzt" jdbcType="DECIMAL" />
+		<result column="AJBH" property="ajbh" jdbcType="VARCHAR" />
+		<result column="BZ" property="bz" jdbcType="VARCHAR" />
+		<result column="ND" property="nd" jdbcType="VARCHAR"/>
+		<result column="TMLXS" property="tmlxs" jdbcType="DECIMAL"/>
+		<result column="YCZT" property="yczt" jdbcType="DECIMAL"/>
+		<result column="SJSCYS" property="sjscys" jdbcType="DECIMAL"/>
+		<association property="infoRWJBXX" javaType="com.gx.hz.pojo.InfoRWJBXX">
+			<id column="RWID" property="id" jdbcType="DECIMAL" />
+			<result column="IRZT" property="zt" />
+			<result column="RWMC" property="mc" />
+			<result column="ISCHECK" property="isCheck" />
+		</association>
+	</resultMap>
+	<resultMap type="com.gx.hz.pojo.Dnzb" id="BaseResultMap2">
+		<result column="SL" property="value" jdbcType="DECIMAL" />
+		<result column="JZLX" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="com.gx.hz.pojo.DosJz" id="BaseResultMap3">
+		<result column="SL" property="sl" jdbcType="DECIMAL" />
+		<result column="JZYS" property="jzys" jdbcType="DECIMAL" />
+		<result column="ND" property="nd" jdbcType="VARCHAR" />
+		<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, AJ_ID, JZLX, ORG_CODE, ORG_NAME, BCQX, JZJS, JZYS,
+		LJDW, QZH, LBH,
+		AJH, QZSJ,
+		USER_ID, CREATE_TIME,
+		UPDATE_TIME,JZTM,SATAE,KSSJ,JSSJ,DD_ID,DDMC,TXMBH,MLH,JZTM,JZBH,SHZT,TMSHZT,JZLX_CODE,
+		SMZT,LRZT,TMZT,AJBH,BZ,ND,TMLXS,RWJZSHZT,YCZT,SJSCYS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from DOS_JZ
+		where satae !=0 AND ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		update DOS_JZ set
+		SATAE = 0 where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="delectByjzbh" >
+		update DOS_JZ set
+		SATAE = 0 where jzbh = #{jzbh}
+	</delete>
+	<sql id="TABLE_SEQUENCE">SEQ_DOS_JZ.nextval</sql>
+	<insert id="insert" parameterType="com.gx.hz.pojo.DosJz"
+		keyProperty="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DOS_JZ (ID, AJ_ID, JZLX,
+		ORG_CODE, ORG_NAME, BCQX,
+		JZJS,
+		JZYS, LJDW, QZH,
+		LBH, AJH, QZSJ, USER_ID,
+		CREATE_TIME,
+		UPDATE_TIME,SATAE,KSSJ,JSSJ,DD_ID,DDMC,TXMBH,JZTM,MLH,JZBH,SHZT,TMSHZT,JZLX_CODE,SMZT,LRZT,TMZT,AJBH,RECORD_PERSON,BZ,ND,TMLXS,RWJZSHZT,YCZT,SJSCYS)
+		values (#{id,jdbcType=DECIMAL}, #{ajId,jdbcType=DECIMAL},
+		#{jzlx,jdbcType=VARCHAR},
+		#{orgCode,jdbcType=VARCHAR},
+		#{orgName,jdbcType=VARCHAR}, #{bcqx,jdbcType=VARCHAR},
+		#{jzjs,jdbcType=DECIMAL}, #{jzys,jdbcType=DECIMAL},
+		#{ljdw,jdbcType=VARCHAR}, #{qzh,jdbcType=VARCHAR},
+		#{lbh,jdbcType=VARCHAR}, #{ajh,jdbcType=VARCHAR},
+		#{qzsj,jdbcType=VARCHAR}, #{userId,jdbcType=DECIMAL},
+		#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{satae},#{kssj,jdbcType=TIMESTAMP},
+		#{jssj,jdbcType=TIMESTAMP},#{ddId,jdbcType=DECIMAL},#{ddmc,jdbcType=VARCHAR},#{txmbh,jdbcType=VARCHAR},
+		#{jztm,jdbcType=VARCHAR},#{mlh,jdbcType=VARCHAR},#{jzbh,jdbcType=VARCHAR},#{shzt,jdbcType=DECIMAL},#{tmshzt,jdbcType=DECIMAL},#{jzlxCode,jdbcType=DECIMAL},#{smzt,jdbcType=DECIMAL},#{lrzt,jdbcType=DECIMAL},#{tmzt,jdbcType=DECIMAL},#{ajbh,jdbcType=VARCHAR},#{recordPerson,jdbcType=VARCHAR}
+		,#{bz,jdbcType=VARCHAR},#{nd,jdbcType=VARCHAR},#{tmlxs,jdbcType=DECIMAL},#{rwjzshzt,jdbcType=DECIMAL},#{yczt,jdbcType=DECIMAL},#{sjscys,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gx.hz.pojo.DosJz">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+		</selectKey>
+		insert into DOS_JZ
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="ajId != null">
+				AJ_ID,
+			</if>
+			<if test="jzlx != null">
+				JZLX,
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE,
+			</if>
+			<if test="orgName != null">
+				ORG_NAME,
+			</if>
+			<if test="bcqx != null">
+				BCQX,
+			</if>
+			<if test="jzjs != null">
+				JZJS,
+			</if>
+			<if test="jzys != null">
+				JZYS,
+			</if>
+			<if test="ljdw != null">
+				LJDW,
+			</if>
+			<if test="qzh != null">
+				QZH,
+			</if>
+			<if test="lbh != null">
+				LBH,
+			</if>
+			<if test="ajh != null">
+				AJH,
+			</if>
+			<if test="qzsj != null">
+				QZSJ,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="jztm != null">
+				JZTM,
+			</if>
+			<if test="satae != null">
+				SATAE,
+			</if>
+			<if test="shzt != null">
+				SHZT,
+			</if>
+			<if test="tmshzt != null">
+				TMSHZT,
+			</if>
+			<if test="jzlxCode != null">
+				JZLX_CODE,
+			</if>
+			<if test="smzt != null">
+				SMZT,
+			</if>
+			<if test="lrzt != null">
+				LRZT,
+			</if>
+			<if test="tmzt != null">
+				TMZT,
+			</if>
+			<if test="rwjzshzt != null">
+				RWJZSHZT,
+			</if>
+			<if test="ajbh != null">
+				AJBH,
+			</if>
+			<if test="tmlxs != null">
+				TMLXS,
+			</if>
+				<if test="yczt != null">
+				YCZT,
+			</if>
+			<if test="sjscys!=null">
+				SJSCYS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ajId != null">
+				#{ajId,jdbcType=DECIMAL},
+			</if>
+			<if test="jzlx != null">
+				#{jzlx,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				#{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="bcqx != null">
+				#{bcqx,jdbcType=VARCHAR},
+			</if>
+			<if test="jzjs != null">
+				#{jzjs,jdbcType=DECIMAL},
+			</if>
+			<if test="jzys != null">
+				#{jzys,jdbcType=DECIMAL},
+			</if>
+			<if test="ljdw != null">
+				#{ljdw,jdbcType=VARCHAR},
+			</if>
+			<if test="qzh != null">
+				#{qzh,jdbcType=VARCHAR},
+			</if>
+			<if test="lbh != null">
+				#{lbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ajh != null">
+				#{ajh,jdbcType=VARCHAR},
+			</if>
+			<if test="qzsj != null">
+				#{qzsj,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jztm != null">
+				#{jztm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="satae != null">
+				#{satae,jdbcType=DECIMAL},
+			</if>
+			<if test="shzt != null">
+				#{shzt,jdbcType=DECIMAL},
+			</if>
+			<if test="tmshzt != null">
+				#{tmshzt,jdbcType=DECIMAL},
+			</if>
+			<if test="rwjzshzt != null">
+				#{rwjzshzt,jdbcType=DECIMAL},
+			</if>
+			<if test="jzlxCode != null">
+				#{jzlxCode,jdbcType=DECIMAL},
+			</if>
+			<if test="smzt != null">
+				#{smzt,jdbcType=DECIMAL},
+			</if>
+			<if test="lrzt != null">
+				#{lrzt,jdbcType=DECIMAL},
+			</if>
+			<if test="tmzt != null">
+				#{tmzt,jdbcType=DECIMAL},
+			</if>
+			<if test="ajbh != null">
+				#{ajbh,jdbcType=DECIMAL},
+			</if>
+			<if test="tmlxs != null">
+				#{tmlxs,jdbcType=DECIMAL},
+			</if>
+				<if test="yczt != null">
+				#{yczt,jdbcType=DECIMAL},
+			</if>
+			<if test="sjscys!=null">
+			#{sjscys,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById">
+		update DOS_JZ set SATAE = 3 where id = #{id}
+	</update>
+	<update id="updateByYczt">
+		update DOS_JZ set yczt = 1 where jzbh = #{jzbh}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DosJz">
+		update DOS_JZ
+		<set>
+			<if test="ajId != null">
+				AJ_ID = #{ajId,jdbcType=DECIMAL},
+			</if>
+			<if test="jzlx != null">
+				JZLX = #{jzlx,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="bcqx != null">
+				BCQX = #{bcqx,jdbcType=VARCHAR},
+			</if>
+			<if test="jzjs != null">
+				JZJS = #{jzjs,jdbcType=DECIMAL},
+			</if>
+			<if test="jzys != null">
+				JZYS = #{jzys,jdbcType=DECIMAL},
+			</if>
+			<if test="ljdw != null">
+				LJDW = #{ljdw,jdbcType=VARCHAR},
+			</if>
+			<if test="qzh != null">
+				QZH = #{qzh,jdbcType=VARCHAR},
+			</if>
+			<if test="lbh != null">
+				LBH = #{lbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ajh != null">
+				AJH = #{ajh,jdbcType=VARCHAR},
+			</if>
+			<if test="qzsj != null">
+				QZSJ = #{qzsj,jdbcType=VARCHAR},
+			</if>
+			<if test="satae != null">
+				SATAE = #{satae,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			UPDATE_TIME = sysdate,
+			<if test="kssj != null">
+				KSSJ = #{kssj},
+			</if>
+			<if test="jssj != null">
+				JSSJ = #{jssj},
+			</if>
+			<if test="ddId != null">
+				DD_ID = #{ddId},
+			</if>
+			<if test="ddmc != null">
+				DDMC = #{ddmc},
+			</if>
+			<if test="txmbh != null">
+				TXMBH = #{txmbh},
+			</if>
+			<if test="jztm != null">
+				JZTM = #{jztm},
+			</if>
+			<if test="mlh != null">
+				MLH = #{mlh},
+			</if>
+			<if test="jzbh !=null">
+				JZBH = #{jzbh},
+			</if>
+			<if test="shzt !=null">
+				SHZT = #{shzt},
+			</if>
+			<if test="tmshzt !=null">
+				TMSHZT = #{tmshzt},
+			</if>
+			<if test="jzlxCode !=null">
+				JZLX_CODE = #{jzlxCode},
+			</if>
+			<if test="smzt !=null">
+				SMZT = #{smzt},
+			</if>
+			<if test="rwjzshzt !=null">
+				RWJZSHZT = #{rwjzshzt},
+			</if>
+			<if test="lrzt !=null">
+				LRZT = #{lrzt},
+			</if>
+			<if test="tmzt !=null">
+				TMZT = #{tmzt},
+			</if>
+			<if test="bz !=null">
+				BZ = #{bz},
+			</if>
+			<if test="nd !=null">
+				ND = #{nd},
+			</if>
+			<if test="tmlxs !=null">
+				TMLXS = #{tmlxs},
+			</if>
+			<if test="yczt !=null">
+				YCZT = #{yczt},
+			</if>
+			<if test="sjscys!=null">
+				SJSCYS=#{sjscys},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DosJz">
+		update DOS_JZ
+		set
+		AJ_ID = #{ajId,jdbcType=DECIMAL},
+		JZLX = #{jzlx,jdbcType=VARCHAR},
+		ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+		ORG_NAME =
+		#{orgName,jdbcType=VARCHAR},
+		BCQX = #{bcqx,jdbcType=VARCHAR},
+		JZJS =
+		#{jzjs,jdbcType=DECIMAL},
+		JZYS = #{jzys,jdbcType=DECIMAL},
+		LJDW =
+		#{ljdw,jdbcType=VARCHAR},
+		QZH = #{qzh,jdbcType=VARCHAR},
+		LBH =
+		#{lbh,jdbcType=VARCHAR},
+		AJH = #{ajh,jdbcType=VARCHAR},
+		QZSJ =
+		#{qzsj,jdbcType=VARCHAR},
+		USER_ID = #{userId,jdbcType=DECIMAL},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		JZTM =
+		#{jztm,jdbcType=TIMESTAMP},
+		SATAE = #{SATAE,jdbcType=TIMESTAMP}
+		KSSJ =
+		#{kssj,jdbcType=TIMESTAMP},
+		JSSJ = #{jssj,jdbcType=TIMESTAMP},
+		DD_ID =
+		#{ddId,jdbcType=DECIMAL},
+		DDMC #{ddmc,jdbcType=VARCHAR},
+		TXMBH =
+		#{txmbh,jdbcType=VARCHAR},
+		JZTM = #{jztm,jdbcType=VARCHAR},
+		MLH =
+		#{mlh,jdbcType=VARCHAR},
+		JZBH =#{jzbh,jdbcType=VARCHAR},
+		SHZT =
+		#{shzt,jdbcType=TIMESTAMP},
+		TMSHZT = #{tmshzt,jdbcType=TIMESTAMP},
+		JZLX_CODE = #{jzlxCode,jdbcType=DECIMAL},
+		TMLXS = #{tmlxs,jdbcType=DECIMAL},
+		YCZT = #{yczt,jdbcType=VARCHAR},
+		SJSCYS=#{sjscys,jdbcType=DECIMAL}
+		where ID =
+		#{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from DOS_JZ
+		where satae !=0
+	</select>
+	
+	<select id="selectByParams" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select jz.*,ir.ZT IRZT,ir.id RWID ,ir.mc rwmc, 
+		di.tmlx tmlx FROM DOS_JZ jz
+		join DOS_AJ aj on jz.AJ_ID = aj.ID LEFT
+		JOIN INFO_RWJBXX ir on ir.id = aj.RW_id
+		JOIN INFO_RWRYGLXXB iry on iry.RW_id = ir.id
+		left join DICT_INFO di on di.id = jz.JZLX_CODE
+		WHERE 1 = 1 AND jz.SATAE !=0
+		<if test="userId !=null">
+			AND iry.user_id = #{userId}
+		</if>
+		<if test="qzh !=null">
+			AND jz.qzh like '%${qzh}%'
+		</if>
+		<if test="lbh !=null">
+			AND jz.lbh like '%${lbh}%'
+		</if>
+		<if test="mlh !=null">
+			AND jz.mlh like '%${mlh}%'
+		</if>
+		<if test="ajh !=null">
+			AND jz.ajh like '%${ajh}%'
+		</if>
+		<if test="tm !=null">
+			AND jz.JZTM like '%${tm}%'
+		</if>
+		<if test="kssj !=null">
+			AND jz.kssj &gt;= #{kssj}
+		</if>
+		<if test="jssj !=null">
+			AND jz.jssj &lt;= #{jssj}
+		</if>
+		<if test="cfwz !=null">
+			AND jz.DD_ID = #{cfwz}
+		</if>
+		<if test="zt !=null">
+			AND ir.ZT = #{zt}
+		</if>
+		<if test="orgCode != null">
+			AND jz.ORG_CODE = #{orgCode}
+		</if>
+		<if test="rwId != null">
+			AND ir.id = #{rwId}
+		</if>
+		<if test="satae != null">
+			AND jz.satae = #{satae}
+		</if>
+		order by jz.id desc
+	</select>
+
+	<select id="queryByJz" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select jz.*, di.tmlx tmlx FROM DOS_JZ jz
+		left join DICT_INFO di on di.id = jz.JZLX_CODE
+		WHERE 1 = 1 AND jz.SATAE = 3
+		<if test="tm !=null">
+			AND jz.jztm like '%${tm}%'
+		</if>
+		<if test="txm !=null">
+			AND jz.txmbh like '%${txm}%'
+		</if>
+		<if test="jzbh !=null">
+			AND jz.jzbh like '%${jzbh}%'
+		</if>
+		<if test="cfwz !=null">
+			AND jz.DD_ID = #{cfwz}
+		</if>
+		<if test="kssj!=null">
+			AND jz.CREATE_TIME &gt;=#{kssj}
+		</if>
+		<if test="jssj!=null">
+			AND jz.CREATE_TIME &lt;=#{jssj}
+		</if>
+		<if test="orgName!=null">
+			AND jz.ORG_NAME=#{orgName}
+		</if>
+		 <if test="datas != null">
+            and
+            <foreach collection="datas" index="index" item="item" open="(" separator="or" close=")">
+                jz.ORG_CODE in #{item}
+            </foreach>
+        </if>
+		order by jz.id desc
+		</select>
+		
+	<select id="queryByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select jz.*,ir.ZT IRZT,ir.id RWID ,ir.mc rwmc , ir.ISCHECK,
+		di.tmlx tmlx FROM DOS_JZ jz
+		join DOS_AJ aj on jz.AJ_ID = aj.ID LEFT
+		JOIN INFO_RWJBXX ir on ir.id = aj.RW_id
+		JOIN INFO_RWRYGLXXB iry on iry.RW_id = ir.id
+		left join DICT_INFO di on di.id = jz.JZLX_CODE
+		WHERE 1 = 1 AND jz.SATAE in(1,2,3)
+		<if test="userId !=null">
+			AND (iry.user_Id = #{userId} or iry.role_Id = #{roleId})
+		</if>
+		<if test="qzh !=null">
+			AND jz.qzh like '%${qzh}%'
+		</if>
+		<if test="lbh !=null">
+			AND jz.lbh like '%${lbh}%'
+		</if>
+		<if test="mlh !=null">
+			AND jz.mlh like '%${mlh}%'
+		</if>
+		<if test="ajh !=null">
+			AND jz.ajh like '%${ajh}%'
+		</if>
+		<if test="tm !=null">
+			AND jz.JZTM like '%${tm}%'
+		</if>
+		<if test="kssj !=null">
+			AND jz.kssj &gt;= #{kssj}
+		</if>
+		<if test="jssj !=null">
+			AND jz.jssj &lt;= #{jssj}
+		</if>
+		<if test="cfwz !=null">
+			AND jz.DD_ID = #{cfwz}
+		</if>
+		<if test="zt !=null">
+			AND ir.ZT = #{zt}
+		</if>
+		<if test="orgCode != null">
+			AND jz.ORG_CODE = #{orgCode}
+		</if>
+		<if test="rwId != null">
+			AND ir.id = #{rwId}
+		</if>
+		<if test="satae!=null">
+			and
+			<foreach collection="satae" index="index" item="item" open="("
+				separator="or" close=")">
+				jz.satae = #{item}
+			</foreach>
+		</if>
+		<if test="smzt != null">
+			AND jz.SMZT = #{smzt}
+		</if>
+		<if test="lrzt != null">
+			AND jz.LRZT = #{lrzt}
+		</if>
+		<if test="ajbh !=null">
+		AND jz.ajbh = #{ajbh}
+		</if>
+		<if test="tmzt != null">
+			AND jz.TMZT = #{tmzt}
+		</if>
+		order by jz.id desc
+	</select>
+	
+	<!-- 获取所有卷宗信息 -->
+	<select id="queryAllJzByCondition" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select jz.*
+		 FROM DOS_JZ jz
+		WHERE jz.SATAE !=0
+		<if test="qzh !=null">
+			AND jz.qzh like '%${qzh}%'
+		</if>
+		<if test="lbh !=null">
+			AND jz.lbh like '%${lbh}%'
+		</if>
+		<if test="mlh !=null">
+			AND jz.mlh like '%${mlh}%'
+		</if>
+		<if test="ajh !=null">
+			AND jz.ajh like '%${ajh}%'
+		</if>
+		<if test="tm !=null">
+			AND jz.JZTM like '%${tm}%'
+		</if>
+		<if test="kssj !=null">
+			AND jz.kssj &gt;= #{kssj}
+		</if>
+		<if test="jssj !=null">
+			AND jz.jssj &lt;= #{jssj}
+		</if>
+		<if test="cfwz !=null">
+			AND jz.DD_ID = #{cfwz}
+		</if>
+		<if test="ajbh !=null">
+		AND jz.ajbh = #{ajbh}
+		</if>
+	    <if test="datas != null">
+		and
+			<foreach collection="datas" index="index" item="item" open="("
+				separator="or" close=")">
+				jz.ORG_CODE = #{item}
+			</foreach>
+	    </if>
+		order by jz.CREATE_TIME desc
+	</select>
+
+	<select id="selectByTxmbh" resultMap="BaseResultMap">
+		select jz.* ,su.USER_NAME
+		record_person
+		from DOS_JZ jz join SYS_USER su
+		on jz.USER_ID = su.id
+		where TXMBH = #{txmbh,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="selectByCountAndNd" resultMap="BaseResultMap3">
+	select count(id) sl,nd from DOS_JZ where satae!=0 GROUP BY nd <!-- ORDER BY cast(nd as int) -->
+	</select>
+	
+	<select id="selectByTjToYearOrRwId" resultType="int">
+	select count(jz.id) from DOS_JZ jz join DOS_AJ aj on jz.ajbh = aj.ajbh where jz.satae != 0
+	<if test="rwId !=null">
+	and aj.RW_ID = #{rwId}
+	</if>
+	<if test="userId !=null">
+	and jz.user_id = #{userId}
+	</if>
+	<if test="year !=null">
+	and to_char(jz.CREATE_TIME,'yyyy-mm-dd') = #{year} 
+	</if>
+	</select>
+	
+	<select id="selectByNd" resultMap="BaseResultMap3">
+	select count(id) sl,sum(JZYS) JZYS,ORG_CODE,ORG_NAME from DOS_JZ where 1=1
+	 <if test="year !=null">
+ 	 and nd = #{year} 
+  	</if>
+	<if test="orgCode !=null">
+ 	 and ORG_CODE like '%${orgCode}%'
+ 	 </if>
+	 GROUP BY ORG_CODE,ORG_NAME
+	</select>
+	
+	<select id="queryByJzbh" resultMap="BaseResultMap">
+		select * from DOS_JZ where JZBH = #{jzbh} and satae!=0
+	</select>
+	<select id="getJzByAjId" parameterType="int" resultMap="BaseResultMap">
+		select *
+		from DOS_JZ
+		where AJ_ID = #{ajId,jdbcType=DECIMAL} and satae!=0
+	</select>
+	
+	<!-- 根据案卷编号查询卷宗 -->
+	<select id="getJzByAjbh" parameterType="com.gx.hz.pojo.DosJz" resultMap="BaseResultMap">
+		select *
+		from DOS_JZ
+		where AJBH = #{ajbh} and satae!=0
+	</select>
+	
+	<!-- 查询卷宗统计件数 -->
+	<select id="countByOrg" resultType="java.util.Map">
+		SELECT
+		jztj.counts,
+		org.ZZJGMC
+		AS orgName
+		FROM
+		(
+		SELECT
+		COUNT(*) AS counts,
+		ORG_CODE AS orgCode
+		FROM
+		DOS_JZ
+		GROUP BY
+		ORG_CODE
+		) jztj
+		RIGHT JOIN DICT_ORG org ON jztj.orgCODE =
+		org.ZZJGDM
+		WHERE
+		org.ZZJGLX = 12
+		AND org.SFYX = '1'
+		AND org.ZZJGMC LIKE
+		'%分局%'
+		AND org.SSJGDM = '440100000000'
+		AND org.SHOWINDEX != 99
+		ORDER BY
+		org.ssjgdm,
+		org.zzjglx,
+		org.showindex
+	</select>
+
+	<!-- 卷宗数据查询 -->
+	<select id="queryDataPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select jz.*,ir.ZT IRZT,ir.id RWID ,ir.mc rwmc, di.tmlx tmlx FROM
+		DOS_JZ jz
+		join DOS_AJ aj on jz.AJ_ID = aj.ID 
+		LEFT JOIN INFO_RWJBXX ir on ir.id = aj.RW_id
+		left join DICT_INFO di on di.id = jz.JZLX_CODE
+		WHERE jz.SATAE !=0 and jz.satae != 3
+		<if test="qzh !=null">
+			AND jz.qzh like '%${qzh}%'
+		</if>
+		<if test="lbh !=null">
+			AND jz.lbh like '%${lbh}%'
+		</if>
+		<if test="mlh !=null">
+			AND jz.mlh like '%${mlh}%'
+		</if>
+		<if test="ajh !=null">
+			AND jz.ajh like '%${ajh}%'
+		</if>
+		<if test="tm !=null">
+			AND jz.JZTM like '%${tm}%'
+		</if>
+		<if test="kssj !=null">
+			AND jz.kssj &gt;= #{kssj}
+		</if>
+		<if test="jssj !=null">
+			AND jz.jssj &lt;= #{jssj}
+		</if>
+		<if test="cfwz !=null">
+			AND jz.DD_ID = #{cfwz}
+		</if>
+		<if test="zt !=null">
+			AND ir.ZT = #{zt}
+		</if>
+		<if test="orgCode != null">
+			AND jz.ORG_CODE = #{orgCode}
+		</if>
+		<if test="rwId != null">
+			AND ir.id = #{rwId}
+		</if>
+		<if test="satae != null">
+			AND jz.satae = #{satae}
+		</if>
+		<if test="datas != null">
+			and
+			<foreach collection="datas" index="index" item="item" open="("
+				separator="or" close=")">
+				jz.ORG_CODE in #{item}
+			</foreach>
+		</if>
+		order by jz.id desc
+	</select>
+	<select id="selectDnzb" resultMap="BaseResultMap2">
+		select count(id) sl,jzlx from DOS_JZ GROUP BY jzlx
+	</select>
+	<select id="selectByRwId" resultType="int">
+		select COUNT(JZ.id) sl from DOS_JZ jz join DOS_AJ aj on JZ.AJ_ID = AJ.ID
+		join
+		INFO_RWJBXX rw on rw.id = aj.rw_id where JZ.SATAE = 3
+		and AJ.SATAE !=0 and RW.id =#{rwId}
+	</select>
+	<!-- 根据任务id获取任务下的卷宗 -->
+	<select id="getDosJzByRwid" resultMap="BaseResultMap">
+		select jz.*,rw.mc rwmc from DOS_JZ jz join DOS_AJ aj on JZ.AJ_ID = AJ.ID
+		join
+		INFO_RWJBXX rw on rw.id = aj.rw_id where JZ.SATAE !=0
+		and AJ.SATAE !=0 and RW.id =#{rwId}
+	</select>
+	 
+	<select id="selectByRwIdMax" resultType="int">
+		select COUNT(JZ.id) sl from DOS_JZ jz join DOS_AJ aj on JZ.AJ_ID = AJ.ID
+		join
+		INFO_RWJBXX rw on rw.id = aj.rw_id where JZ.SATAE != 0
+		and AJ.SATAE !=0 and RW.id =#{rwId}
+	</select>
+	
+	<!-- 通过卷宗编号更新卷宗信息 -->
+	<update id="updateByJzbh" parameterType="com.gx.hz.pojo.DosJz">
+		update DOS_JZ
+		<set>
+			<if test="ajId != null">
+				AJ_ID = #{ajId,jdbcType=DECIMAL},
+			</if>
+			<if test="jzlx != null">
+				JZLX = #{jzlx,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="bcqx != null">
+				BCQX = #{bcqx,jdbcType=VARCHAR},
+			</if>
+			<if test="jzjs != null">
+				JZJS = #{jzjs,jdbcType=DECIMAL},
+			</if>
+			<if test="jzys != null">
+				JZYS = #{jzys,jdbcType=DECIMAL},
+			</if>
+			<if test="ljdw != null">
+				LJDW = #{ljdw,jdbcType=VARCHAR},
+			</if>
+			<if test="qzh != null">
+				QZH = #{qzh,jdbcType=VARCHAR},
+			</if>
+			<if test="lbh != null">
+				LBH = #{lbh,jdbcType=VARCHAR},
+			</if>
+			<if test="ajh != null">
+				AJH = #{ajh,jdbcType=VARCHAR},
+			</if>
+			<if test="qzsj != null">
+				QZSJ = #{qzsj,jdbcType=VARCHAR},
+			</if>
+			<if test="satae != null">
+				SATAE = #{satae,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=DECIMAL},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			UPDATE_TIME = sysdate,
+			<if test="kssj != null">
+				KSSJ = #{kssj},
+			</if>
+			<if test="jssj != null">
+				JSSJ = #{jssj},
+			</if>
+			<if test="ddId != null">
+				DD_ID = #{ddId},
+			</if>
+			<if test="ddmc != null">
+				DDMC = #{ddmc},
+			</if>
+			<if test="txmbh != null">
+				TXMBH = #{txmbh},
+			</if>
+			<if test="jztm != null">
+				JZTM = #{jztm},
+			</if>
+			<if test="mlh != null">
+				MLH = #{mlh},
+			</if>
+			<if test="shzt !=null">
+				SHZT = #{shzt},
+			</if>
+			<if test="tmshzt !=null">
+				TMSHZT = #{tmshzt},
+			</if>
+			<if test="jzlxCode !=null">
+				JZLX_CODE = #{jzlxCode},
+			</if>
+			<if test="smzt !=null">
+				SMZT = #{smzt},
+			</if>
+			<if test="lrzt !=null">
+				LRZT = #{lrzt},
+			</if>
+			<if test="tmzt !=null">
+				TMZT = #{tmzt},
+			</if>
+		</set>
+		where JZBH = #{jzbh,jdbcType=VARCHAR}
+	</update>
+	
+		<select id="queryByPage" parameterType="java.util.Map"
+		resultMap="BaseResultMap3">
+		select count(JZ.id) sl,JZ.org_name orgName,JZ.org_code orgCode
+		FROM dos_jz jz  WHERE 1 = 1 AND jz.SATAE =3
+		<if test="dalxName !=null">
+			AND jz.jzlx = #{dalxName}
+		</if>
+		<if test="nd!=null">
+			AND jz.ND = #{nd}
+		</if>
+		<if test="bcqx!=null">
+			AND jz.BCQX = #{bcqx}
+		</if>
+		<if test="orgCode !=null">
+		and JZ.org_code = #{orgCode}
+		</if>
+		<if test="datas != null">
+			and
+			<foreach collection="datas" index="index" item="item" open="("
+				separator="or" close=")">
+				jz.ORG_CODE in #{item}
+			</foreach>
+		</if>
+		GROUP BY JZ.org_code,JZ.org_name
+	</select>
+	<select id="queryByConditionByFk" resultMap="BaseResultMap">
+	select * from Dos_jz where 1=1
+		<if test="jzbhs != null">
+			and
+			<foreach collection="jzbhs" index="index" item="item" open="("
+				separator="or" close=")">
+				jzbh in #{item}
+			</foreach>
+		</if>
+		<if test="jzbh !=null">
+			and jzbh = #{jzbh}
+		</if>
+	</select>
+	
+	<select id="queryByConditionByYcjz" resultMap="BaseResultMap">
+	select jz.* from DOS_JZ jz join DOS_AJ aj on JZ.AJBH = AJ.AJBH join INFO_RWJBXX rw on rw.id = aj.rw_id 
+	where JZ.SATAE != 0 and RW.fzr_id = #{userId} and jz.yczt = 1
+	ORDER BY JZ.id DESC
+	</select>
+	
+	<!-- 通过卷宗编号查询卷宗的信息和任务信息 -->
+	<select id="selectJzAndRwInfo"  resultMap="BaseResultMap">
+		select jz.*,ir.ZT IRZT,ir.id RWID ,ir.mc rwmc , ir.ISCHECK,
+		di.tmlx tmlx FROM DOS_JZ jz
+		join DOS_AJ aj on jz.AJ_ID = aj.ID LEFT
+		JOIN INFO_RWJBXX ir on ir.id = aj.RW_id
+		JOIN INFO_RWRYGLXXB iry on iry.RW_id = ir.id
+		left join DICT_INFO di on di.id = jz.JZLX_CODE
+		where jz.JZBH = #{jzbh} and jz.satae!=0
+	</select>
+</mapper>

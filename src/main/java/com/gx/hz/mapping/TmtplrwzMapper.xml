@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TmtplrwzDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Tmtplrwz" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="JZ_ID" property="jzId" jdbcType="DECIMAL" />
+    <result column="TOTAL_PAGE" property="totalPage" jdbcType="DECIMAL" />
+    <result column="NOW_PAGE" property="nowPage" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, JZ_ID, TOTAL_PAGE, NOW_PAGE,USER_ID, JZBH
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TM_TPLRWZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TM_TPLRWZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_TM_TPLRWZ.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Tmtplrwz" >
+      <selectKey keyProperty="id"  resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into TM_TPLRWZ (ID, JZ_ID, TOTAL_PAGE, 
+      NOW_PAGE,USER_ID, JZBH)
+    values (#{id,jdbcType=DECIMAL}, #{jzId,jdbcType=DECIMAL}, #{totalPage,jdbcType=DECIMAL}, 
+      #{nowPage,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{jzbh,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Tmtplrwz" >
+      <selectKey keyProperty="id"  resultType="long" order="BEFORE">
+          select <include refid="TABLE_SEQUENCE"/> from dual
+      </selectKey>
+    insert into TM_TPLRWZ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="jzId != null" >
+        JZ_ID,
+      </if>
+      <if test="totalPage != null" >
+        TOTAL_PAGE,
+      </if>
+      <if test="nowPage != null" >
+        NOW_PAGE,
+      </if>
+      <if test="userId != null" >
+          USER_ID,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="jzId != null" >
+        #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPage != null" >
+        #{totalPage,jdbcType=DECIMAL},
+      </if>
+      <if test="nowPage != null" >
+        #{nowPage,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Tmtplrwz" >
+    update TM_TPLRWZ
+    <set >
+      <if test="jzId != null" >
+        JZ_ID = #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPage != null" >
+        TOTAL_PAGE = #{totalPage,jdbcType=DECIMAL},
+      </if>
+      <if test="nowPage != null" >
+        NOW_PAGE = #{nowPage,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+          USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Tmtplrwz" >
+    update TM_TPLRWZ
+    set JZ_ID = #{jzId,jdbcType=DECIMAL},
+      TOTAL_PAGE = #{totalPage,jdbcType=DECIMAL},
+      NOW_PAGE = #{nowPage,jdbcType=DECIMAL},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      JZBH = #{jzbh,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+
+
+
+
+    <select id="selectByJZID" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from TM_TPLRWZ
+        where JZ_ID = #{jzId,jdbcType=DECIMAL}
+    </select>
+    <select id="selectByJZIDAndUserId" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from TM_TPLRWZ
+        where JZ_ID = #{jzId,jdbcType=DECIMAL} and USER_ID= #{userId,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="selectByJZBH" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from TM_TPLRWZ
+        where JZBH = #{jzbh,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

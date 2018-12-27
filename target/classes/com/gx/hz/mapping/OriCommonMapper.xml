@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OriCommonDao" >
+  
+  	<!-- 动态获取录入表的序列 -->
+	<select id="getOriSequence" resultType="int" parameterType="string">
+		select  ${seq}  from dual
+	</select>
+	
+	<!-- 动态插入主表关联信息 -->
+	<insert id="insertOriPrimary" parameterType="string">
+		${insertSql}
+	</insert>
+	
+	<!-- 动态插入原文录入信息 -->
+	<insert id="insertOriInfo" parameterType="string">
+		${insertSql}
+	</insert>
+	
+	<!-- 动态更新原文录入信息 -->
+	<update id="updateOriInfo" parameterType="string">
+		${updateSql}
+	</update>
+	
+	<delete id="deleteOriInfo" parameterType="string">
+		${deleteSql}
+	</delete>
+	
+	<select id="selectOriInfo" parameterType="string" resultType="java.util.Map">
+		${selectSql}
+	</select>
+	
+	<!-- 动态获取录入信息 -->
+	<select id="getOriInfoByTableName" resultType="map">
+		select * from ${tableName} where ywtpbh = #{ywtpbh}
+		<if test="userId != '' and userId != null">
+			and user_id = #{userId} 
+		</if>
+		and rownum=1 order by id desc
+	</select>
+	
+	<select id="getOriInfoByTableNameAndYwpid" resultType="map">
+		select * from ${tableName} where ywtpbh = #{ywtpbh}
+		<if test="userId != '' and userId != null">
+			and user_id = #{userId} 
+		</if>
+		<if test="ywpid != '' and ywpid != null">
+			and ywp_id = #{ywpid}
+		</if>
+		and rownum=1 order by id desc
+	</select>
+	
+	<!-- 动态获取录入信息 返回map集合 副表有多个一样-->
+	<select id="getOriInfoByYwtpbh" resultType="map">
+		select * from ${tableName} where ywtpbh = #{ywtpbh}
+	</select>
+	
+	<!-- 动态创建数据库表 -->
+	<update id="createTable" parameterType="string">
+		${createSql}
+	</update>
+	
+	<!-- 动态创建数据库表 -->
+	<update id="createSequence" parameterType="string">
+		${createSeq}
+	</update>
+</mapper>

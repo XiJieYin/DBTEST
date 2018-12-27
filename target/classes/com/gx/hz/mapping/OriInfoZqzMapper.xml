@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.OriInfoZqzDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.OriInfoZqz" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="LRRYMC" property="lrrymc" jdbcType="VARCHAR" />
+    <result column="LRSJ" property="lrsj" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="YWTPBH" property="ywtpbh" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="CSNY" property="csny" jdbcType="VARCHAR" />
+    <result column="ZJHM" property="zjhm" jdbcType="VARCHAR" />
+    <result column="DZ" property="dz" jdbcType="VARCHAR" />
+    <result column="ZQZH" property="zqzh" jdbcType="VARCHAR" />
+    <result column="YWP_ID" property="ywpId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, LRRYMC, LRSJ, SATAE, YWTPBH, XM, XB, CSNY, ZJHM, DZ, ZQZH, YWP_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORI_INFO_ZQZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ORI_INFO_ZQZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <sql id="TABLE_SEQUENCE">SEQ_ORI_INFO_ZQZ.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.OriInfoZqz" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into ORI_INFO_ZQZ (ID, USER_ID, LRRYMC, 
+      LRSJ, SATAE, YWTPBH, 
+      XM, XB, CSNY, ZJHM, 
+      DZ, ZQZH, YWP_ID)
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{lrrymc,jdbcType=VARCHAR}, 
+      #{lrsj,jdbcType=TIMESTAMP}, #{satae,jdbcType=DECIMAL}, #{ywtpbh,jdbcType=VARCHAR}, 
+      #{xm,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{csny,jdbcType=VARCHAR}, #{zjhm,jdbcType=VARCHAR}, 
+      #{dz,jdbcType=VARCHAR}, #{zqzh,jdbcType=VARCHAR}, #{ywpId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.OriInfoZqz" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into ORI_INFO_ZQZ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC,
+      </if>
+      <if test="lrsj != null" >
+        LRSJ,
+      </if>
+      <if test="satae != null" >
+        SATAE,
+      </if>
+      <if test="ywtpbh != null" >
+        YWTPBH,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="xb != null" >
+        XB,
+      </if>
+      <if test="csny != null" >
+        CSNY,
+      </if>
+      <if test="zjhm != null" >
+        ZJHM,
+      </if>
+      <if test="dz != null" >
+        DZ,
+      </if>
+      <if test="zqzh != null" >
+        ZQZH,
+      </if>
+      <if test="ywpId != null" >
+        YWP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="ywtpbh != null" >
+        #{ywtpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="csny != null" >
+        #{csny,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="dz != null" >
+        #{dz,jdbcType=VARCHAR},
+      </if>
+      <if test="zqzh != null" >
+        #{zqzh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywpId != null" >
+        #{ywpId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.OriInfoZqz" >
+    update ORI_INFO_ZQZ
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="ywtpbh != null" >
+        YWTPBH = #{ywtpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="csny != null" >
+        CSNY = #{csny,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        ZJHM = #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="dz != null" >
+        DZ = #{dz,jdbcType=VARCHAR},
+      </if>
+      <if test="zqzh != null" >
+        ZQZH = #{zqzh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywpId != null" >
+        YWP_ID = #{ywpId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.OriInfoZqz" >
+    update ORI_INFO_ZQZ
+    set USER_ID = #{userId,jdbcType=DECIMAL},
+      LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      YWTPBH = #{ywtpbh,jdbcType=VARCHAR},
+      XM = #{xm,jdbcType=VARCHAR},
+      XB = #{xb,jdbcType=VARCHAR},
+      CSNY = #{csny,jdbcType=VARCHAR},
+      ZJHM = #{zjhm,jdbcType=VARCHAR},
+      DZ = #{dz,jdbcType=VARCHAR},
+      ZQZH = #{zqzh,jdbcType=VARCHAR},
+      YWP_ID = #{ywpId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <select id="selectByTPBH" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_ZQZ
+        where SATAE=1  and YWTPBH = #{tpbh,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByInfoPrimaryId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from ORI_INFO_ZQZ
+        where SATAE=1 and  YWP_ID = #{id,jdbcType=DECIMAL}
+    </select>
+    
+    <!-- 通过图片编号修改信息 -->
+    <update id="updateByTpbh" parameterType="com.gx.hz.pojo.OriInfoZqz" >
+    update ORI_INFO_ZQZ
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="lrrymc != null" >
+        LRRYMC = #{lrrymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lrsj != null" >
+        LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="csny != null" >
+        CSNY = #{csny,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhm != null" >
+        ZJHM = #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="dz != null" >
+        DZ = #{dz,jdbcType=VARCHAR},
+      </if>
+      <if test="zqzh != null" >
+        ZQZH = #{zqzh,jdbcType=VARCHAR},
+      </if>
+      <if test="ywpId != null" >
+        YWP_ID = #{ywpId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where YWTPBH = #{ywtpbh,jdbcType=VARCHAR}
+  </update>
+</mapper>

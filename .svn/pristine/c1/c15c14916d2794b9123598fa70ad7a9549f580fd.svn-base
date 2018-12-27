@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoTaskRuleDetailDao" >
+
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoTaskRuleDetail" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CJR" property="cjr" jdbcType="INTEGER" />
+    <result column="XGR" property="xgr" jdbcType="INTEGER" />
+    <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="PARENT_NAME" property="parentName" jdbcType="VARCHAR" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="RULE_ID" property="ruleId" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, INSERT_TIME, UPDATE_TIME, CJR, ROLE_ID, ROLE_NAME, PARENT_ID, PARENT_NAME, RULE_ID, PARENT_CODE, ROLE_CODE
+  </sql>
+  
+  <!-- 批量插入 -->
+  <insert id="insertBatch" parameterType="java.util.List" >
+	    INSERT INTO INFO_TASK_RULE_DETAIL (ID, ROLE_ID, ROLE_NAME, ROLE_CODE, PARENT_CODE, PARENT_ID, RULE_ID, PARENT_NAME, CJR, INSERT_TIME)
+	    <!--序列Oracle自增 -->
+	    SELECT SEQ_INFO_TASK_RULE_DETAIL.NEXTVAL ID ,A.* from(
+	    <foreach collection="list" item="item" index="index" separator="union all">
+	    SELECT 
+	      #{item.roleId} ROLE_ID,
+	      #{item.roleName} ROLE_NAME,
+	      #{item.roleCode} ROLE_CODE,
+	      #{item.parentCode} PARENT_CODE,
+	      #{item.parentId} PARENT_ID,
+	      #{item.ruleId} RULE_ID,
+	      #{item.parentName} PARENT_NAME,
+	      #{item.cjr} CJR,
+	      #{item.insertTime} INSERT_TIME
+	    FROM DUAL
+	    </foreach>
+	    ) A
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    DELETE from INFO_TASK_RULE_DETAIL
+    WHERE RULE_ID = #{ruleId}
+  </delete>
+  
+  <select id="queryDetail" parameterType="java.util.Map" resultMap="BaseResultMap">	
+  	SELECT 
+  		<include refid="Base_Column_List"/>
+  	FROM 
+  		INFO_TASK_RULE_DETAIL
+  	WHERE 1 = 1
+  	<if test="roleId != null" >
+        AND ROLE_ID = #{roleId}
+    </if>
+    <if test="ruleId != null" >
+        AND RULE_ID = #{ruleId}
+    </if>
+  </select>
+  
+  <select id="queryDetailByRuleId" parameterType="java.util.Map" resultMap="BaseResultMap">	
+  	SELECT 
+  		<include refid="Base_Column_List"/>
+  	FROM 
+  		INFO_TASK_RULE_DETAIL
+  	WHERE 1 = 1
+    <if test="ruleId != null" >
+        AND RULE_ID = #{ruleId}
+    </if>
+  </select>
+  
+</mapper>

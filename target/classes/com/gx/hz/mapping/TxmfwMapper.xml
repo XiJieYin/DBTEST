@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TxmfwDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Txmfw" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="KSZ" property="ksz" jdbcType="VARCHAR" />
+    <result column="JSZ" property="jsz" jdbcType="VARCHAR" />
+    <result column="JSZ" property="jsz" jdbcType="VARCHAR" />
+    <result column="SL" property="sl" jdbcType="DECIMAL" />
+    <result column="DYRMC" property="dyrmc" jdbcType="VARCHAR" />
+    <result column="DYR_ID" property="dyrId" jdbcType="DECIMAL" />
+    <result column="DYSJ" property="dysj" jdbcType="TIMESTAMP" />
+    <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="LX" property="lx" jdbcType="VARCHAR" />
+    <result column="ORGCODE" property="orgcode" jdbcType="VARCHAR" />
+    <result column="LXBH" property="lxbh" jdbcType="VARCHAR" />
+    <result column="TM_NAME" property="tmName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, KSZ, JSZ, SL, DYRMC, DYR_ID, DYSJ, CJSJ, SATAE, LX, ORGCODE, LXBH, TM_NAME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TXMFW
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="queryByCondition" resultMap="BaseResultMap">
+  	select  
+  		<include refid="Base_Column_List" /> 
+  		from TXMFW 
+  	where 1=1 and satae != 0
+  	<if test="satae !=null">
+  	and SATAE = #{satae}
+  	</if>
+  	<if test="lx !=null">
+  	and LX = #{lx}
+  	</if>
+  	<if test="lxbh !=null">
+  	and LXBH = #{lxbh}
+  	</if>
+  	<if test="orgCode !=null">
+  	and ORGCODE = #{orgCode}
+  	</if>
+  	order by ID desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update TXMFW set satae = 0
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id='TABLE_SEQUENCE'>SEQ_TXMFW.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Txmfw" >
+  <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into TXMFW (ID, KSZ, JSZ, 
+      SL, DYRMC, DYR_ID, DYSJ, 
+      CJSJ, SATAE,LX,ORGCODE,LXBH,TM_NAME)
+    values (#{id,jdbcType=DECIMAL}, #{ksz,jdbcType=VARCHAR}, #{jsz,jdbcType=VARCHAR}, 
+      #{sl,jdbcType=DECIMAL}, #{dyrmc,jdbcType=VARCHAR}, #{dyrId,jdbcType=DECIMAL}, #{dysj,jdbcType=TIMESTAMP}, 
+      #{cjsj,jdbcType=TIMESTAMP}, 1,#{lx,jdbcType=VARCHAR},#{orgcode,jdbcType=VARCHAR},#{lxbh,jdbcType=VARCHAR},#{tmName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Txmfw"   useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+   <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into TXMFW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ksz != null" >
+        KSZ,
+      </if>
+      <if test="jsz != null" >
+        JSZ,
+      </if>
+      <if test="sl != null" >
+        SL,
+      </if>
+      <if test="dyrmc != null" >
+        DYRMC,
+      </if>
+      <if test="dyrId != null" >
+        DYR_ID,
+      </if>
+      <if test="dysj != null" >
+        DYSJ,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+        SATAE,
+        <if test="lx != null">
+        LX,
+        </if>
+        <if test="orgcode != null">
+        ORGCODE,
+        </if>
+        <if test="lxbh != null">
+        LXBH,
+        </if>
+        <if test="tmName != null">
+        TM_NAME
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="ksz != null" >
+        #{ksz,jdbcType=VARCHAR},
+      </if>
+      <if test="jsz != null" >
+        #{jsz,jdbcType=VARCHAR},
+      </if>
+      <if test="sl != null" >
+        #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="dyrmc != null" >
+        #{dyrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dyrId != null" >
+        #{dyrId,jdbcType=DECIMAL},
+      </if>
+      <if test="dysj != null" >
+        #{dysj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+       1,
+       <if test="lx !=null">
+       #{lx,jdbcType=VARCHAR},
+       </if>
+       <if test="orgcode !=null">
+       #{orgcode,jdbcType=VARCHAR},
+       </if>
+       <if test="lxbh !=null">
+       #{lxbh,jdbcType=VARCHAR},
+       </if>
+       <if test="tmName !=null">
+       #{tmName,jdbcType=VARCHAR}
+       </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Txmfw" >
+    update TXMFW
+    <set >
+      <if test="ksz != null" >
+        KSZ = #{ksz,jdbcType=VARCHAR},
+      </if>
+      <if test="jsz != null" >
+        JSZ = #{jsz,jdbcType=VARCHAR},
+      </if>
+      <if test="sl != null" >
+        SL = #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="dyrmc != null" >
+        DYRMC = #{dyrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dyrId != null" >
+        DYR_ID = #{dyrId,jdbcType=DECIMAL},
+      </if>
+      <if test="dysj != null" >
+        DYSJ = #{dysj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="lx != null" >
+        LX = #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcode != null" >
+        ORGCODE = #{orgcode,jdbcType=DECIMAL},
+      </if>
+      <if test="lx != null" >
+        LXBH = #{lxbh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Txmfw" >
+    update TXMFW
+    set KSZ = #{ksz,jdbcType=VARCHAR},
+      JSZ = #{jsz,jdbcType=VARCHAR},
+      SL = #{sl,jdbcType=DECIMAL},
+      DYRMC = #{dyrmc,jdbcType=VARCHAR},
+      DYR_ID = #{dyrId,jdbcType=DECIMAL},
+      DYSJ = #{dysj,jdbcType=TIMESTAMP},
+      CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      LX = #{lx,jdbcType=VARCHAR},
+      ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      LXBH = #{lxbh,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 查询生效的批号的条形码数据 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM TXMFW
+   	WHERE SATAE = 1
+    ORDER BY CJSJ DESC
+  </select>
+  
+  <select id="findByOrgcodeAndLxbh" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT * FROM TXMFW WHERE ORGCODE = '${orgcode}' AND LXBH = '${lxbh}'
+  </select>
+  
+</mapper>

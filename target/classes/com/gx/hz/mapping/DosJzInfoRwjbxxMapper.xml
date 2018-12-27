@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="DOS_JZ_INFO_RWJBXX" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.DosJzInfoRwjbxx" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="JZ_ID" property="jzId" jdbcType="DECIMAL" />
+    <result column="RW_ID" property="rwId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, JZ_ID, RW_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from DOS_JZ_INFO_RWJBXX
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from DOS_JZ_INFO_RWJBXX
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id='TABLE_SEQUENCE'>SEQ_DOS_JZ_INFO_RWJBXX.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.DosJzInfoRwjbxx" >
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into DOS_JZ_INFO_RWJBXX (id, JZ_ID, RW_ID
+      )
+    values (#{id,jdbcType=DECIMAL}, #{jzId,jdbcType=DECIMAL}, #{rwId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.DosJzInfoRwjbxx" >
+    insert into DOS_JZ_INFO_RWJBXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jzId != null" >
+        JZ_ID,
+      </if>
+      <if test="rwId != null" >
+        RW_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="jzId != null" >
+        #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="rwId != null" >
+        #{rwId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.DosJzInfoRwjbxx" >
+    update DOS_JZ_INFO_RWJBXX
+    <set >
+      <if test="jzId != null" >
+        JZ_ID = #{jzId,jdbcType=DECIMAL},
+      </if>
+      <if test="rwId != null" >
+        RW_ID = #{rwId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.DosJzInfoRwjbxx" >
+    update DOS_JZ_INFO_RWJBXX
+    set JZ_ID = #{jzId,jdbcType=DECIMAL},
+      RW_ID = #{rwId,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

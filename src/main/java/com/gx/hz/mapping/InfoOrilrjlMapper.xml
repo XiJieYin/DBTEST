@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.InfoOrilrjlDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.InfoOrilrjl" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="JZBH" property="jzbh" jdbcType="VARCHAR" />
+    <result column="JZID" property="jzid" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+    <result column="FINISH_DATE" property="finishDate" jdbcType="TIMESTAMP" />
+    <result column="SHSATAE" property="shsatae" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, JZBH, JZID, USER_ID, SATAE, FINISH_DATE, SHSATAE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from INFO_ORILRJL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from INFO_ORILRJL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+
+    <sql id="TABLE_SEQUENCE">SEQ_INFO_ORILRJL.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.InfoOrilrjl" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into INFO_ORILRJL (ID, JZBH, JZID, 
+      USER_ID, SATAE, FINISH_DATE, 
+      SHSATAE)
+    values (#{id,jdbcType=DECIMAL}, #{jzbh,jdbcType=VARCHAR}, #{jzid,jdbcType=DECIMAL}, 
+      #{userId,jdbcType=DECIMAL}, #{satae,jdbcType=DECIMAL}, #{finishDate,jdbcType=TIMESTAMP}, 
+      #{shsatae,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.InfoOrilrjl" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+          select
+          <include refid="TABLE_SEQUENCE" />
+          from dual
+      </selectKey>
+    insert into INFO_ORILRJL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="jzbh != null" >
+        JZBH,
+      </if>
+      <if test="jzid != null" >
+        JZID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="satae != null" >
+        SATAE,
+      </if>
+      <if test="finishDate != null" >
+        FINISH_DATE,
+      </if>
+      <if test="shsatae != null" >
+        SHSATAE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="jzbh != null" >
+        #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jzid != null" >
+        #{jzid,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="satae != null" >
+        #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="finishDate != null" >
+        #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shsatae != null" >
+        #{shsatae,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.InfoOrilrjl" >
+    update INFO_ORILRJL
+    <set >
+      <if test="jzbh != null" >
+        JZBH = #{jzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="jzid != null" >
+        JZID = #{jzid,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="satae != null" >
+        SATAE = #{satae,jdbcType=DECIMAL},
+      </if>
+      <if test="finishDate != null" >
+        FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shsatae != null" >
+        SHSATAE = #{shsatae,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.InfoOrilrjl" >
+    update INFO_ORILRJL
+    set JZBH = #{jzbh,jdbcType=VARCHAR},
+      JZID = #{jzid,jdbcType=DECIMAL},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      SATAE = #{satae,jdbcType=DECIMAL},
+      FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+      SHSATAE = #{shsatae,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+
+    <select id="selectJL" resultMap="BaseResultMap">
+        select * from INFO_ORILRJL WHERE USER_ID=#{userId} and JZID=#{jzid}
+    </select>
+
+</mapper>

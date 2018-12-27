@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.ClbmDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Clbm" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENTS_CODE" property="parentsCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" />
+    <result column="UPDATE_TIME" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CODE, NAME, PARENTS_CODE,CREATE_TIME,UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from CLBM
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <sql id='TABLE_SEQUENCE'>SEQ_CLBM.nextval</sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from CLBM
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Clbm" keyProperty="id">
+     <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into CLBM (ID, CODE, NAME, 
+      PARENTS_CODE,CREATE_TIME,UPDATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{parentsCode,jdbcType=VARCHAR},#{createTime},#{updateTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Clbm" keyProperty="id">
+     <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into CLBM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="parentsCode != null" >
+        PARENTS_CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsCode != null" >
+        #{parentsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Clbm" >
+    update CLBM
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsCode != null" >
+        PARENTS_CODE = #{parentsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Clbm" >
+    update CLBM
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      PARENTS_CODE = #{parentsCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime},
+      UPDATE_TIME = #{updateTime}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="queryClbmByParent" resultMap="BaseResultMap">
+  	select * from CLBM where PARENTS_CODE is null
+  </select>
+   <select id="selectAll" resultMap="BaseResultMap">
+  	select * from CLBM
+  </select>
+  <select id="queryByConditions" resultMap="BaseResultMap">
+  	select * from CLBM where 1=1
+  	<if test="name !=null">
+  	AND name like '%${name}%'
+  	</if>
+  </select>
+</mapper>

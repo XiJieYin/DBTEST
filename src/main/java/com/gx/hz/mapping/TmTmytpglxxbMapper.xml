@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TmTmytpglxxbDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.TmTmytpglxxb" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TMBH" property="tmbh" jdbcType="VARCHAR" />
+    <result column="TPBH" property="tpbh" jdbcType="VARCHAR" />
+    <result column="YM" property="ym" jdbcType="DECIMAL" />
+    <result column="GLSJ" property="glsj" jdbcType="TIMESTAMP" />
+    <result column="CLRID" property="clrid" jdbcType="VARCHAR" />
+    <result column="CRLMC" property="crlmc" jdbcType="VARCHAR" />
+     <result column="SATAE" property="satae" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TMBH, TPBH, YM, GLSJ, CLRID, CRLMC,SATAE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TM_TMYTPGLXXB
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="queryByTpbh" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TM_TMYTPGLXXB
+    where TPBH = #{tpbh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TM_TMYTPGLXXB
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id="TABLE_SEQUENCE">SEQ_TM_TMYTPGLXXB.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.TmTmytpglxxb" >
+  <selectKey keyProperty="id"  resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into TM_TMYTPGLXXB (ID, TMBH, TPBH, 
+      YM, GLSJ, CLRID, 
+      CRLMC,SATAE)
+    values (#{id,jdbcType=DECIMAL}, #{tmbh,jdbcType=VARCHAR}, #{tpbh,jdbcType=VARCHAR}, 
+      #{ym,jdbcType=DECIMAL}, #{glsj,jdbcType=TIMESTAMP}, #{clrid,jdbcType=VARCHAR}, 
+      #{crlmc,jdbcType=VARCHAR},
+      #{satae,jdbcType=DECIMAL},)
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.TmTmytpglxxb" >
+  <selectKey keyProperty="id"  resultType="int" order="BEFORE">
+  		select <include refid="TABLE_SEQUENCE"/> from dual
+  	</selectKey>
+    insert into TM_TMYTPGLXXB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tmbh != null" >
+        TMBH,
+      </if>
+      <if test="tpbh != null" >
+        TPBH,
+      </if>
+      <if test="ym != null" >
+        YM,
+      </if>
+      <if test="glsj != null" >
+        GLSJ,
+      </if>
+      <if test="clrid != null" >
+        CLRID,
+      </if>
+      <if test="crlmc != null" >
+        CRLMC,
+      </if>
+        <if test="satae != null" >
+              SATAE,
+          </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="tmbh != null" >
+        #{tmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="tpbh != null" >
+        #{tpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ym != null" >
+        #{ym,jdbcType=DECIMAL},
+      </if>
+      <if test="glsj != null" >
+        #{glsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clrid != null" >
+        #{clrid,jdbcType=VARCHAR},
+      </if>
+      <if test="crlmc != null" >
+        #{crlmc,jdbcType=VARCHAR},
+      </if>
+      <if test="satae != null" >
+        #{satae,jdbcType=DECIMAL},
+       </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.TmTmytpglxxb" >
+    update TM_TMYTPGLXXB
+    <set >
+      <if test="tmbh != null" >
+        TMBH = #{tmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="tpbh != null" >
+        TPBH = #{tpbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ym != null" >
+        YM = #{ym,jdbcType=DECIMAL},
+      </if>
+      <if test="glsj != null" >
+        GLSJ = #{glsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clrid != null" >
+        CLRID = #{clrid,jdbcType=VARCHAR},
+      </if>
+      <if test="crlmc != null" >
+        CRLMC = #{crlmc,jdbcType=VARCHAR},
+      </if>
+       <if test="satae != null" >
+                SATAE = #{satae,jdbcType=DECIMAL},
+       </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.TmTmytpglxxb" >
+    update TM_TMYTPGLXXB
+    set TMBH = #{tmbh,jdbcType=VARCHAR},
+      TPBH = #{tpbh,jdbcType=VARCHAR},
+      YM = #{ym,jdbcType=DECIMAL},
+      GLSJ = #{glsj,jdbcType=TIMESTAMP},
+      CLRID = #{clrid,jdbcType=VARCHAR},
+      CRLMC = #{crlmc,jdbcType=VARCHAR},
+      SATAE = #{satae,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByTmbh" resultMap="BaseResultMap">
+  select * from TM_TMYTPGLXXB where 1=1
+  <if test="tmbh !=null">
+  AND  TMBH = #{tmbh}
+  </if>
+  </select>
+
+    <delete id="deleteByTMBH" parameterType="java.lang.String" >
+        delete from TM_TMYTPGLXXB
+        where  TMBH= #{tmbh,jdbcType=VARCHAR}
+    </delete>
+    <delete id="delectByTpbh" parameterType="java.lang.String" >
+        delete from TM_TMYTPGLXXB
+        where  tpbh= #{tpbh}
+    </delete>
+
+    <delete id="deleteByTmbhAndTpbh" parameterType="java.lang.String" >
+        delete from TM_TMYTPGLXXB
+        where  TMBH= #{tmbh,jdbcType=VARCHAR} AND TPBH= #{tpbh,jdbcType=VARCHAR}
+    </delete>
+
+
+    <select id="selectByTmbhAndTpbh" resultMap="BaseResultMap">
+        select * from TM_TMYTPGLXXB where 1=1
+
+            AND  TMBH = #{tmbh}    AND TPBH= #{tpbh,jdbcType=VARCHAR}
+
+    </select>
+
+
+</mapper>

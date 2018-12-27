@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.hz.dao.TbcxtjDao" >
+  <resultMap id="BaseResultMap" type="com.gx.hz.pojo.Tbcxtj" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ZZJGDM" property="zzjgdm" jdbcType="VARCHAR" />
+    <result column="ZZJGMC" property="zzjgmc" jdbcType="VARCHAR" />
+    <result column="CS" property="cs" jdbcType="DECIMAL" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL"/>
+    <result column="CXSJ" property="cxsj" jdbcType="TIMESTAMP"/>
+    <result column="ND" property="nd" jdbcType="DECIMAL"/>
+  </resultMap>
+  
+  <resultMap id="LineChartMonthInfo" type="com.gx.hz.entity.LineChartMonthInfo" >
+    <result column="ONE" property="one" jdbcType="INTEGER" />
+   	<result column="TWO" property="two" jdbcType="INTEGER" />
+   	<result column="THREE" property="three" jdbcType="INTEGER" />
+   	<result column="FOUR" property="four" jdbcType="INTEGER" />
+   	<result column="FIVE" property="five" jdbcType="INTEGER" />
+   	<result column="SIX" property="six" jdbcType="INTEGER" />
+   	<result column="SEVEN" property="seven" jdbcType="INTEGER" />
+   	<result column="EIGHT" property="eight" jdbcType="INTEGER" />
+   	<result column="NINE" property="nine" jdbcType="INTEGER" />
+   	<result column="TEN" property="ten" jdbcType="INTEGER" />
+   	<result column="ELEVEN" property="eleven" jdbcType="INTEGER" />
+   	<result column="TWELVE" property="twelve" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, ZZJGDM, ZZJGMC, CS,TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBCXTJ
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TBCXTJ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <sql id='TABLE_SEQUENCE'>SEQ_TBCXTJ.nextval</sql>
+  <insert id="insert" parameterType="com.gx.hz.pojo.Tbcxtj" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into TBCXTJ (ID, ZZJGDM, ZZJGMC, 
+      CS,TYPE)
+    values (#{id,jdbcType=DECIMAL}, #{zzjgdm,jdbcType=VARCHAR}, #{zzjgmc,jdbcType=VARCHAR}, 
+      #{cs,jdbcType=DECIMAL},#{type,jdbcType=DECIMAL},#{cxsj,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.hz.pojo.Tbcxtj" >
+      <selectKey keyProperty="id" resultType="long" order="BEFORE">
+			select
+			<include refid="TABLE_SEQUENCE" />
+			from dual
+    </selectKey>
+    insert into TBCXTJ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="zzjgdm != null" >
+        ZZJGDM,
+      </if>
+      <if test="zzjgmc != null" >
+        ZZJGMC,
+      </if>
+      <if test="cs != null" >
+        CS,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="cxsj != null" >
+        cxsj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="zzjgdm != null" >
+        #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgmc != null" >
+        #{zzjgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="cs != null" >
+        #{cs,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="cxsj != null" >
+        #{cxsj,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.hz.pojo.Tbcxtj" >
+    update TBCXTJ
+    <set >
+      <if test="zzjgdm != null" >
+        ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjgmc != null" >
+        ZZJGMC = #{zzjgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="cs != null" >
+        CS = #{cs,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="cxsj != null" >
+        CXSJ = #{cxsj,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.hz.pojo.Tbcxtj" >
+    update TBCXTJ
+    set ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+      ZZJGMC = #{zzjgmc,jdbcType=VARCHAR},
+      CS = #{cs,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      CXSJ = #{cxsj,jdbcType=TIMESTAMP},
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+  select * from TBCXTJ ORDER BY ZZJGDM
+  </select>
+   <select id="selectAllByNd" resultMap="BaseResultMap">
+ 	 select * from TBCXTJ where to_char(cxsj,'yyyy') = #{nd} ORDER BY ZZJGDM 
+  </select>
+  <select id="selectByCxcs" resultMap="BaseResultMap">
+  select sum(cs) cs,zzjgdm,zzjgmc from tbcxtj
+  where 1 = 1
+  <if test="cxsj !=null">
+  and cxsj = #{cxsj}
+  </if>
+  <if test="orgCode!=null">
+  and zzjgdm = #{orgCode}
+  </if>
+  <if test="type !=null">
+  and type = #{type}
+  </if>
+  <if test="datas != null">
+   and
+    <foreach collection="datas" index="index" item="item" open="(" separator="or" close=")">
+     zzjgdm in #{item}
+    </foreach>
+   </if>
+  GROUP BY zzjgdm,zzjgmc
+  </select>
+  
+  <select id="selectAllByType" resultMap="BaseResultMap">
+  select * from TBCXTJ where 1=1
+  <if test="type !=null">
+  and type = #{type}
+  </if>
+  ORDER BY ZZJGDM
+  </select>
+  
+  <select id="selectByOrgcode" resultMap="BaseResultMap">
+  select * from TBCXTJ where zzjgdm = #{orgCode} and type = #{type} and CXSJ = #{date}
+  </select>
+  
+  <select id="selectByNd" resultType="int">
+  select to_char(cxsj,'yyyy') nd  from TBcxtj GROUP BY to_char(cxsj,'yyyy')
+  </select>
+  
+  <!-- 按年度查询档案查询的情况 -->
+  <select id="selectSearchCount" resultType="int" parameterType="java.util.Map">
+	SELECT
+		sum
+	FROM
+		(
+			SELECT
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'01',
+						cs,
+						0
+					)
+				) 一月,
+				
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'02',
+						cs,
+						0
+					)
+				) 二月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'03',
+						cs,
+						0
+					)
+				) 三月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'04',
+						cs,
+						0
+					)
+				) 四月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'05',
+						cs,
+						0
+					)
+				) 五月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'06',
+						cs,
+						0
+					)
+				) 六月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'07',
+						cs,
+						0
+					)
+				) 七月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'08',
+						cs,
+						0
+					)
+				) 八月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'09',
+						cs,
+						0
+					)
+				) 九月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'10',
+						cs,
+						0
+					)
+				) 十月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'11',
+						cs,
+						0
+					)
+				) 十一月,
+				SUM (
+					DECODE (
+						TO_CHAR (cxsj, 'mm'),
+						'12',
+						cs,
+						0
+					)
+				) 十二月
+			FROM
+				TBCXTJ
+			WHERE
+				TO_CHAR (cxsj, 'yyyy') = #{year}
+		and type = #{type}
+			) UNPIVOT (
+			sum FOR years IN (
+				一月,
+				二月,
+				三月,
+				四月,
+				五月,
+				六月,
+				七月,
+				八月,
+				九月,
+				十月,
+				十一月,
+				十二月
+			)
+		)
+  </select>
+  
+   <select id="selectCsYears" resultType="String">
+		SELECT TO_CHAR(CXSJ,'yyyy') CXSJ 
+			from TBCXTJ 
+		GROUP BY TO_CHAR(CXSJ,'yyyy')
+   </select>
+</mapper>
